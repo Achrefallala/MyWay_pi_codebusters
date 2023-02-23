@@ -3,6 +3,7 @@ package Utils;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 /**
@@ -10,10 +11,15 @@ import java.sql.SQLException;
  * @author Mohamed
  */
 public class MyDB {
+
+    public static Connection getConnect() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     final String URL ="jdbc:mysql://127.0.0.1:3306/myway";
     final String USERNAME="root";
     final String PWD ="";
-   private  Connection cnx;
+    Connection cnx;
+   PreparedStatement pst;
  private static   MyDB instance;
     private MyDB(){
         try {

@@ -4,31 +4,37 @@
  * and open the template in the editor.
  */
 package Entities;
+import java.sql.Timestamp;
 import java.util.Date;
+
 
 /**
  *
  * @author Slim
  */
 public class Reservation {
-    private int id_reservation ,id_utilisateur ;
+   private int id_reservation;
+    private int id_utilisateur;
     private String moyen_transport;
-    private boolean disponibilite_r;
-    private Date date_reservation;
-    private float prix_ticket;
+    private String disponibilite_r;
 
     public Reservation() {
     }
 
-    public Reservation(int id_utilisateur ,String moyen_transport,Date date_reservation,float prix_ticket,boolean disponibilite_r){
+    public Reservation(int id_reservation, int id_utilisateur, String moyen_transport, String disponibilite_r) {
+        this.id_reservation = id_reservation;
         this.id_utilisateur = id_utilisateur;
-        this.moyen_transport= moyen_transport;
-        this.date_reservation= date_reservation;
-        this.prix_ticket= prix_ticket;
-        this.disponibilite_r= disponibilite_r;
- 
-    }
+        this.moyen_transport = moyen_transport;
+        this.disponibilite_r = disponibilite_r;
         
+    }
+      public Reservation(int id_utilisateur, String moyen_transport, String disponibilite_r) {
+        this.id_utilisateur = id_utilisateur;
+        this.moyen_transport = moyen_transport;
+        this.disponibilite_r = disponibilite_r;
+        
+    }
+
     public int getId_reservation() {
         return id_reservation;
     }
@@ -44,7 +50,7 @@ public class Reservation {
     public void setId_utilisateur(int id_utilisateur) {
         this.id_utilisateur = id_utilisateur;
     }
-    
+
     public String getMoyen_transport() {
         return moyen_transport;
     }
@@ -53,34 +59,26 @@ public class Reservation {
         this.moyen_transport = moyen_transport;
     }
 
-    public Date getDate_reservation() {
-        return date_reservation	;
-    }
-
-    public void setDate_reservation	(Date date_reservation) {
-        this.date_reservation= date_reservation;
-    }
-        public float getPrix_ticket() {
-        return prix_ticket;
-    }
-
-    public void setPrix_ticket	(float prix_ticket) {
-        this.prix_ticket=prix_ticket;
-    }
-       public boolean getDisponibilite_r() {
+    public String getDisponibilite_r() {
         return disponibilite_r;
     }
 
-    public void setDisponibilite_r(boolean disponibilite_r) {
-        this.disponibilite_r= disponibilite_r;
+    public void setDisponibilite_r(String disponibilite_r) {
+        this.disponibilite_r = disponibilite_r;
     }
 
     @Override
     public String toString() {
-        return "Reservation{" + "id_reservation=" + id_reservation + ", id_utilisateur=" + id_utilisateur + ", moyen_transport=" + moyen_transport + ", disponibilite_r=" + disponibilite_r + ", date_reservation=" + date_reservation + ", prix_ticket=" + prix_ticket + '}';
+        return "Reservation{" + "id_reservation=" + id_reservation + ", id_utilisateur=" + id_utilisateur + ", moyen_transport=" + moyen_transport + ", disponibilite_r=" + disponibilite_r + '}';
     }
 
     
 
-    
+   
 }
+
+
+    
+
+    
+

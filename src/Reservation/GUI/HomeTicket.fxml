@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="1380.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Pane layoutX="18.0" layoutY="110.0" prefHeight="378.0" prefWidth="452.0" style="-fx-background-color: blue;" />
+      <TableView fx:id="reservationsTable" layoutX="482.0" layoutY="77.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="537.0" prefWidth="943.0">
+        <columns>
+          <TableColumn fx:id="idreservationCol" prefWidth="133.0" text="ID RESERVATION" />
+            <TableColumn fx:id="idutilisateurCol" minWidth="0.0" prefWidth="96.0" text="ID TICKET" />
+            <TableColumn fx:id="moyentransportCol" minWidth="0.0" prefWidth="124.0" text="PRIX TICKET" />
+            <TableColumn fx:id="disponibiliteCol" minWidth="0.0" prefWidth="123.0" text="LIEU DEPART" />
+            <TableColumn fx:id="disponibiliteCol1" maxWidth="163.0" minWidth="-1.0" prefWidth="145.0" text="LIEU ARRIVE" />
+            <TableColumn fx:id="disponibiliteCol11" minWidth="0.0" prefWidth="168.0" text="HEURE DEPART" />
+            <TableColumn fx:id="disponibiliteCol111" minWidth="0.0" prefWidth="153.0" text="HEURE ARRIVE" />
+        </columns>
+      </TableView>
+      <Text fill="#1872cc" layoutX="517.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tickets" textAlignment="RIGHT" wrappingWidth="183.6708984375">
+         <font>
+            <Font size="32.0" />
+         </font>
+      </Text>
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+      <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="25.0" layoutY="14.0" onMouseClicked="#refreshTable">
+         <image>
+            <Image url="@../../../../../../Desktop/pngwing.com.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="1375.0" layoutY="1.0" onMouseClicked="#close">
+         <image>
+            <Image url="@../../../../../../Downloads/close-icon-13577.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="28.0" layoutY="126.0" text="ID reservation" textFill="WHITE">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Label>
+      <TextField layoutX="216.0" layoutY="127.0" prefHeight="31.0" prefWidth="240.0" />
+      <Label layoutX="28.0" layoutY="178.0" text="Prix ticket" textFill="WHITE">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Label>
+      <TextField layoutX="216.0" layoutY="179.0" prefHeight="31.0" prefWidth="240.0" />
+      <Label layoutX="28.0" layoutY="234.0" text="Lieu de depart" textFill="WHITE">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Label>
+      <TextField layoutX="216.0" layoutY="235.0" prefHeight="31.0" prefWidth="240.0" />
+      <Label layoutX="28.0" layoutY="292.0" prefHeight="32.0" prefWidth="140.0" text="Lieu d'arrive" textFill="WHITE">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Label>
+      <TextField layoutX="216.0" layoutY="292.0" prefHeight="31.0" prefWidth="240.0" />
+      <Label layoutX="26.0" layoutY="342.0" prefHeight="39.0" prefWidth="184.0" text="Heure de depart" textFill="WHITE">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Label>
+      <TextField layoutX="213.0" layoutY="346.0" prefHeight="31.0" prefWidth="240.0" />
+      <Label layoutX="28.0" layoutY="418.0" prefHeight="39.0" prefWidth="184.0" text="Heure d'arrive" textFill="WHITE">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Label>
+      <TextField layoutX="215.0" layoutY="422.0" prefHeight="31.0" prefWidth="240.0" />
+      <Button layoutX="39.0" layoutY="539.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="114.0" text="Ajouter" />
+      <Button layoutX="187.0" layoutY="539.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="114.0" text="Modifier" />
+      <Button layoutX="336.0" layoutY="539.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="114.0" text="Supprimer" />
+   </children>
+</AnchorPane>

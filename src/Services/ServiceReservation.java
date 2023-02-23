@@ -9,7 +9,9 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import Utils.MyDB;
+import java.sql.Timestamp;
 import java.util.Date;
+//import java.sql.Date;
 
 /**
  *
@@ -20,8 +22,8 @@ public class ServiceReservation implements IServices<Reservation>{
     @Override
     public void add(Reservation r) {
          try {
-String qry ="INSERT INTO `reservation`(`id_utilisateur`, `moyen_transport`, `date_reservation` ,`prix_ticket` , `disponibilite_r`) VALUES ('"+r.getId_utilisateur()+"','"+r.getMoyen_transport()"','"+r.getDate_reservation+"','"+r.getPrix_ticket+"','"+r.getDisponibilite_r"')";
-      cnx = MyDB.getInstance().getCnx();
+     String qry ="INSERT INTO `reservation`( `id_utilisateur`, `moyen_transport`, `disponibilite_r`) VALUES ('"+r.getId_utilisateur()+"','"+r.getMoyen_transport()+"','"+r.getDisponibilite_r()+"')";
+     cnx = MyDB.getInstance().getCnx();
       
             Statement stm =cnx.createStatement();
             
@@ -37,19 +39,17 @@ String qry ="INSERT INTO `reservation`(`id_utilisateur`, `moyen_transport`, `dat
     public List<Reservation> afficher() {
         List<Reservation> Reservations = new ArrayList<>();
         try {
-            String qry ="SELECT * FROM `reservation` ";
+            String qry ="SELECT * FROM `reservation`";
             cnx = MyDB.getInstance().getCnx();
             Statement stm = cnx.createStatement();
             ResultSet rs = stm.executeQuery(qry);
             while(rs.next()){
                 Reservation r =new Reservation();
-                r.setId_reservation(rs.getInt(11));
-                r.setId_utilisateur(rs.getInt(11));
-                r.setMoyen_transport(rs.getString(30));
-                r.setDate_reservation(rs.getDate());
-                r.setPrix_ticket(rs.getFloat(255));
-                r.setDisponibilite_r(rs.getBoolean(3));
-                Reservation.add(r);
+                r.setId_reservation(rs.getInt(1));
+                r.setId_utilisateur(rs.getInt(2));
+                r.setMoyen_transport(rs.getString(3));
+                r.setDisponibilite_r(rs.getString(4));
+                Reservations.add(r);
             }
             return Reservations;
             
@@ -61,15 +61,13 @@ String qry ="INSERT INTO `reservation`(`id_utilisateur`, `moyen_transport`, `dat
         
     }
 
-   
+  
     @Override
     public void modifier(Reservation r) {
  try {
-            String qry ="UPDATE reservation SET date`='"+r.getDate_reservation()+"',disponibilite_r`='"+r.getDisponibilite_r()+"' WHERE id_reservation="+r.getId_reservation()+";";    
+            String qry ="UPDATE reservation SET moyen_transport='"+r.getMoyen_transport()+"',disponibilite_r='"+r.getDisponibilite_r()+"' WHERE `id_reservation`="+r.getId_reservation()+" ;";    
             cnx = MyDB.getInstance().getCnx();
-      
             Statement stm =cnx.createStatement();
-            
             stm.executeUpdate(qry);
             
         } catch (SQLException ex) {
@@ -77,8 +75,7 @@ String qry ="INSERT INTO `reservation`(`id_utilisateur`, `moyen_transport`, `dat
         }
         }
 
-    //@Override
-    public void supprimer(int ide) {
+    public void supprimer(int id_reservation) {
 try {
             String qry ="DELETE from reservation where id_reservation = "+id_reservation+";";
       cnx = MyDB.getInstance().getCnx();
@@ -89,13 +86,17 @@ try {
             
         } catch (SQLException ex) {
              System.out.println(ex.getMessage());
-        }    }
+        }   
+    }
 
     @Override
     public void supprimer(Reservation r) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
    
+
+ 
 }
     
 
