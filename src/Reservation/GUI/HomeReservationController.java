@@ -1,60 +1,30 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Reservation.GUI;
 
-import Entities.Reservation;
-import Services.ServiceReservation;
 import Utils.MyDB;
-import static Utils.MyDB.getConnect;
-import java.awt.Label;
-import java.awt.TextField;
-import java.io.IOException;
+import Entities.Reservation;
+import Entities.Ticket;
+import Services.ServiceReservation;
+import Services.ServiceTicket;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
-import javafx.application.Application;
-import static javafx.application.ConditionalFeature.FXML;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.layout.StackPane;
-import javafx.stage.Stage;
-import java.sql.Timestamp;
-import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.fxml.FXMLLoader;
-import javafx.geometry.Insets;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.TableCell;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.HBox;
-import javafx.stage.StageStyle;
-import javafx.util.Callback;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
+import javafx.scene.layout.AnchorPane;
 //import javafx.scene.control.TextField;
-
 
 /**
  *
@@ -62,25 +32,25 @@ import javafx.scene.control.TableView;
  */
 public class HomeReservationController implements Initializable {
 
+    ServiceReservation res = new ServiceReservation();
 
     @FXML
-    private TableView<Reservation> reservationsTable;
+    private TableView<Reservation> tableRes;
 
     @FXML
-    private TableColumn<Reservation,String> idreservationCol;
+    private TableColumn<Reservation, Integer> idreservationCol;
 
     @FXML
-    private TableColumn<Reservation,String> idutilisateurCol;
+    private TableColumn<Reservation, Integer> idutilisateurCol;
 
     @FXML
-    private TableColumn<Reservation,String> moyentransportCol;
+    private TableColumn<Reservation, String> moyentransportCol;
 
     @FXML
-    private TableColumn<Reservation,String> disponibiliteCol;
+    private TableColumn<Reservation, String> disponibiliteCol;
 
     @FXML
     private javafx.scene.control.TextField txtidutilisateur;
-
 
     @FXML
     private Button btnAdd;
@@ -94,194 +64,145 @@ public class HomeReservationController implements Initializable {
     private javafx.scene.control.TextField txtmoyen;
     @FXML
     private javafx.scene.control.TextField txtdispo;
-        Connection cnx;
-PreparedStatement pst;
+    Connection cnx;
+
+    ObservableList<Reservation> listRes;
+
     @FXML
     void Add(ActionEvent event) {
 
-        
-            String id_utilisateur,moyen_transport,disponibilite_r;
-            id_utilisateur = txtidutilisateur.getText();
-            moyen_transport = txtmoyen.getText();
-            disponibilite_r = txtdispo.getText();
-        try
-        {
-            PreparedStatement pst = cnx.prepareStatement("insert into registation(id_utilisateur,moyen_transport,disponibilite_r)values(?,?,?)");
-            pst.setString(1, id_utilisateur);
+        int id_utilisateur;
+        String moyen_transport;
+        String disponibilite_r;
+        id_utilisateur = Integer.parseInt(txtidutilisateur.getText());
+        moyen_transport = txtmoyen.getText();
+        disponibilite_r = txtdispo.getText();
+        PreparedStatement pst;
+        cnx = MyDB.getInstance().getCnx();
+        try {
+            pst = cnx.prepareStatement("insert into reservation(id_utilisateur,moyen_transport,disponibilite_r)values(?,?,?)");
+            pst.setInt(1, id_utilisateur);
             pst.setString(2, moyen_transport);
             pst.setString(3, disponibilite_r);
             pst.executeUpdate();
-          
-             Alert alert = new Alert(Alert.AlertType.INFORMATION);
-alert.setTitle("Reservation Registation");
- 
-alert.setHeaderText("Reservation Registation");
-alert.setContentText("Record Addedddd!");
- 
-alert.showAndWait();
- 
-           table();
-            
-            txtidutilisateur.setText("");
-            txtmoyen.setText("");
-            txtdispo.setText("");
+
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Reservation Registation");
+
+            alert.setHeaderText("Reservation Registation");
+            alert.setContentText("Record Addedddd!");
+
+            alert.showAndWait();
+
+            table();
+
             txtidutilisateur.requestFocus();
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
         }
-        catch (SQLException ex)
-        {
-            Logger.getLogger(HomeReservationController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        
-        
-        
-        
+
     }
 
-   public void table()
-      {
-          Connect();
-          ObservableList<Reservation> reservations = FXCollections.observableArrayList();
-       try
-       {
-           pst = con.prepareStatement("select id_reservation,id_utilisateur,moyen_transport,disponinilite_r from registation");  
-           ResultSet rs = pst.executeQuery();
-      {
-        while (rs.next())
-        {
-            Reservation r = new Reservation();
-            r.setId_reservation(rs.getInt("id_reservation"));
-            r.setId_utilisateur(rs.getInt("id_utilisateur"));
-            r.setMoyen_transport(rs.getString("moyen_transport"));
-            r.setDisponibilite_r(rs.getString("disponibilite_r"));
-           reservations.add(r);
-       }
+    public void table() {
+        ServiceReservation res = new ServiceReservation();
+        tableRes.setItems(FXCollections.observableArrayList(res.afficher()));
+
+        idreservationCol.setCellValueFactory(new PropertyValueFactory<>("id_reservation"));
+        idutilisateurCol.setCellValueFactory(new PropertyValueFactory<>("id_utilisateur"));
+        moyentransportCol.setCellValueFactory(new PropertyValueFactory<>("moyen_transport"));
+        disponibiliteCol.setCellValueFactory(new PropertyValueFactory<>("disponibilite_r"));
+        tableRes.setRowFactory(tv -> {
+            TableRow<Reservation> myRow = new TableRow<>();
+            myRow.setOnMouseClicked((event)
+                    -> {
+                if (event.getClickCount() == 1 && (!myRow.isEmpty())) {
+                    int myIndex = tableRes.getSelectionModel().getSelectedIndex();
+
+                    int id = Integer.parseInt(String.valueOf(tableRes.getItems().get(myIndex).getId_reservation()));
+                    txtidutilisateur.setText(String.valueOf(tableRes.getItems().get(myIndex).getId_utilisateur()));
+                    txtmoyen.setText(tableRes.getItems().get(myIndex).getMoyen_transport());
+                    txtdispo.setText(tableRes.getItems().get(myIndex).getDisponibilite_r());
+
+                }
+            });
+            return myRow;
+        });
+
+        /* listRes = res.getDataRes();
+        tableRes.setItems(listRes);*/
     }
-                table.setItems(reservations);
-                idreservationCol.setCellValueFactory(f -> f.getValue().idProperty());
-                idutilisateurCol.setCellValueFactory(f -> f.getValue().nameProperty());
-                moyentransportCol.setCellValueFactory(f -> f.getValue().mobileProperty());
-                disponibiliteCol.setCellValueFactory(f -> f.getValue().courseProperty());
-                
-              
- 
-       }
-      
-       catch (SQLException ex)
-       {
-           Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
-       }
- 
-                table.setRowFactory( tv -> {
-     TableRow<Student> myRow = new TableRow<>();
-     myRow.setOnMouseClicked (event ->
-     {
-        if (event.getClickCount() == 1 && (!myRow.isEmpty()))
-        {
-            myIndex =  table.getSelectionModel().getSelectedIndex();
-           id = Integer.parseInt(String.valueOf(table.getItems().get(myIndex).getId()));
-           txtName.setText(table.getItems().get(myIndex).getName());
-           txtMobile.setText(table.getItems().get(myIndex).getMobile());
-                            txtCourse.setText(table.getItems().get(myIndex).getCourse());
-                          
-                        
-                          
-        }
-     });
-        return myRow;
-                   });
-    
-    
-      }
- 
+
     @FXML
     void Delete(ActionEvent event) {
-        myIndex = table.getSelectionModel().getSelectedIndex();
-        id = Integer.parseInt(String.valueOf(table.getItems().get(myIndex).getId()));
-                    
- 
-        try
-        {
-            pst = con.prepareStatement("delete from registation where id = ? ");
-            pst.setInt(1, id);
+        int myIndex = tableRes.getSelectionModel().getSelectedIndex();
+        int id_reservation = Integer.parseInt(String.valueOf(tableRes.getItems().get(myIndex).getId_reservation()));
+        PreparedStatement pst;
+        cnx = MyDB.getInstance().getCnx();
+        try {
+            pst = cnx.prepareStatement("delete from reservation where id_reservation = ? ");
+            pst.setInt(1, id_reservation);
             pst.executeUpdate();
-            
+
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Student Registationn");
- 
-alert.setHeaderText("Student Registation");
-alert.setContentText("Deletedd!");
- 
-alert.showAndWait();
-                  table();
-        }
-        catch (SQLException ex)
-        {
-            Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
+            alert.setTitle("reservation Registationn");
+
+            alert.setHeaderText("reservation Registation");
+            alert.setContentText("Deletedd!");
+
+            alert.showAndWait();
+            table();
+        } catch (SQLException ex) {
+            Logger.getLogger(HomeReservationController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
- 
+
     @FXML
     void Update(ActionEvent event) {
-      
-        String stname,mobile,course;
-        
-         myIndex = table.getSelectionModel().getSelectedIndex();
-        id = Integer.parseInt(String.valueOf(table.getItems().get(myIndex).getId()));
-          
-            stname = txtName.getText();
-            mobile = txtMobile.getText();
-            course = txtCourse.getText();
-        try
-        {
-            pst = con.prepareStatement("update registation set name = ?,mobile = ? ,course = ? where id = ? ");
-            pst.setString(1, stname);
-            pst.setString(2, mobile);
-            pst.setString(3, course);
-             pst.setInt(4, id);
-            pst.executeUpdate();
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-alert.setTitle("Student Registationn");
- 
-alert.setHeaderText("Student Registation");
-alert.setContentText("Updateddd!");
- 
-alert.showAndWait();
-                table();
-        }
-        catch (SQLException ex)
-        {
-            Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-    
-    
-    
-    Connection con;
-    PreparedStatement pst;
-    int myIndex;
-    int id;
-    
-    
-    
-     public void Connect()
-    {
-        try {
-            Class.forName("com.mysql.jdbc.Driver");
-            con = DriverManager.getConnection("jdbc:mysql://localhost/studcruds","root","");
-        } catch (ClassNotFoundException ex) {
-          
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-    }
-    
- 
-    
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        Connect();
-        table();
-    }    
-   
+        int myIndex = tableRes.getSelectionModel().getSelectedIndex();
+        int id_reservation = Integer.parseInt(String.valueOf(tableRes.getItems().get(myIndex).getId_reservation()));
+        System.out.println(id_reservation);
+        int id_utilisateur = Integer.parseInt(txtidutilisateur.getText());
+        String moyen_transport = txtmoyen.getText();
+        String disponibilite_r = txtdispo.getText();
 
+        Reservation r = new Reservation(id_reservation, id_utilisateur, moyen_transport, disponibilite_r);
+        res.modifier(r);
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("TICKET Registationn");
+
+        alert.setHeaderText("TICKET Registation");
+        alert.setContentText("UPDATED!");
+        alert.showAndWait();
+        table();
+
+//        int id_utilisateur = Integer.parseInt(txtidutilisateur.getText());
+//        String moyen_transport = txtmoyen.getText();
+//        String disponibilite_r = txtdispo.getText();
+//        PreparedStatement pst;
+//        cnx = MyDB.getInstance().getCnx();
+//        try {
+//            pst = cnx.prepareStatement("update reservation set id_utilisateur = ?, moyen_transport = ? , disponibilite_r= ? where id_reservation= ? ");
+//            pst.setInt(1, id_utilisateur);
+//            pst.setString(2, moyen_transport);
+//            pst.setString(3, disponibilite_r);
+//
+//            pst.executeUpdate();
+//            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+//            alert.setTitle("reservation Registationn");
+//
+//            alert.setHeaderText("reservation Registation");
+//            alert.setContentText("UPDATED!");
+//
+//            alert.showAndWait();
+//            table();
+//        } catch (SQLException ex) {
+//            Logger.getLogger(HomeReservationController.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        table();
+    }
+
+}

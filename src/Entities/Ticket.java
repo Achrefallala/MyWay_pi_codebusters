@@ -11,7 +11,7 @@ package Entities;
  */
 public class Ticket {
 private int id_reservation;
-private float prix_ticket;
+private int prix_ticket;
 private String lieu_depart; 
 private String lieu_arrive;
 private String heure_depart;
@@ -22,7 +22,7 @@ private int id_ticket;
     public Ticket() {
     }
 
-    public Ticket(int id_reservation, float prix_ticket, String lieu_depart, String lieu_arrive, String heure_depart, String heure_arrive, int id_ticket) {
+    public Ticket(int id_reservation, int prix_ticket, String lieu_depart, String lieu_arrive, String heure_depart, String heure_arrive, int id_ticket) {
         this.id_reservation = id_reservation;
         this.prix_ticket = prix_ticket;
         this.lieu_depart = lieu_depart;
@@ -32,7 +32,16 @@ private int id_ticket;
         this.id_ticket = id_ticket;
     } 
 
-    public Ticket(int id_reservation, float prix_ticket, String lieu_depart, String lieu_arrive, String heure_depart, String heure_arrive) {
+    public Ticket(int prix_ticket, String lieu_depart, String lieu_arrive, String heure_depart, String heure_arrive, int id_ticket) {
+        this.prix_ticket = prix_ticket;
+        this.lieu_depart = lieu_depart;
+        this.lieu_arrive = lieu_arrive;
+        this.heure_depart = heure_depart;
+        this.heure_arrive = heure_arrive;
+        this.id_ticket = id_ticket;
+    }
+
+    public Ticket(int id_reservation, int prix_ticket, String lieu_depart, String lieu_arrive, String heure_depart, String heure_arrive) {
         this.id_reservation = id_reservation;
         this.prix_ticket = prix_ticket;
         this.lieu_depart = lieu_depart;
@@ -54,7 +63,7 @@ private int id_ticket;
         return prix_ticket;
     }
 
-    public void setPrix_ticket(float prix_ticket) {
+    public void setPrix_ticket(int prix_ticket) {
         this.prix_ticket = prix_ticket;
     }
 

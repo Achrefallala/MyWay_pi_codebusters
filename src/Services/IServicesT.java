@@ -5,16 +5,14 @@
  */
 package Services;
 import java.util.List;
-
 /**
  *
  * @author Slim
  */
-public interface IServiceTicket {
-    public interface IServicesTicket<T> {
+public interface IServicesT<T> {
     public void add(T r);
     public List<T> afficher();
     public void modifier(T r);
     public void supprimer(T r);
-}
+    
 }

@@ -7,6 +7,7 @@ package Reservation.GUI;
 
 import java.io.IOException;
 import javafx.application.Application;
+import static javafx.application.Application.launch;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
@@ -15,7 +16,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-//import Reservation.GUI.HomeReservationController.java
+
 /**
  *
  * @author Slim
@@ -35,7 +36,7 @@ public class HomeReservationFXMain extends Application {
     }
     catch(IOException e){System.out.println(e.getMessage());}
     }
-    /**"
+    /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {

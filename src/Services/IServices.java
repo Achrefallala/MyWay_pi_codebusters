@@ -9,10 +9,10 @@ import java.util.List;
  *
  * @author Slim
  */
-public interface IServices<R> {
+public interface IServices <R>{
     public void add(R r);
     public List<R> afficher();
-    public void modifier(R r);
-    public void supprimer(R r);
+   public void modifier(R r);
+   public void supprimer(R r);
     
 }
