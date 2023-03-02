@@ -10,14 +10,14 @@ package Entities;
  * @author Slim
  */
 public class Ticket {
-private int id_reservation;
-private int prix_ticket;
-private String lieu_depart; 
-private String lieu_arrive;
-private String heure_depart;
-private String heure_arrive;
-private int id_ticket;
-
+  //private reservation reservation;
+    private int id_reservation;
+    private int prix_ticket;
+    private String lieu_depart;
+    private String lieu_arrive;
+    private String heure_depart;
+    private String heure_arrive;
+    private int id_ticket;
 
     public Ticket() {
     }
@@ -30,7 +30,7 @@ private int id_ticket;
         this.heure_depart = heure_depart;
         this.heure_arrive = heure_arrive;
         this.id_ticket = id_ticket;
-    } 
+    }
 
     public Ticket(int prix_ticket, String lieu_depart, String lieu_arrive, String heure_depart, String heure_arrive, int id_ticket) {
         this.prix_ticket = prix_ticket;
@@ -50,7 +50,6 @@ private int id_ticket;
         this.heure_arrive = heure_arrive;
     }
 
-   
     public int getId_reservation() {
         return id_reservation;
     }
@@ -112,9 +111,4 @@ private int id_ticket;
         return "Ticket{" + "id_reservation=" + id_reservation + ", prix_ticket=" + prix_ticket + ", lieu_depart=" + lieu_depart + ", lieu_arrive=" + lieu_arrive + ", heure_depart=" + heure_depart + ", heure_arrive=" + heure_arrive + ", id_ticket=" + id_ticket + '}';
     }
 
-  
-    }
-
-   
-
-
+}

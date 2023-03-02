@@ -117,5 +117,27 @@ public class ServiceTicket implements IServicesT<Ticket> {
             System.out.println(ex.getMessage());
         }
     }
+    public List<Integer> afficherIDRESERVATION() {
+        List<Integer> Tickets = new ArrayList<>();
+        try {
+            String qry = "SELECT id_reservation  FROM `reservation`";
+            cnx = MyDB.getInstance().getCnx();
+            Statement stm = cnx.createStatement();
+            ResultSet rs = stm.executeQuery(qry);
+            while (rs.next()) {
+                int r = 1;
+                r=rs.getInt(1);
+                
+                Tickets.add(r);
+            }
+            return Tickets;
+
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return Tickets;
+
+    }
+  
 
 }

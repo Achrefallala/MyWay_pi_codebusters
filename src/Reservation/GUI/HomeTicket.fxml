@@ -1,73 +1,84 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="1380.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Reservation.GUI.HomeTicketController">
+<AnchorPane id="AnchorPane" prefHeight="660.0" prefWidth="1344.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Reservation.GUI.HomeTicketController">
    <children>
-      <Pane layoutX="18.0" layoutY="110.0" prefHeight="378.0" prefWidth="452.0" style="-fx-background-color: blue;" />
-      <TableView fx:id="tableTic" layoutX="482.0" layoutY="77.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="537.0" prefWidth="943.0">
+      <Pane layoutX="18.0" layoutY="190.0" prefHeight="378.0" prefWidth="452.0" style="-fx-background-color: #73c1ab;">
+         <children>
+            <ComboBox fx:id="idreservationcombo" layoutX="197.0" layoutY="20.0" prefHeight="31.0" prefWidth="240.0" />
+         </children></Pane>
+      <TableView fx:id="tableTic" layoutX="482.0" layoutY="157.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="537.0" prefWidth="943.0">
         <columns>
-          <TableColumn fx:id="idreservationCol" prefWidth="133.0" text="ID RESERVATION" />
-            <TableColumn fx:id="idticketCol" minWidth="0.0" prefWidth="96.0" text="ID TICKET" />
-            <TableColumn fx:id="prixticketCol" minWidth="0.0" prefWidth="124.0" text="PRIX TICKET" />
-            <TableColumn fx:id="lieudepartCol" minWidth="0.0" prefWidth="123.0" text="LIEU DEPART" />
-            <TableColumn fx:id="lieuarriveCol" maxWidth="163.0" minWidth="-1.0" prefWidth="145.0" text="LIEU ARRIVE" />
-            <TableColumn fx:id="heuredepartCol" minWidth="0.0" prefWidth="168.0" text="HEURE DEPART" />
-            <TableColumn fx:id="heurearriveCol" minWidth="0.0" prefWidth="153.0" text="HEURE ARRIVE" />
+          <TableColumn fx:id="idreservationCol" prefWidth="133.0" text="ID RESERVATION" visible="false" />
+            <TableColumn fx:id="idticketCol" minWidth="0.0" prefWidth="0.0" text="ID TICKET" />
+            <TableColumn fx:id="prixticketCol" minWidth="0.0" prefWidth="144.0" text="PRIX TICKET" />
+            <TableColumn fx:id="lieudepartCol" minWidth="0.0" prefWidth="199.0" text="LIEU DEPART" />
+            <TableColumn fx:id="lieuarriveCol" maxWidth="180.0" minWidth="-1.0" prefWidth="180.0" text="LIEU ARRIVE" />
+            <TableColumn fx:id="heuredepartCol" minWidth="0.0" prefWidth="163.0" text="HEURE DEPART" />
+            <TableColumn fx:id="heurearriveCol" minWidth="0.0" prefWidth="256.0" text="HEURE ARRIVE" />
         </columns>
       </TableView>
-      <Text fill="#1872cc" layoutX="517.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tickets" textAlignment="RIGHT" wrappingWidth="183.6708984375">
+      <Text fill="#73c1ab" layoutX="513.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tickets" textAlignment="RIGHT" wrappingWidth="183.6708984375">
          <font>
             <Font size="32.0" />
          </font>
       </Text>
-      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
-      <Label layoutX="28.0" layoutY="126.0" text="ID reservation" textFill="WHITE">
+      <Label layoutX="28.0" layoutY="205.0" text="ID reservation" textFill="WHITE">
          <font>
             <Font size="22.0" />
          </font>
       </Label>
-      <TextField fx:id="txtidreservation" layoutX="216.0" layoutY="127.0" prefHeight="31.0" prefWidth="240.0" />
-      <Label layoutX="28.0" layoutY="178.0" text="Prix ticket" textFill="WHITE">
+      <Label layoutX="28.0" layoutY="257.0" text="Prix ticket" textFill="WHITE">
          <font>
             <Font size="22.0" />
          </font>
       </Label>
-      <TextField fx:id="txtprixticket" layoutX="216.0" layoutY="179.0" prefHeight="31.0" prefWidth="240.0" />
-      <Label layoutX="28.0" layoutY="234.0" text="Lieu de depart" textFill="WHITE">
+      <TextField fx:id="txtprixticket" layoutX="216.0" layoutY="258.0" prefHeight="31.0" prefWidth="240.0" />
+      <Label layoutX="28.0" layoutY="313.0" text="Lieu de depart" textFill="WHITE">
          <font>
             <Font size="22.0" />
          </font>
       </Label>
-      <TextField fx:id="txtlieudepart" layoutX="216.0" layoutY="235.0" prefHeight="31.0" prefWidth="240.0" />
-      <Label layoutX="28.0" layoutY="292.0" prefHeight="32.0" prefWidth="140.0" text="Lieu d'arrive" textFill="WHITE">
+      <TextField fx:id="txtlieudepart" layoutX="216.0" layoutY="314.0" prefHeight="31.0" prefWidth="240.0" />
+      <Label layoutX="28.0" layoutY="371.0" prefHeight="32.0" prefWidth="140.0" text="Lieu d'arrive" textFill="WHITE">
          <font>
             <Font size="22.0" />
          </font>
       </Label>
-      <TextField fx:id="txtlieuarrive" layoutX="216.0" layoutY="292.0" prefHeight="31.0" prefWidth="240.0" />
-      <Label layoutX="26.0" layoutY="342.0" prefHeight="39.0" prefWidth="184.0" text="Heure de depart" textFill="WHITE">
+      <TextField fx:id="txtlieuarrive" layoutX="216.0" layoutY="371.0" prefHeight="31.0" prefWidth="240.0" />
+      <Label layoutX="26.0" layoutY="421.0" prefHeight="39.0" prefWidth="184.0" text="Heure de depart" textFill="WHITE">
          <font>
             <Font size="22.0" />
          </font>
       </Label>
-      <TextField fx:id="txtheuredep" layoutX="213.0" layoutY="346.0" prefHeight="31.0" prefWidth="240.0" />
-      <Label layoutX="28.0" layoutY="418.0" prefHeight="39.0" prefWidth="184.0" text="Heure d'arrive" textFill="WHITE">
+      <TextField fx:id="txtheuredep" layoutX="213.0" layoutY="425.0" prefHeight="31.0" prefWidth="240.0" />
+      <Label layoutX="28.0" layoutY="497.0" prefHeight="39.0" prefWidth="184.0" text="Heure d'arrive" textFill="WHITE">
          <font>
             <Font size="22.0" />
          </font>
       </Label>
-      <TextField fx:id="txtheurearr" layoutX="215.0" layoutY="422.0" prefHeight="31.0" prefWidth="240.0" />
-      <Button fx:id="btnAdd" layoutX="39.0" layoutY="539.0" mnemonicParsing="false" onAction="#Add" prefHeight="50.0" prefWidth="114.0" text="Ajouter" />
-      <Button fx:id="btnUpdate" layoutX="187.0" layoutY="539.0" mnemonicParsing="false" onAction="#Update" prefHeight="50.0" prefWidth="114.0" text="Modifier" />
-      <Button fx:id="btnDelete" layoutX="336.0" layoutY="539.0" mnemonicParsing="false" onAction="#Delete" prefHeight="50.0" prefWidth="114.0" text="Supprimer" />
+      <TextField fx:id="txtheurearr" layoutX="215.0" layoutY="501.0" prefHeight="31.0" prefWidth="240.0" />
+      <Button fx:id="btnAdd" layoutX="39.0" layoutY="619.0" mnemonicParsing="false" onAction="#Add" prefHeight="50.0" prefWidth="114.0" text="Ajouter" />
+      <Button fx:id="btnUpdate" layoutX="187.0" layoutY="619.0" mnemonicParsing="false" onAction="#Update" prefHeight="50.0" prefWidth="114.0" text="Modifier" />
+      <Button fx:id="btnDelete" layoutX="336.0" layoutY="619.0" mnemonicParsing="false" onAction="#Delete" prefHeight="50.0" prefWidth="114.0" text="Supprimer" />
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="153.0" layoutY="-14.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../images/logomyway.png" />
+         </image>
+      </ImageView>
+      <TextField fx:id="txt_keyword" layoutX="482.0" layoutY="100.0" onKeyPressed="#searchBar" onKeyReleased="#searchBar" onKeyTyped="#searchBar" prefHeight="31.0" prefWidth="832.0" promptText="Rechercher un ticket?" />
+      <Button fx:id="btnGenPDF" layoutX="118.0" layoutY="132.0" mnemonicParsing="false" onAction="#btnGenPDF" prefHeight="50.0" prefWidth="225.0" text="Generer PDF" />
    </children>
 </AnchorPane>

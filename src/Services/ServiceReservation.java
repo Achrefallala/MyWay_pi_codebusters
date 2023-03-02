@@ -114,7 +114,32 @@ public class ServiceReservation implements IServices<Reservation> {
             System.out.println(ex.getMessage());
         }
     }
+    
+     
+    public List<String> afficherNOM() {
+        List<String> Reservations = new ArrayList<>();
+        try {
+            String qry = "SELECT nom  FROM `utilisateur`";
+            cnx = MyDB.getInstance().getCnx();
+            Statement stm = cnx.createStatement();
+            ResultSet rs = stm.executeQuery(qry);
+            while (rs.next()) {
+                String r = null;
+                r=rs.getString(1);
+                
+                Reservations.add(r);
+            }
+            return Reservations;
 
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return Reservations;
+
+    }
+    
+ 
+    
     @Override
     public void supprimer(Reservation r) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
