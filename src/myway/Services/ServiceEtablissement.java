@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import myway.Entities.Trajet;
 import myway.Utils.MyDB;
 
 
@@ -25,13 +26,10 @@ public class ServiceEtablissement implements IServices<Etablissement> {
     @Override
     public void add(Etablissement e) {
         try {
-            String qry = "INSERT INTO `etablissement`( `nom`, `type`, `id_trajet`) VALUES ('" + e.getNom() + "','" + e.getType() + "','" + e.getId_trajet() + "')";
+            String qry = "INSERT INTO `etablissement`( `nom`, `type`, `description`, `id_trajet`) VALUES ('" + e.getNom() + "','" + e.getType() + "','" + e.getDescription() + "','" + e.getTrajet().getId() + "')";
             cnx = MyDB.getInstance().getCnx();
-
             Statement stm = cnx.createStatement();
-
             stm.executeUpdate(qry);
-
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
@@ -39,7 +37,7 @@ public class ServiceEtablissement implements IServices<Etablissement> {
     }
 
     @Override
-    public List<Etablissement> afficher() {
+    public List<Etablissement> display() {
         List<Etablissement> etablissements = new ArrayList<>();
         try {
             String qry = "SELECT * FROM `etablissement` ";
@@ -51,7 +49,10 @@ public class ServiceEtablissement implements IServices<Etablissement> {
                 e.setId(rs.getInt("id"));
                 e.setNom(rs.getString("nom"));
                 e.setType(rs.getString("type"));
-                e.setId_trajet(rs.getInt("id_trajet"));
+                e.setDescription(rs.getString("description"));
+                
+                ServiceTrajet st = new ServiceTrajet();
+                e.setTrajet(st.findById(rs.getInt("id_trajet")));
 
                 etablissements.add(e);
             }
@@ -65,14 +66,12 @@ public class ServiceEtablissement implements IServices<Etablissement> {
     }
 
     @Override
-    public void modifier(Etablissement e, String colonne, String valeur) {
+    public void update(Etablissement e) {
         try {
-            String qry = "UPDATE etablissement SET " + "`" + colonne + "` = " + "'" + valeur + "'" + " WHERE id = " + e.getId();
+            String qry = "UPDATE etablissement SET " + "`nom` = '" + e.getNom() + "'" + ", `type` = '" + e.getType() + "'" + ", `description` = '" + e.getDescription() + "'" + ", `id_trajet` = '" + e.getTrajet().getId() + "'" + " WHERE id = " + e.getId();
             System.out.println(qry);
             cnx = MyDB.getInstance().getCnx();
-
             Statement stm = cnx.createStatement();
-
             stm.executeUpdate(qry);
 
         } catch (SQLException ex) {
@@ -82,13 +81,11 @@ public class ServiceEtablissement implements IServices<Etablissement> {
     }
 
     @Override
-    public void supprimer(Etablissement e) {
+    public void delete(Etablissement e) {
         try {
             String qry = "DELETE FROM etablissement WHERE id = " + e.getId();
             cnx = MyDB.getInstance().getCnx();
-
             Statement stm = cnx.createStatement();
-
             stm.executeUpdate(qry);
 
         } catch (SQLException ex) {
@@ -96,11 +93,11 @@ public class ServiceEtablissement implements IServices<Etablissement> {
         }
 
     }
-
-    public Etablissement findByName(String nom) {
+    
+    public Etablissement findById(int id) {
         Etablissement e = new Etablissement();
         try {
-            String qry = "SELECT * FROM `etablissement` WHERE nom = '" + nom + "'";
+            String qry = "SELECT * FROM `etablissement` WHERE id = '" + id + "'";
             
             cnx = MyDB.getInstance().getCnx();
             Statement stm = cnx.createStatement();
@@ -111,7 +108,10 @@ public class ServiceEtablissement implements IServices<Etablissement> {
                 e.setId(rs.getInt("id"));
                 e.setNom(rs.getString("nom"));
                 e.setType(rs.getString("type"));
-                e.setId_trajet(rs.getInt("id_trajet"));
+                e.setDescription(rs.getString("description"));
+                
+                ServiceTrajet st = new ServiceTrajet();
+                e.setTrajet(st.findById(rs.getInt("id_trajet"))); 
             }
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
@@ -119,11 +119,12 @@ public class ServiceEtablissement implements IServices<Etablissement> {
         return e;
 
     }
-    
-    public List<Etablissement> findById_trajet(int id_trajet) {
+
+    public List<Etablissement> findByName(String nom) {
+        
         List<Etablissement> etablissements = new ArrayList<>();
         try {
-            String qry = "SELECT * FROM `etablissement` WHERE id_trajet = '" + id_trajet + "'";
+            String qry = "SELECT * FROM `etablissement` WHERE nom = '" + nom + "'";
             
             cnx = MyDB.getInstance().getCnx();
             Statement stm = cnx.createStatement();
@@ -134,7 +135,40 @@ public class ServiceEtablissement implements IServices<Etablissement> {
                 e.setId(rs.getInt("id"));
                 e.setNom(rs.getString("nom"));
                 e.setType(rs.getString("type"));
-                e.setId_trajet(rs.getInt("id_trajet"));
+                e.setDescription(rs.getString("description"));
+                
+                ServiceTrajet st = new ServiceTrajet();
+                e.setTrajet(st.findById(rs.getInt("id_trajet")));
+                
+                etablissements.add(e);
+            }
+            return etablissements;
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return etablissements;
+
+    }
+    
+    public List<Etablissement> findByTrajet(Trajet trajet) {
+        List<Etablissement> etablissements = new ArrayList<>();
+        try {
+            String qry = "SELECT * FROM `etablissement` WHERE id_trajet = '" + trajet.getId() + "'";
+            
+            cnx = MyDB.getInstance().getCnx();
+            Statement stm = cnx.createStatement();
+            ResultSet rs = stm.executeQuery(qry);
+            
+            while (rs.next()) {
+                Etablissement e = new Etablissement();
+                e.setId(rs.getInt("id"));
+                e.setNom(rs.getString("nom"));
+                e.setType(rs.getString("type"));
+                e.setDescription(rs.getString("description"));
+                
+                ServiceTrajet st = new ServiceTrajet();
+                e.setTrajet(st.findById(rs.getInt("id_trajet")));
+                
                 etablissements.add(e);
             }
         } catch (SQLException ex) {
@@ -142,6 +176,27 @@ public class ServiceEtablissement implements IServices<Etablissement> {
         }
         return etablissements;
 
+    }
+    
+    public Boolean exist(Etablissement e){
+        Etablissement etab= new Etablissement();   
+        try {
+            String qry = "SELECT * FROM `etablissement` WHERE nom = '" + e.getNom() + "' AND id_trajet = '" + e.getTrajet().getId() +"'";
+            
+            cnx = MyDB.getInstance().getCnx();
+            Statement stm = cnx.createStatement();
+            ResultSet rs = stm.executeQuery(qry);
+            
+            while (rs.next()) {
+                etab.setNom(rs.getString("nom"));
+            }
+    
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            
+        }
+        return etab.getNom() != null;
+        
     }
 
 }

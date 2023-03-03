@@ -27,20 +27,22 @@ public class ServiceTrajet implements IServices<Trajet> {
     public void add(Trajet t) {
         try {
             String qry = "INSERT INTO `trajet`( `depart`, `destination`, `etat`, `directions`, `image`) VALUES ('" + t.getDepart() + "','" + t.getDestination() + "','" + t.getEtat() + "','" + t.getDirections() + "','" + t.getImage() + "')";
+            
             cnx = MyDB.getInstance().getCnx();
-
+            
             Statement stm = cnx.createStatement();
 
             stm.executeUpdate(qry);
 
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
+            
         }
 
     }
 
     @Override
-    public List<Trajet> afficher() {
+    public List<Trajet> display() {
         List<Trajet> trajets = new ArrayList<>();
         try {
             String qry = "SELECT * FROM `trajet` ";
@@ -67,10 +69,11 @@ public class ServiceTrajet implements IServices<Trajet> {
     }
 
     @Override
-    public void modifier(Trajet t, String colonne, String valeur) {
+    public void update(Trajet t) {
         try {
-            String qry = "UPDATE trajet SET " + "`" + colonne + "` = " + "'" + valeur + "'" + " WHERE id = " + t.getId();
-            System.out.println(qry);
+            
+            String qry = "UPDATE trajet SET " + "`depart` = '" + t.getDepart() + "'" + ", `destination` = '" + t.getDestination() + "'" + ", `etat` = \"" + t.getEtat() + "\"" + ", `directions` = \"" + t.getDirections() + "\"" + ", `image` = '" + t.getImage() + "'" + " WHERE id = " + t.getId();
+            
             cnx = MyDB.getInstance().getCnx();
 
             Statement stm = cnx.createStatement();
@@ -84,7 +87,7 @@ public class ServiceTrajet implements IServices<Trajet> {
     }
 
     @Override
-    public void supprimer(Trajet t) {
+    public void delete(Trajet t) {
         try {
             String qry = "DELETE FROM trajet WHERE id = " + t.getId();
             cnx = MyDB.getInstance().getCnx();
@@ -96,6 +99,31 @@ public class ServiceTrajet implements IServices<Trajet> {
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
+
+    }
+    
+    public Trajet findById(int id_trajet) {
+        Trajet t = new Trajet();
+        try {
+            String qry = "SELECT * FROM `trajet` WHERE id = '" + id_trajet +"'";
+            
+            cnx = MyDB.getInstance().getCnx();
+            Statement stm = cnx.createStatement();
+            ResultSet rs = stm.executeQuery(qry);
+            
+            while (rs.next()) {
+                
+                t.setId(rs.getInt("id"));
+                t.setDepart(rs.getString("depart"));
+                t.setDestination(rs.getString("destination"));
+                t.setEtat(rs.getString("etat"));
+                t.setDirections(rs.getString("directions"));
+                t.setImage(rs.getString("image"));
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return t;
 
     }
 
@@ -122,6 +150,32 @@ public class ServiceTrajet implements IServices<Trajet> {
         }
         return t;
 
+    }
+    
+    public Boolean exist(Trajet trajet){
+        Trajet t= new Trajet();   
+        try {
+            
+            String qry = "SELECT * FROM `trajet` WHERE depart = '" + trajet.getDepart() + "' AND destination = '"+ trajet.getDestination() + "'";
+            
+            cnx = MyDB.getInstance().getCnx();
+            Statement stm = cnx.createStatement();
+            ResultSet rs = stm.executeQuery(qry);
+            
+            while (rs.next()) {
+                t.setDepart(rs.getString("depart"));
+            }
+    
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            
+        }
+        if(t.getDepart() == null){
+            return false;
+        }else{
+            return true;
+        }
+        
     }
 
 }

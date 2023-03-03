@@ -9,20 +9,26 @@ package myway.Entities;
  * @author 9naydel
  */
 public class MoyenTransport {
+    private int id;
     private String matricule, organisation, type, icon, horaires;
     private int nbr_places;
-    private double prix_ticket;
+    private double prix;
 
     public MoyenTransport() {
     }
 
-    public MoyenTransport(String organisation, String type, String icone, String horaires, int nbr_places, double prix_ticket) {
+    public MoyenTransport(String matricule, String organisation, String type, String icone, String horaires, int nbr_places, double prix) {
+        this.matricule = matricule;
         this.organisation = organisation;
         this.type = type;
         this.icon = icone;
         this.horaires = horaires;
         this.nbr_places = nbr_places;
-        this.prix_ticket = prix_ticket;
+        this.prix = prix;
+    }
+    
+    public int getId() {
+        return id;
     }
 
     public String getMatricule() {
@@ -49,8 +55,12 @@ public class MoyenTransport {
         return nbr_places;
     }
 
-    public double getPrix_ticket() {
-        return prix_ticket;
+    public double getPrix() {
+        return prix;
+    }
+    
+    public void setId(int id) {
+        this.id = id;
     }
 
     public void setMatricule(String matricule) {
@@ -77,13 +87,15 @@ public class MoyenTransport {
         this.nbr_places = nbr_places;
     }
 
-    public void setPrix_ticket(double prix_ticket) {
-        this.prix_ticket = prix_ticket;
+    public void setPrix (double prix) {
+        this.prix = prix;
     }
 
     @Override
     public String toString() {
-        return "MoyenTransport{" + "matricule=" + matricule + ", organisation=" + organisation + ", type=" + type + ", icone=" + icon + ", horaires=" + horaires + ", nbr_places=" + nbr_places + ", prix_ticket=" + prix_ticket + '}';
+        return "MoyenTransport{" + "id=" + id + ", matricule=" + matricule + ", organisation=" + organisation + ", type=" + type + ", icon=" + icon + ", horaires=" + horaires + ", nbr_places=" + nbr_places + ", prix=" + prix + '}';
     }
+
+    
     
 }

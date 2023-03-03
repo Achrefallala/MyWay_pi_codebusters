@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<ScrollPane hbarPolicy="ALWAYS" prefHeight="405.0" prefWidth="600.0" vbarPolicy="ALWAYS" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="myway.GUI.Trajet.User.DetailsTrajetFXMLController">
+   <content>
+      <AnchorPane prefHeight="1676.0" prefWidth="583.0">
+         <children>
+            <Text layoutX="40.0" layoutY="61.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Trajet : ">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Text>
+            <Text layoutX="41.0" layoutY="100.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Départ:">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+            <Text layoutX="303.0" layoutY="100.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Destination:">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+            <TextField fx:id="tfDepart" editable="false" layoutX="106.0" layoutY="81.0" prefHeight="25.0" prefWidth="141.0" />
+            <TextField fx:id="tfDest" editable="false" layoutX="405.0" layoutY="81.0" prefHeight="25.0" prefWidth="141.0" />
+            <Text layoutX="40.0" layoutY="154.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Moyens de tranport :">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Text>
+            <TableView fx:id="tableMoyenTransport" layoutX="41.0" layoutY="176.0" onMouseClicked="#reserver" prefHeight="200.0" prefWidth="509.0">
+               <columns>
+                  <TableColumn fx:id="columnMoyenOrganisation" prefWidth="97.0" text="Organisation" />
+                  <TableColumn fx:id="columnMoyenType" prefWidth="63.0" text="Type" />
+                  <TableColumn fx:id="columnMoyenNbrPlaces" minWidth="9.0" prefWidth="68.0" text="Nbr de places" />
+                  <TableColumn fx:id="columnMoyenIcon" prefWidth="53.0" text="Icon" />
+                  <TableColumn fx:id="columnMoyenPrix" prefWidth="72.0" text="Prix" />
+                  <TableColumn fx:id="columnMoyenHoraires" prefWidth="154.0" text="Horaires" />
+               </columns>
+            </TableView>
+            <Text layoutX="41.0" layoutY="424.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Map :">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Text>
+            <ImageView fx:id="ImageMap" fitHeight="464.0" fitWidth="507.0" layoutX="41.0" layoutY="444.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../ariana.png" />
+               </image>
+            </ImageView>
+            <Text layoutX="35.0" layoutY="1075.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Directions :">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Text>
+            <TextArea fx:id="tfDirections" editable="false" layoutX="35.0" layoutY="1094.0" prefHeight="297.0" prefWidth="518.0" />
+            <Text layoutX="37.0" layoutY="874.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Etat du Trajet :">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Text>
+            <TextArea fx:id="tfEtat" editable="false" layoutX="37.0" layoutY="896.0" prefHeight="140.0" prefWidth="516.0" />
+            <Text layoutX="36.0" layoutY="1433.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Etablissements :">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Text>
+            <TableView fx:id="tableEtablissement" layoutX="37.0" layoutY="1447.0" prefHeight="200.0" prefWidth="516.0">
+               <columns>
+                  <TableColumn fx:id="columnEtabNom" prefWidth="132.0" text="Nom" />
+                  <TableColumn fx:id="columnEtabType" prefWidth="126.0" text="Type" />
+                  <TableColumn fx:id="columnEtabDescription" prefWidth="257.0" text="Description" />
+               </columns>
+            </TableView>
+         </children>
+      </AnchorPane>
+   </content>
+</ScrollPane>

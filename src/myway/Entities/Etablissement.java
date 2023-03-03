@@ -9,28 +9,34 @@ package myway.Entities;
  * @author 9naydel
  */
 public class Etablissement {
-    private int id, id_trajet;
-    private String nom, type;
+    private int id;
+    private Trajet trajet;
+    private String nom, type, description;
 
     public Etablissement() {
     }
 
-    public Etablissement(String nom, String type, int id_trajet) {
+    public Etablissement(String nom, String type, String description, Trajet trajet) {
         this.nom = nom;
         this.type = type;
-        this.id_trajet = id_trajet;
+        this.trajet = trajet;
+        this.description = description;
     }
 
     public int getId() {
         return id;
     }
 
-    public int getId_trajet() {
-        return id_trajet;
+    public Trajet getTrajet() {
+        return trajet;
     }
 
     public String getNom() {
         return nom;
+    }
+    
+    public String getDescription() {
+        return description;
     }
 
     public String getType() {
@@ -41,12 +47,16 @@ public class Etablissement {
         this.id = id;
     }
 
-    public void setId_trajet(int id_trajet) {
-        this.id_trajet = id_trajet;
+    public void setTrajet(Trajet trajet) {
+        this.trajet = trajet;
     }
 
     public void setNom(String nom) {
         this.nom = nom;
+    }
+    
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public void setType(String type) {
@@ -55,10 +65,10 @@ public class Etablissement {
 
     @Override
     public String toString() {
-        return "Etablissement{" + "id=" + id + ", id_trajet=" + id_trajet + ", nom=" + nom + ", type=" + type + '}';
+        return "Etablissement{" + "id=" + id + ", nom=" + nom + ", type=" + type + ", description=" + description + ", trajet=" + trajet + '}';
     }
+
     
-    
-    
+
     
 }

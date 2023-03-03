@@ -13,9 +13,9 @@ import java.util.List;
  */
 public interface IServices<T> {
     public void add(T t);
-    public List<T> afficher();
-    public void modifier(T t, String colonne, String valeur);
-    public void supprimer(T t);
+    public List<T> display();
+    public void update(T t);
+    public void delete(T t);
     
     
 }

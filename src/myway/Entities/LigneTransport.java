@@ -9,45 +9,47 @@ package myway.Entities;
  * @author 9naydel
  */
 public class LigneTransport {
-    private int id, id_trajet;
-    private String matricule_moyentp;
+    private int id;
+    private MoyenTransport moyenTransport;
+    private Trajet trajet;
 
     public LigneTransport() {
     }
 
-    public LigneTransport(int id_trajet, String matricule_moyentp) {
-        this.id_trajet = id_trajet;
-        this.matricule_moyentp = matricule_moyentp;
+    public LigneTransport(MoyenTransport moyenTransport, Trajet trajet) {
+        this.moyenTransport = moyenTransport;
+        this.trajet = trajet;
     }
 
     public int getId() {
         return id;
     }
 
-    public int getId_trajet() {
-        return id_trajet;
+    public MoyenTransport getMoyenTransport() {
+        return moyenTransport;
     }
 
-    public String getMatricule_moyentp() {
-        return matricule_moyentp;
+    public Trajet getTrajet() {
+        return trajet;
     }
 
     public void setId(int id) {
         this.id = id;
     }
 
-    public void setId_trajet(int id_trajet) {
-        this.id_trajet = id_trajet;
+    public void setMoyenTransport(MoyenTransport moyenTransport) {
+        this.moyenTransport = moyenTransport;
     }
 
-    public void setMatricule_moyentp(String matricule_moyentp) {
-        this.matricule_moyentp = matricule_moyentp;
+    public void setTrajet(Trajet trajet) {
+        this.trajet = trajet;
     }
 
     @Override
     public String toString() {
-        return "LigneTransport{" + "id=" + id + ", id_trajet=" + id_trajet + ", matricule_moyentp=" + matricule_moyentp + '}';
+        return "LigneTransport{" + "id=" + id + ", moyenTransport=" + moyenTransport + ", trajet=" + trajet + '}';
     }
+    
     
     
 }

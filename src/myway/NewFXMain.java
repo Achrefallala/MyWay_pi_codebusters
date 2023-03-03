@@ -22,7 +22,7 @@ public class NewFXMain extends Application {
     @Override
     public void start(Stage primaryStage) {
         try {
-            Parent root=FXMLLoader.load(getClass().getResource("../myWay/GUI/Trajet/HomeTrajetFXML.fxml"));
+            Parent root=FXMLLoader.load(getClass().getResource("../myWay/GUI/Trajet/User/ChercherTrajetFXML.fxml"));
             Scene scene = new Scene(root);
             primaryStage.setTitle("Trajet");
             primaryStage.setScene(scene);
