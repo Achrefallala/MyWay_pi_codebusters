@@ -28,7 +28,7 @@ public class NewFXMain extends Application {
         
                 try {
                     
-                    root=FXMLLoader.load(getClass().getResource("ContratLocation.fxml"));
+                    root=FXMLLoader.load(getClass().getResource("interfaceLocation.fxml"));
                     Scene scene = new Scene(root);
                     primaryStage.setTitle("");
                     primaryStage.setScene(scene);

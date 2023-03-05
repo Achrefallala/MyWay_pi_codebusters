@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="513.0" prefWidth="797.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="workshop3a24.GUI.InterfaceLocationController">
+   <children>
+      <ScrollPane fx:id="scrollpane" layoutX="58.0" layoutY="96.0" prefHeight="368.0" prefWidth="718.0">
+         <content>
+            <FlowPane fx:id="Flow" prefHeight="344.0" prefWidth="713.0">
+               <children>
+                  <VBox prefHeight="233.0" prefWidth="217.0">
+                     <children>
+                        <ImageView fitHeight="122.0" fitWidth="259.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../../../Documents/images%20pi/miata.jpg" />
+                           </image>
+                        </ImageView>
+                        <VBox prefHeight="238.0" prefWidth="217.0" spacing="20.0">
+                           <children>
+                              <TextField fx:id="txtN" />
+                              <TextField fx:id="txtD" />
+                              <TextField fx:id="txtT" />
+                              <TextField fx:id="txtDesc" />
+                              <TextField fx:id="txtP" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </VBox>
+               </children></FlowPane>
+         </content>
+      </ScrollPane>
+      <Label layoutX="182.0" layoutY="10.0" prefHeight="51.0" prefWidth="220.0" text="LOCATION" textFill="#09f2b7">
+         <font>
+            <Font name="System Bold Italic" size="39.0" />
+         </font>
+      </Label>
+      <HBox layoutX="459.0" layoutY="-12.0" prefHeight="100.0" prefWidth="200.0" />
+   </children>
+</AnchorPane>

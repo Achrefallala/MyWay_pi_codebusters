@@ -152,6 +152,7 @@ public class ContratLocationController implements Initializable {
 
     @FXML
     private void modifier(ActionEvent event) {
+        boolean ok = true;
         if (isInputValid()) {
             int myIndex = contable.getSelectionModel().getSelectedIndex();
             int id = Integer.parseInt(String.valueOf(contable.getItems().get(myIndex).getId_location()));
@@ -160,11 +161,20 @@ public class ContratLocationController implements Initializable {
             Date sqlDate = Date.valueOf(localDate);
             LocalDate localDate1 = txtFin.getValue();
             Date sqlDate1 = Date.valueOf(localDate1);
-
-            
-        
-
             contrat_location l = new contrat_location(id, prix,sqlDate,sqlDate1 );
+            
+             if(!sqlDate.before(sqlDate1)){
+                      Alert alert = new Alert(AlertType.ERROR);
+                
+                alert.setTitle("Error Message");
+                alert.setHeaderText(null);
+                alert.setContentText("Date Debut > Date Fin");
+                alert.showAndWait();
+             ok = false;
+                 return;
+            }
+            
+             if (ok==true){
             sc.modifier(l);
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("location modification");
@@ -173,12 +183,14 @@ public class ContratLocationController implements Initializable {
             alert.setContentText("Updateddd!");
 
             alert.showAndWait();
-            table();
+            table();}
         }
     }
 
     private boolean isInputValid() {
         String errorMessage = "";
+       
+        
 
         if (txtPrix.getText() == null || txtPrix.getText().length() == 0 ) {
             errorMessage += "Invalide prix!\n";
@@ -193,6 +205,9 @@ public class ContratLocationController implements Initializable {
         if (errorMessage.length() == 0) {
             return true;
         } else {
+            
+           
+             
             // Show the error message.
             Alert alert = new Alert(AlertType.ERROR);
 
@@ -201,7 +216,7 @@ public class ContratLocationController implements Initializable {
             alert.setContentText(errorMessage);
 
             alert.showAndWait();
-
+            
             return false;
         }
     }

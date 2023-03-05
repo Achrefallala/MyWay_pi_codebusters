@@ -7,6 +7,7 @@ import java.sql.Date;
  * @author Mohamed
  */
 public class contrat_location {
+    //private Location location;
     private int id_location ;
  Float prix;
     Date debut ,fin;

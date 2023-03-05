@@ -5,9 +5,24 @@
  */
 package workshop3a24.GUI;
 
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Element;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
+import java.awt.Desktop;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.net.URL;
+import java.text.SimpleDateFormat;
+import java.util.Locale;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -20,6 +35,7 @@ import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyEvent;
 import workshop3a24.Entities.Location;
 import workshop3a24.Services.ServiceLocation;
 
@@ -56,6 +72,10 @@ public class HomeLocationFxmlController implements Initializable {
     private TableColumn<Location,String> DescriptionColmn;
     @FXML
     private TableColumn<Location, Integer> ID;
+    @FXML
+    private TextField search;
+    @FXML
+    private Button btnGenPDF;
 
     /**
      * Initializes the controller class.
@@ -109,10 +129,10 @@ public class HomeLocationFxmlController implements Initializable {
         int id_location = Integer.parseInt(String.valueOf(tableLocation.getItems().get(myIndex).getId()));
         locations.supprimerBYid(id_location);
           Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Produit suiprrmer");
+            alert.setTitle("Location supprime");
              table();
             
-            alert.setHeaderText("Produit Registation");
+            alert.setHeaderText("Location Registration");
             alert.setContentText("Deleted!");
 
             alert.showAndWait();
@@ -168,6 +188,7 @@ public class HomeLocationFxmlController implements Initializable {
                 alert.setTitle("location modification");
 
                 alert.setHeaderText("location modif");
+                
                 alert.setContentText("Updateddd!");
 
                 alert.showAndWait();
@@ -178,6 +199,86 @@ public class HomeLocationFxmlController implements Initializable {
     
     
     
+    @FXML
+    private void filter(KeyEvent event) {
+        ObservableList<Location> filteredLocation = FXCollections.observableArrayList(locations.afficher());
+        //    ObservableList<Person> filteredPeople = people.filtered(p -> p.getAge() >= 30 && p.getAge() < 40);  
+
+        ObservableList<Location> newdata = filteredLocation.stream()
+                .filter(n -> n.getDisponibilite().toLowerCase().contains(search.getText().toLowerCase())
+                || n.getDisponibilite().toLowerCase().equals(search.getText())
+                || n.getDescription().toLowerCase().contains(search.getText())
+                || n.getNom().toLowerCase().contains(search.getText().toLowerCase())
+                || n.getNom().toLowerCase().equals(search.getText())
+                || n.getType().toLowerCase().contains(search.getText().toLowerCase())
+                || n.getType().toLowerCase().equals(search.getText()))
+                .collect(Collectors.toCollection(FXCollections::observableArrayList));
+
+        tableLocation.setItems(newdata);   
+
+    }
+    
+    
+    
+    @FXML
+    void btnGenPDF(ActionEvent event) throws DocumentException, FileNotFoundException, IOException {
+
+        long millis = System.currentTimeMillis();
+        java.sql.Date DateRapport = new java.sql.Date(millis);
+
+        String DateLyoum = new SimpleDateFormat("yyyyMMddHHmmss", Locale.ENGLISH).format(DateRapport);//yyyyMMddHHmmss
+        System.out.println("Date d'aujourdhui : " + DateLyoum);
+
+        com.itextpdf.text.Document document = new com.itextpdf.text.Document();
+
+        try {
+            PdfWriter.getInstance(document, new FileOutputStream(String.valueOf(DateLyoum + ".pdf")));//yyyy-MM-dd
+            document.open();
+            Paragraph ph1 = new Paragraph("Rapport Pour les ocations :" + DateRapport);
+            Paragraph ph2 = new Paragraph(".");
+            PdfPTable table = new PdfPTable(5);
+
+            //On créer l'objet cellule.
+            PdfPCell cell;
+
+            //contenu du tableau.
+            table.addCell("ID Location");
+            table.addCell("NOM");
+            table.addCell("DISPONIBILITE");
+            table.addCell("TYPE");
+                        table.addCell("DESCRIPTION");
+
+            Location r = new Location();
+            locations.afficher().forEach(e
+                    -> {
+                table.setHorizontalAlignment(Element.ALIGN_CENTER);
+                table.addCell(String.valueOf(e.getId()));
+                table.addCell(String.valueOf(e.getNom()));
+                table.addCell(String.valueOf(e.getDisponibilite()));
+                table.addCell(String.valueOf(e.getType()));
+                                table.addCell(String.valueOf(e.getDescription()));
+
+
+            }
+            );
+            document.add(ph1);
+            document.add(ph2);
+            document.add(table);
+            //  document.addAuthor("Bike");
+            // AlertDialog.showNotification("Creation PDF ", "Votre fichier PDF a ete cree avec success", AlertDialog.image_checked);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        document.close();
+
+        ///Open FilePdf
+        File file = new File(DateLyoum + ".pdf");
+        Desktop desktop = Desktop.getDesktop();
+        if (file.exists()) //checks file exists or not  
+        {
+            desktop.open(file); //opens the specified file   
+        }
+    }
     
     
     
@@ -212,6 +313,9 @@ public class HomeLocationFxmlController implements Initializable {
             return false;
         }
     }
+
+    
+
 
     
     

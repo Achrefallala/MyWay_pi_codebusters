@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+  <?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="workshop3a24.GUI.MycardnewController">
+  
+
+
+<VBox layoutX="472.0" layoutY="106.0" prefHeight="373.0" prefWidth="220.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ImageView fitHeight="122.0" fitWidth="259.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../Documents/images%20pi/miata.jpg" />
+         </image>
+      </ImageView>
+      <VBox prefHeight="238.0" prefWidth="217.0" spacing="20.0">
+         <children>
+            <TextField fx:id="txtN" />
+            <TextField fx:id="txtD" />
+            <TextField fx:id="txtT" />
+            <TextField fx:id="txtDesc" />
+            <TextField fx:id="txtP" />
+         </children>
+      </VBox>
+   </children>
+</VBox>
+
+</AnchorPane>
