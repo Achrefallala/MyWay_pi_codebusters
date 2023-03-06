@@ -12,6 +12,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import Utils.MyDB;
+import sun.util.logging.resources.logging;
 //import java.sql.Date;
 
 /**
@@ -83,52 +84,59 @@ public class ServiceReservation implements IServices<Reservation> {
     
     @Override
         public List<Reservation> afficher() {
+                              System.out.println("begin Afficher");
 
         List<Reservation> listRes = new ArrayList<>();
         ServiceUtilisateur uService = new ServiceUtilisateur();
-        try {
+                    System.out.println("begin Try");
 
 
-    String qry ="SELECT u.nom, mt.type, t.depart, t.destination \n" +
-"            FROM reservation r \n" +
-"            INNER JOIN utilisateur u ON r.id_utilisateur = u.id_utilisateur \n" +
-"            INNER JOIN ligne_transport lt ON r.id_ligne = lt.id_ligne \n" +
-"            INNER JOIN moyen_transport mt ON lt.id_moyentp = mt.id_moyentp\n" +
-"            INNER JOIN trajet t ON lt.id_trajet = t.id_trajet";
+    String qry ="SELECT utilisateur.nom as nom, moyen_transport.type as type, trajet.depart as depart, trajet.destination as destination FROM reservation INNER JOIN utilisateur ON reservation.id_utilisateur = utilisateur.id_utilisateur INNER JOIN ligne_transport ON reservation.id_ligne = ligne_transport.id_ligne INNER JOIN moyen_transport ON ligne_transport.id_moyentp = moyen_transport.id_moyentp INNER JOIN trajet ON ligne_transport.id_trajet = trajet.id_trajet;";
 
 
+
+            
+                        
+            try { 
             cnx = MyDB.getInstance().getCnx();
             Statement stm = cnx.createStatement();
-            ResultSet rs = stm.executeQuery(qry);
-            while (rs.next()) {
+            ResultSet rs = stm.executeQuery(qry); 
+                 while(rs.next()) {
                 Reservation r = new Reservation();
                 Utilisateur u = new Utilisateur();
-                MoyenTransport mt = new MoyenTransport();
                 Trajet t = new Trajet();
                 LigneTransport lt = new LigneTransport();
-                
-                
-                
-                u.setNom(rs.getString(1));
-               lt.getMoyentransport().setType(rs.getString(2));
-                lt.getTrajet().setDepart(rs.getString(3));
-                lt.getTrajet().setDestination(rs.getString(4));
+                MoyenTransport mt = new MoyenTransport();    
 
-
-//                r.getUtilisateur().setNom(rs.getString(1));
-//                 //  lt.setMoyentransport().;
-//                r.getLigne().getMoyentransport().setType(rs.getString(2));
-//                r.getLigne().getTrajet().setDepart(rs.getString(3));
-//                r.getLigne().getTrajet().setDestination(rs.getString(4));
-                  System.out.println(r);
+                    
+                u.setNom(rs.getString("nom"));
+               mt.setType(rs.getString("type"));
+                t.setDepart(rs.getString("depart"));
+                t.setDestination(rs.getString("destination"));
+                lt.setTrajet(t);
+                lt.setMoyentransport(mt);
+                
+                
+                System.out.println("u :"+ u.getNom());
+                System.out.println("Moyentransport :"+ lt.getMoyentransport());
+                System.out.println("Depart :"+ lt.getTrajet().getDepart());
+                System.out.println("destination :"+ u.getNom());
+ 
+                r.setUtilisateur(u);
+                r.setLigne(lt);
+                
+                System.out.println("R"+ r.toString());
                 listRes.add(r);
             }
-            return listRes;
-
-        } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
+            
         }
+            catch(SQLException e){
+                System.out.println(e.getMessage());
+            }
+            
+            
 
+     
         return listRes;
     }
 

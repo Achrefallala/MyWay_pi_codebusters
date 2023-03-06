@@ -1,15 +1,16 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package reservation.gui;
 
 import Entities.MoyenTransport;
 import Entities.Reservation;
-import Entities.Ticket;
+import Entities.ResultReservation;
 import Entities.Trajet;
 import Entities.Utilisateur;
 import Services.ServiceReservation;
-import Services.ServiceTicket;
-import Services.ServiceUtilisateur;
-import Utils.MyDB;
-import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Element;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfPCell;
@@ -17,41 +18,45 @@ import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import java.awt.Desktop;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
 import java.util.ResourceBundle;
-import javafx.fxml.Initializable;
+import java.util.stream.Collectors;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
-
-import java.util.List;
-import java.util.Locale;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import java.util.stream.Collectors;
-import javafx.event.ActionEvent;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 
 /**
+ * FXML Controller class
  *
  * @author Slim
  */
 public class HomeReservationController implements Initializable {
 
-    Reservation r = new Reservation();
+    /**
+     * Initializes the controller class.
+     */
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        table();
+    }    
+
+        Reservation r = new Reservation();
     ServiceReservation res = new ServiceReservation();
 
     Connection cnx;
@@ -59,23 +64,47 @@ public class HomeReservationController implements Initializable {
     @FXML
     private Button btnGenPDF;
     @FXML
-    private TableView<Reservation> tableRes;
+    private TableView<ResultReservation> tableRes;
     @FXML
-    private TableColumn<Utilisateur, String> nomutilisateurCol;
+    private TableColumn<ResultReservation, String> nomutilisateurCol;
     @FXML
-    private TableColumn<MoyenTransport, String> moyentransportCol;
+    private TableColumn<ResultReservation, String> moyentransportCol;
     @FXML
-    private TableColumn<Trajet, String> departCol;
+    private TableColumn<ResultReservation, String> departCol;
     @FXML
-    private TableColumn<Trajet, String> destinationCol;
+    private TableColumn<ResultReservation, String> destinationCol;
     @FXML
     private Button btnDelete;
     @FXML
     private TextField txt_keyword;
 
     public void table() {
+List<Reservation> listRes = new ArrayList<>();
+    try{
+        
+        
+        listRes=res.afficher();
+        ResultReservation r;
+        List<ResultReservation> listResReservation = new ArrayList<>();
+       
+        for (Reservation res : listRes) {
+         r = new ResultReservation();
+         r.setId_reservation(res.getId_reservation());
+         r.setDepart(res.getLigne().getTrajet().getDepart());
+         r.setDestination(res.getLigne().getTrajet().getDestination());
+         r.setNom(res.getUtilisateur().getNom());
+         r.setType(res.getLigne().getMoyentransport().getType());
+         
+         
+         listResReservation.add(r);
+            
+            
+        }
+    
 
-        tableRes.setItems(FXCollections.observableArrayList(res.afficher()));
+        
+        
+        tableRes.setItems(FXCollections.observableArrayList(listResReservation));
         nomutilisateurCol.setCellValueFactory(new PropertyValueFactory<>("nom"));
         moyentransportCol.setCellValueFactory(new PropertyValueFactory<>("type"));
         departCol.setCellValueFactory(new PropertyValueFactory<>("depart"));
@@ -93,6 +122,10 @@ public class HomeReservationController implements Initializable {
             return myRow;
         });
 
+    }catch(Exception e){
+        System.out.println(e.getMessage());
+    }
+        
     
 
 
@@ -136,11 +169,8 @@ public class HomeReservationController implements Initializable {
 
 
    
-}
-
- 
-
-    @FXML
+    }
+     @FXML
     private void btnGenPDF(ActionEvent event) throws IOException {
          long millis = System.currentTimeMillis();
         java.sql.Date DateRapport = new java.sql.Date(millis);
@@ -195,11 +225,11 @@ public class HomeReservationController implements Initializable {
         }
     }
 
-    @FXML
+
+      @FXML
     private void Add(ActionEvent event) {
     }
-
-    @FXML
+     @FXML
     private void searchBar(KeyEvent event) {
         ServiceReservation sr = new ServiceReservation();
         List<Reservation> l = sr.afficher();
@@ -210,10 +240,4 @@ public class HomeReservationController implements Initializable {
         tableRes.setItems(newdata);
     }
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        table();
-    }
-    
-    
 }

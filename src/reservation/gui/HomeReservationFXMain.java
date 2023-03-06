@@ -29,7 +29,7 @@ public class HomeReservationFXMain extends Application {
             primaryStage.setTitle("Gestion Reservation");
             primaryStage.setScene(scene);
             primaryStage.show();
-        } catch (IOException e) {
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
     }
