@@ -3,19 +3,27 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Slim/Desktop/GestionReservation/src/Services/IServices.java</file>
-            <file>file:/C:/Users/Slim/Desktop/GestionReservation/src/Reservation/GUI/HomeTicketFXMain.java</file>
-            <file>file:/C:/Users/Slim/Desktop/GestionReservation/src/Reservation/GUI/HomeTicketController.java</file>
-            <file>file:/C:/Users/Slim/Desktop/GestionReservation/src/Reservation/GUI/HomeReservationFXMain.java</file>
-            <file>file:/C:/Users/Slim/Desktop/GestionReservation/src/Utils/MyDB.java</file>
+            <file>file:/C:/Users/Slim/Desktop/GestionReservation/src/Entities/Trajet.java</file>
             <file>file:/C:/Users/Slim/Desktop/GestionReservation/src/Entities/Ticket.java</file>
             <file>file:/C:/Users/Slim/Desktop/GestionReservation/src/Services/ServiceReservation.java</file>
+            <file>file:/C:/Users/Slim/Desktop/GestionReservation/src/reservation/gui/HomeTicketController.java</file>
+            <file>file:/C:/Users/Slim/Desktop/GestionReservation/src/reservation/gui/HomeReservationUSERFXMain.java</file>
+            <file>file:/C:/Users/Slim/Desktop/GestionReservation/src/reservation/gui/HomeReservationFXMain.java</file>
             <file>file:/C:/Users/Slim/Desktop/GestionReservation/src/Entities/Reservation.java</file>
-            <file>file:/C:/Users/Slim/Desktop/GestionReservation/src/Services/IServicesT.java</file>
-            <file>file:/C:/Users/Slim/Desktop/GestionReservation/src/Reservation/GUI/HomeReservationController.java</file>
+            <file>file:/C:/Users/Slim/Desktop/GestionReservation/src/reservation/gui/HomeReservationController.java</file>
+            <file>file:/C:/Users/Slim/Desktop/GestionReservation/src/reservation/gui/HomeReservationUSERController.java</file>
+            <file>file:/C:/Users/Slim/Desktop/GestionReservation/src/reservation/gui/HomeReservationUSER.fxml</file>
+            <file>file:/C:/Users/Slim/Desktop/GestionReservation/src/reservation/gui/HomeTicketFXMain.java</file>
+            <file>file:/C:/Users/Slim/Desktop/GestionReservation/src/Services/ServiceUtilisateur.java</file>
+            <file>file:/C:/Users/Slim/Desktop/GestionReservation/src/Services/ServiceLigneTransport.java</file>
+            <file>file:/C:/Users/Slim/Desktop/GestionReservation/src/Entities/Utilisateur.java</file>
             <file>file:/C:/Users/Slim/Desktop/GestionReservation/src/gestionreservation/GestionTicket.java</file>
+            <file>file:/C:/Users/Slim/Desktop/GestionReservation/src/Entities/MoyenTransport.java</file>
             <file>file:/C:/Users/Slim/Desktop/GestionReservation/src/Services/ServiceTicket.java</file>
-            <file>file:/C:/Users/Slim/Desktop/GestionReservation/src/Reservation/GUI/HomeTicket.fxml</file>
+            <file>file:/C:/Users/Slim/Desktop/GestionReservation/src/reservation/gui/HomeReservation.fxml</file>
+            <file>file:/C:/Users/Slim/Desktop/GestionReservation/src/reservation/gui/HomeTicket.fxml</file>
+            <file>file:/C:/Users/Slim/Desktop/GestionReservation/src/gestionreservation/GestionReservation.java</file>
+            <file>file:/C:/Users/Slim/Desktop/GestionReservation/src/Entities/LigneTransport.java</file>
         </group>
     </open-files>
 </project-private>

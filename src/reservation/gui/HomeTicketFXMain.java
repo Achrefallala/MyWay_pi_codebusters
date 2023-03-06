@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Reservation.GUI;
+package reservation.gui;
 
 import java.io.IOException;
 import javafx.application.Application;
@@ -24,11 +24,10 @@ import javafx.stage.Stage;
 public class HomeTicketFXMain extends Application {
     
     @Override
-    public void start(Stage primaryStage) throws IOException  {
+    public void start(Stage primaryStage) {
        
         try{
-       Parent p = new Parent() {};
-        p=FXMLLoader.load(getClass().getResource("HomeTicket.fxml")); //lparent taatih lpath taa fichier fxml
+       Parent p=FXMLLoader.load(getClass().getResource("HomeTicket.fxml")); //lparent taatih lpath taa fichier fxml
         Scene scene = new Scene(p); //bech tnajjem taffichih thotou fel scene
         primaryStage.setTitle("Gestion Ticket");
         primaryStage.setScene(scene);

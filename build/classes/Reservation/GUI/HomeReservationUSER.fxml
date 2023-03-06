@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<VBox prefHeight="613.0" prefWidth="671.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="reservation.gui.HomeReservationUSERController">
+  <children>
+    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="308.0" prefWidth="543.0" VBox.vgrow="ALWAYS">
+      <children>
+            <Text fill="#73c1ab" layoutX="244.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Reservations" textAlignment="RIGHT" wrappingWidth="183.6708984375">
+               <font>
+                  <Font size="32.0" />
+               </font>
+            </Text>
+            <Label layoutX="78.0" layoutY="324.0" prefHeight="32.0" prefWidth="206.0" text="Moyen de transport">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Label>
+            <Label fx:id="tfmoyen" layoutX="409.0" layoutY="317.0" prefHeight="32.0" prefWidth="38.0" text="fixe">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Label>
+            <Label layoutX="80.0" layoutY="149.0" prefHeight="32.0" prefWidth="206.0" text="Depart">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Label>
+            <Label fx:id="tfdepart" layoutX="411.0" layoutY="149.0" prefHeight="32.0" prefWidth="184.0" text="fixe">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Label>
+            <Label layoutX="80.0" layoutY="200.0" prefHeight="32.0" prefWidth="206.0" text="Destination">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Label>
+            <Label fx:id="tfdestination" layoutX="411.0" layoutY="190.0" prefHeight="32.0" prefWidth="52.0" text="fixe">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Label>
+            <Button fx:id="addreservation" layoutX="225.0" layoutY="498.0" mnemonicParsing="false" prefHeight="81.0" prefWidth="221.0" text="Confirmer Reservation" />
+            <Label layoutX="80.0" layoutY="254.0" prefHeight="32.0" prefWidth="206.0" text="Prix">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Label>
+            <Label fx:id="tfprix" layoutX="411.0" layoutY="238.0" prefHeight="32.0" prefWidth="52.0" text="fixe">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Label>
+            <Label fx:id="tfprix1" layoutX="463.0" layoutY="238.0" prefHeight="32.0" prefWidth="52.0" text="DT">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="113.0" fitWidth="118.0" layoutX="65.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../logomyway.png" />
+               </image>
+            </ImageView>
+      </children>
+    </AnchorPane>
+  </children>
+</VBox>

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Reservation.GUI;
+package reservation.gui;
 
 import java.io.IOException;
 import javafx.application.Application;
@@ -21,16 +21,16 @@ import javafx.stage.Stage;
  *
  * @author Slim
  */
-public class HomeReservationFXMain extends Application {
+public class HomeReservationUSERFXMain extends Application {
     
     @Override
     public void start(Stage primaryStage) throws IOException  {
        
         try{
        Parent p = new Parent() {};
-        p=FXMLLoader.load(getClass().getResource("HomeReservation.fxml")); //lparent taatih lpath taa fichier fxml
+        p=FXMLLoader.load(getClass().getResource("HomeReservationUSER.fxml")); //lparent taatih lpath taa fichier fxml
         Scene scene = new Scene(p); //bech tnajjem taffichih thotou fel scene
-        primaryStage.setTitle("Gestion Reservation");
+        primaryStage.setTitle("Votre reservation");
         primaryStage.setScene(scene);
         primaryStage.show();
     }

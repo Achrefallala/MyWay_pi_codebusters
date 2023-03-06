@@ -4,36 +4,31 @@
  * and open the template in the editor.
  */
 package Entities;
+
 import java.sql.Timestamp;
 import java.util.Date;
-
 
 /**
  *
  * @author Slim
  */
 public class Reservation {
-   private int id_reservation;
-    private int id_utilisateur;
-    private String moyen_transport;
+
+    private int id_reservation;
+    private LigneTransport ligne; // ligne.id_ligne; moyentp.type
+    private Utilisateur utilisateur;
     private String disponibilite_r;
 
     public Reservation() {
     }
 
-    public Reservation(int id_reservation, int id_utilisateur, String moyen_transport, String disponibilite_r) {
-        this.id_reservation = id_reservation;
-        this.id_utilisateur = id_utilisateur;
-        this.moyen_transport = moyen_transport;
+    public Reservation(LigneTransport ligne, Utilisateur utilisateur, String disponibilite_r) {
+        this.ligne = ligne;
+        this.utilisateur = utilisateur;
         this.disponibilite_r = disponibilite_r;
-        
     }
-      public Reservation(int id_utilisateur, String moyen_transport, String disponibilite_r) {
-        this.id_utilisateur = id_utilisateur;
-        this.moyen_transport = moyen_transport;
-        this.disponibilite_r = disponibilite_r;
-        
-    }
+
+    
 
     public int getId_reservation() {
         return id_reservation;
@@ -43,20 +38,20 @@ public class Reservation {
         this.id_reservation = id_reservation;
     }
 
-    public int getId_utilisateur() {
-        return id_utilisateur;
+    public LigneTransport getLigne() {
+        return ligne;
     }
 
-    public void setId_utilisateur(int id_utilisateur) {
-        this.id_utilisateur = id_utilisateur;
+    public void setLigne(LigneTransport ligne) {
+        this.ligne = ligne;
     }
 
-    public String getMoyen_transport() {
-        return moyen_transport;
+    public Utilisateur getUtilisateur() {
+        return utilisateur;
     }
 
-    public void setMoyen_transport(String moyen_transport) {
-        this.moyen_transport = moyen_transport;
+    public void setUtilisateur(Utilisateur utilisateur) {
+        this.utilisateur = utilisateur;
     }
 
     public String getDisponibilite_r() {
@@ -69,16 +64,8 @@ public class Reservation {
 
     @Override
     public String toString() {
-        return "Reservation{" + "id_reservation=" + id_reservation + ", id_utilisateur=" + id_utilisateur + ", moyen_transport=" + moyen_transport + ", disponibilite_r=" + disponibilite_r + '}';
+        return "Reservation{" + "id_reservation=" + id_reservation + ", ligne=" + ligne + ", utilisateur=" + utilisateur + ", disponibilite_r=" + disponibilite_r + '}';
     }
 
     
-
-   
 }
-
-
-    
-
-    
-
