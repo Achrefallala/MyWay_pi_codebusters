@@ -14,12 +14,12 @@
    <children>
       <TableView fx:id="tableTic" layoutX="153.0" layoutY="223.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="568.0" prefWidth="1169.0">
         <columns>
-            <TableColumn fx:id="prixticketCol1" minWidth="0.0" prefWidth="249.0" text="NOM UTILISATEUR" />
+            <TableColumn fx:id="nomutilisateurCol" minWidth="0.0" prefWidth="249.0" text="NOM UTILISATEUR" />
             <TableColumn fx:id="prixticketCol" minWidth="0.0" prefWidth="143.0" text="PRIX TICKET" />
-            <TableColumn fx:id="lieudepartCol" minWidth="0.0" prefWidth="152.0" text="DEPART" />
-            <TableColumn fx:id="lieuarriveCol" maxWidth="381.0" minWidth="-1.0" prefWidth="214.0" text="DESTINATION" />
-            <TableColumn fx:id="lieuarriveCol1" maxWidth="381.0" minWidth="-1.0" prefWidth="214.0" text="DATE TICKET" />
-            <TableColumn fx:id="lieuarriveCol11" maxWidth="381.0" minWidth="-1.0" prefWidth="196.0" text="MOYEN DE TRANSPORT" />
+            <TableColumn fx:id="departCol" minWidth="0.0" prefWidth="152.0" text="DEPART" />
+            <TableColumn fx:id="destinationCol" maxWidth="381.0" minWidth="-1.0" prefWidth="214.0" text="DESTINATION" />
+            <TableColumn fx:id="dateticketCol" maxWidth="381.0" minWidth="-1.0" prefWidth="214.0" text="DATE TICKET" />
+            <TableColumn fx:id="typeCol" maxWidth="381.0" minWidth="-1.0" prefWidth="196.0" text="MOYEN DE TRANSPORT" />
         </columns>
       </TableView>
       <Text fill="#73c1ab" layoutX="513.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tickets" textAlignment="RIGHT" wrappingWidth="183.6708984375">

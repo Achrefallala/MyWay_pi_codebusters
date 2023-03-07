@@ -5,8 +5,11 @@
  */
 package Services;
 
+import Entities.LigneTransport;
 import Entities.MoyenTransport;
+import Entities.Reservation;
 import Entities.Ticket;
+import Entities.Trajet;
 import Entities.Utilisateur;
 import Utils.MyDB;
 import java.sql.Connection;
@@ -21,50 +24,64 @@ import java.util.List;
  * @author Slim
  */
 public class ServiceTicket implements IServicesT<Ticket> {
-//    private int id_ticket;
-//    private Utilisateur utilisateur; // ID UTILISATEUR
-//    private MoyenTransport moyentransport;//matricule
-////prix_ticket
-//    private Date dateticket;
-    Connection cnx = MyDB.getInstance().getCnx();
- 
-       Utilisateur u = new Utilisateur();
-    MoyenTransport m = new MoyenTransport();
-    
-    static final String UPDATE_ = "UPDATE `ticket` SET `id_ticket` =?, `u.id_utilisateur` = ?, `m.moyentransport` = ?, `dateticket` = ?,  WHERE `ticket`.`id_ticket` = ?";
 
-    
+    Connection cnx = MyDB.getInstance().getCnx();
+
     @Override
     public List<Ticket> afficher() {
-  List<Ticket> Tickets = new ArrayList<>();
-//      
-//        try {
-//            String qry = "SELECT id_ticket,u.id_utilisateur,m.moyentransport,dateticket FROM `ticket`";
-//            cnx = MyDB.getInstance().getCnx();
-//            Statement stm = cnx.createStatement();
-//            ResultSet rs = stm.executeQuery(qry);
-//            while (rs.next()) {
-//                Ticket r = new Ticket();
-//                r.setId_reservation(rs.getInt(1));
-//                r.setPrix_ticket(rs.getInt(2));
-//                r.setLieu_depart(rs.getString(3));
-//                r.setLieu_arrive(rs.getString(4));
-//                r.setHeure_depart(rs.getString(5));
-//                r.setHeure_arrive(rs.getString(6));
-//                r.setId_ticket(rs.getInt(7));
-//
-//                Tickets.add(r);
-//            }
-//            return Tickets;
-//
-//        } catch (SQLException ex) {
-//            System.out.println(ex.getMessage());
-//        }
-      return Tickets;
+        System.out.println("begin Afficher");
 
+        List<Ticket> listTic = new ArrayList<>();
+        ServiceUtilisateur uService = new ServiceUtilisateur();
+        System.out.println("begin Try");
+
+        String qry = "SELECT utilisateur.nom, moyen_transport.prix, trajet.depart, trajet.destination, ticket.dateticket, moyen_transport.type FROM ticket INNER JOIN utilisateur ON ticket.id_utilisateur = utilisateur.id_utilisateur INNER JOIN ligne_transport ON ticket.id_ligne = ligne_transport.id_ligne INNER JOIN trajet ON ligne_transport.id_trajet = trajet.id_trajet INNER JOIN moyen_transport ON ligne_transport.id_moyentp = moyen_transport.id_moyentp;";
+
+        try {
+            cnx = MyDB.getInstance().getCnx();
+            Statement stm = cnx.createStatement();
+            ResultSet rs = stm.executeQuery(qry);
+            while (rs.next()) {
+                Reservation r = new Reservation();
+                Utilisateur u = new Utilisateur();
+                Trajet t = new Trajet();
+                LigneTransport lt = new LigneTransport();
+                MoyenTransport mt = new MoyenTransport();
+                Ticket tic = new Ticket();
+
+                u.setNom(rs.getString("nom"));
+                mt.setPrix(rs.getDouble("prix"));
+                t.setDepart(rs.getString("depart"));
+                t.setDestination(rs.getString("destination"));
+                tic.setDateticket(rs.getDate("dateticket"));
+                mt.setType(rs.getString("type"));
+
+                lt.setTrajet(t);
+                lt.setMoyentransport(mt);
+
+                System.out.println("nom :" + u.getNom());
+                System.out.println("prix :" + mt.getPrix());
+                System.out.println("Depart :" + lt.getTrajet().getDepart());
+                System.out.println("Depart :" + lt.getTrajet().getDestination());
+                System.out.println("Date Ticket :" + tic.getDateticket());
+                System.out.println("Type :" + mt.getType());
+
+                r.setUtilisateur(u);
+                r.setLigne(lt);
+                
+
+                System.out.println("R" + r.toString());
+                listTic.add(tic);
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+        return listTic;
     }
 
-   /* public void modifier(Ticket r) {
+    /* public void modifier(Ticket r) {
         try {
             cnx = MyDB.getInstance().getCnx();
             PreparedStatement pst = cnx.prepareStatement(UPDATE_);
@@ -83,7 +100,7 @@ public class ServiceTicket implements IServicesT<Ticket> {
             System.out.println(ex.getMessage());
         }
     }
-*/
+     */
     public void supprimer(int id_ticket) {
 //        try {
 //            String qry = "DELETE from ticket where id_ticket = " + id_ticket + ";";
@@ -112,7 +129,8 @@ public class ServiceTicket implements IServicesT<Ticket> {
 //            System.out.println(ex.getMessage());
 //        }
     }
-   /* public List<Integer> afficherIDRESERVATION() {
+
+    /* public List<Integer> afficherIDRESERVATION() {
         List<Integer> Tickets = new ArrayList<>();
         try {
             String qry = "SELECT id_reservation  FROM `reservation`";
@@ -133,7 +151,6 @@ public class ServiceTicket implements IServicesT<Ticket> {
         return Tickets;
 
     }*/
-
     @Override
     public void add(Ticket r) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -143,6 +160,5 @@ public class ServiceTicket implements IServicesT<Ticket> {
     public void modifier(Ticket r) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-  
 
 }

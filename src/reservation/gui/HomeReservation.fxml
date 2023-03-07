@@ -26,7 +26,7 @@
          </font>
       </Text>
       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
-      <Button fx:id="btnDelete" layoutX="640.0" layoutY="152.0" mnemonicParsing="false" onAction="#Add" prefHeight="50.0" prefWidth="402.0" text="Supprimer cette reservation" />
+      <Button fx:id="btnDelete" layoutX="640.0" layoutY="152.0" mnemonicParsing="false" onAction="#Delete" prefHeight="50.0" prefWidth="402.0" text="Supprimer cette reservation" />
       <Button fx:id="btnGenPDF" layoutX="47.0" layoutY="127.0" mnemonicParsing="false" onAction="#btnGenPDF" prefHeight="50.0" prefWidth="225.0" text="Generer PDF" />
       <TextField fx:id="txt_keyword" layoutX="283.0" layoutY="83.0" onKeyPressed="#searchBar" onKeyReleased="#searchBar" onKeyTyped="#searchBar" prefHeight="31.0" prefWidth="714.0" promptText="Rechercher une reservation?" />
       <ImageView fitHeight="136.0" fitWidth="155.0" layoutX="58.0" layoutY="-6.0">

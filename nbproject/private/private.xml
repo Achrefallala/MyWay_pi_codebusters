@@ -12,16 +12,13 @@
             <file>file:/C:/Users/Slim/Desktop/GestionReservation/src/Entities/Reservation.java</file>
             <file>file:/C:/Users/Slim/Desktop/GestionReservation/src/reservation/gui/HomeReservationController.java</file>
             <file>file:/C:/Users/Slim/Desktop/GestionReservation/src/reservation/gui/HomeReservationUSERController.java</file>
-            <file>file:/C:/Users/Slim/Desktop/GestionReservation/src/reservation/gui/HomeReservationUSER.fxml</file>
             <file>file:/C:/Users/Slim/Desktop/GestionReservation/src/reservation/gui/HomeTicketFXMain.java</file>
-            <file>file:/C:/Users/Slim/Desktop/GestionReservation/src/Services/ServiceUtilisateur.java</file>
+            <file>file:/C:/Users/Slim/Desktop/GestionReservation/src/Entities/ResultReservation.java</file>
             <file>file:/C:/Users/Slim/Desktop/GestionReservation/src/Services/ServiceLigneTransport.java</file>
             <file>file:/C:/Users/Slim/Desktop/GestionReservation/src/Entities/Utilisateur.java</file>
             <file>file:/C:/Users/Slim/Desktop/GestionReservation/src/gestionreservation/GestionTicket.java</file>
-            <file>file:/C:/Users/Slim/Desktop/GestionReservation/src/Entities/MoyenTransport.java</file>
             <file>file:/C:/Users/Slim/Desktop/GestionReservation/src/Services/ServiceTicket.java</file>
             <file>file:/C:/Users/Slim/Desktop/GestionReservation/src/reservation/gui/HomeReservation.fxml</file>
-            <file>file:/C:/Users/Slim/Desktop/GestionReservation/src/reservation/gui/HomeTicket.fxml</file>
             <file>file:/C:/Users/Slim/Desktop/GestionReservation/src/gestionreservation/GestionReservation.java</file>
             <file>file:/C:/Users/Slim/Desktop/GestionReservation/src/Entities/LigneTransport.java</file>
         </group>
