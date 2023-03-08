@@ -23,7 +23,7 @@ import javafx.stage.Stage;
  * @author mbark
  */
 public class NewFXMain extends Application {
-    
+ 
     @Override
     public void start(Stage primaryStage) {
         

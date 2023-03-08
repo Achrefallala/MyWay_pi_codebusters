@@ -34,9 +34,7 @@ public class MainController implements Initializable {
     @FXML
     private Button ajouter;
     @FXML
-    private Button modifer;
-    @FXML
-    private Button supp;
+    private Button afficher;
 
     public void switchToScene1(ActionEvent event) throws IOException {
      //   root = FXMLLoader.load(getClass().getResource("AjouterReclamation.fxml"));
@@ -64,7 +62,21 @@ public class MainController implements Initializable {
                             System.out.println("wrong!!");
                         }
 
-                    });
+                    })
+                ;
+        afficher.setOnAction((event) -> {
+
+                        try {
+                            FXMLLoader loader = new FXMLLoader(getClass().getResource("AfficherReclamation.fxml"));
+                            Parent root = loader.load();
+                            afficher.getScene().setRoot(root);
+                        } catch (IOException ex) {
+                            System.out.print(ex.getMessage());
+                            System.out.println("wrong!!");
+                        }
+
+                    })        
+                ;
         
 
     }

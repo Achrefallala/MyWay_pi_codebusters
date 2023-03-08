@@ -8,20 +8,22 @@ package Myway.Entities;
 
 public class Reclamation {
     private int id_rec;
-    private String message,type,nom,prenom;
+    private String message,type,nom,prenom,categorie;
     
     public Reclamation() {
     }
-    public Reclamation( String message, String type, String nom, String prenom) { 
+    public Reclamation( String message, String type, String nom, String prenom,String categorie) { 
         this.message = message;
         this.type = type;
         this.nom = nom;
         this.prenom = prenom;
+        this.categorie = categorie;
     }
-     public Reclamation( String message,String nom, String prenom) { 
+     public Reclamation( String message,String nom, String prenom,String categorie) { 
         this.message = message;
         this.nom = nom;
         this.prenom = prenom;
+        this.categorie = categorie;
     }
    
 
@@ -31,6 +33,7 @@ public class Reclamation {
         this.type = type;
         this.nom = nom;
         this.prenom = prenom;
+        
     }
 
     public int getId_rec() {
@@ -50,6 +53,8 @@ public class Reclamation {
     public void setMessage(String message) {
         this.message = message;
     }
+    
+   
 
     public String getType() {
         return type;
@@ -65,12 +70,19 @@ public class Reclamation {
     public void setNom(String nom) {
         this.nom = nom;
     }
-     public String getPrenom() {
+    public String getPrenom() {
         return prenom;
     }
 
     public void setPrenom(String prenom) {
         this.prenom = prenom;
+    }
+    public String getCategorie() {
+        return categorie;
+    }
+
+    public void setCategorie(String categorie) {
+        this.categorie = categorie;
     }
     @Override
     public String toString() {

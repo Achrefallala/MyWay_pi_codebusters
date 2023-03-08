@@ -5,8 +5,7 @@
 
 <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Myway.GUI.MainController">
    <children>
-      <Button fx:id="ajouter" layoutX="226.0" layoutY="73.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="143.0" text="Ajouter Reclamation" />
-      <Button fx:id="modifer" layoutX="226.0" layoutY="146.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="143.0" text="Modifier Reclamation" />
-      <Button fx:id="supp" layoutX="226.0" layoutY="226.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="143.0" text="Supprimer Reclamation" />
+      <Button fx:id="ajouter" layoutX="226.0" layoutY="73.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="143.0" style="-fx-background-color: #80cbc4;" text="Ajouter Reclamation" />
+      <Button fx:id="afficher" layoutX="226.0" layoutY="146.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="143.0" style="-fx-background-color: #80cbc4;" text="Afficher Reclamation" />
    </children>
 </AnchorPane>

@@ -27,17 +27,18 @@ public class Myway {
 //        System.out.println(a.hashCode());
 //        System.out.println(a1.hashCode());
 
-       Reclamation R = new Reclamation("achref", "hjvjh","safa3","mbarki2");
-       ServiceReclamation sp = new ServiceReclamation();
-        sp.add(R);
-       // sp.modifier(R);
+       Reclamation R = new Reclamation(193,"achref", "hjvjh","safa3","mbarki2");
+       //ServiceReclamation sp = new ServiceReclamation();
+        //sp.add(R);
+       //sp.modifier(R);
        //sp.supprimer(R);
         //System.out.println( sp.afficher());
-       // Reponse R1 = new Reponse (200, 155,"hjbjqdbqjdv");
-        //ServiceReponse sp2 = new ServiceReponse();
+        Reponse R1 = new Reponse (6,191,"abcd");
+        ServiceReponse sp2 = new ServiceReponse();
         //System.out.println( sp2.afficher());
         //sp2.add(R1);
-        
+        //sp2.modifier(R1);
+        //sp2.supprimer(R1);
     }
     
 }

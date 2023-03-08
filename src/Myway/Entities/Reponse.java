@@ -11,21 +11,25 @@ package Myway.Entities;
  */
 public class Reponse {
     private int id_rep ,id_rec;
-    private String text ;
+    private String reponse ;
     
     public Reponse (){
     }
-    public Reponse (int id_rec , String text){
+    public Reponse (int id_rec , String reponse){
         this.id_rec = id_rec;
-        this.text = text;
+        this.reponse = reponse;
     }
-    public Reponse (int id_rep ,int id_rec , String text){
+     public Reponse (String reponse){
+        this.reponse = reponse;
+    }
+   
+    public Reponse (int id_rep ,int id_rec , String reponse){
         this.id_rep = id_rep;
         this.id_rec = id_rec;
-        this.text = text;
+        this.reponse = reponse;
     }
     
-    public void setId_reponse(int id_reponse) {
+    public void setId_reponse(int id_rep) {
         this.id_rep = id_rep;
     }
 
@@ -33,8 +37,8 @@ public class Reponse {
         this.id_rec = id_rec;
     }
 
-    public void setText(String text) {
-        this.text = text;
+    public void setReponse(String reponse) {
+        this.reponse = reponse;
     }
 
     public int getId_reponse() {
@@ -45,12 +49,12 @@ public class Reponse {
         return id_rec;
     }
 
-    public String getText() {
-        return text;
+    public String getReponse() {
+        return reponse;
     }
       @Override
     public String toString() {
-        return "Reponse{" + "id_reponse=" + id_rep + ", id_rec=" + id_rec + ", text=" + text + '}';
+        return "Reponse{" + "id_reponse=" + id_rep + ", id_rec=" + id_rec + ", reponse=" + reponse + '}';
     }
 
 }

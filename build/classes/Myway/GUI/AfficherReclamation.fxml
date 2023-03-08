@@ -11,19 +11,21 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="478.0" prefWidth="682.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane id="AnchorPane" prefHeight="478.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Myway.GUI.AfficherReclamationController">
 
     <children>
-      <TableView fx:id="studentsTable" layoutX="288.0" layoutY="130.0" prefHeight="265.0" prefWidth="367.0" style="-fx-background-color: #e0f2f1;">
+      <TableView fx:id="reclamationTable" layoutX="238.0" layoutY="140.0" prefHeight="265.0" prefWidth="392.0" style="-fx-background-color: #e0f2f1;">
         <columns>
-          <TableColumn fx:id="idCol" maxWidth="70.0" prefWidth="70.0" style="-fx-alignment: center;" text="ID" />
-          <TableColumn fx:id="messageCol" maxWidth="100.0" prefWidth="100.0" style="-fx-alignment: center;" text="MESSAGE" />
-            <TableColumn fx:id="nomCol" maxWidth="85.0" prefWidth="85.0" style="-fx-alignment: center;" text="NOM" />
-            <TableColumn fx:id="prenomCol" maxWidth="100.0" prefWidth="100.0" style="-fx-alignment: center;" text="PRENOM" />
+          <TableColumn fx:id="idCol" maxWidth="70.0" prefWidth="58.0" style="-fx-alignment: center;" text="ID" />
+          <TableColumn fx:id="messageCol" maxWidth="112.0" prefWidth="83.0" style="-fx-alignment: center;" text="MESSAGE" />
+            <TableColumn fx:id="nomCol" maxWidth="114.0" prefWidth="78.0" style="-fx-alignment: center;" text="NOM" />
+            <TableColumn fx:id="prenomCol" maxWidth="136.0" prefWidth="93.0" style="-fx-alignment: center;" text="PRENOM" />
+            <TableColumn fx:id="categorieCol" maxWidth="143.0" prefWidth="82.0" style="-fx-alignment: center;" text="CATEGORIE" />
+
         </columns>
       </TableView>
       <Pane layoutY="59.0" prefHeight="3.0" prefWidth="200.0" style="-fx-background-color: black;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
-      <Text layoutX="161.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Liste des Réclamations" wrappingWidth="360.13671875">
+      <Text layoutX="247.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Liste des Réclamations" wrappingWidth="360.13671875">
          <font>
             <Font name="Bauhaus 93" size="32.0" />
          </font>
@@ -32,13 +34,27 @@
          <children>
          </children>
       </HBox>
-      <Button layoutX="161.0" layoutY="348.0" mnemonicParsing="false" style="-fx-background-color: #d50000;" text="SUPPRIMER" />
-      <Button layoutX="51.0" layoutY="348.0" mnemonicParsing="false" style="-fx-background-color: #00c853;" text="MODIFIER" />
-      <Label layoutX="35.0" layoutY="149.0" prefHeight="18.0" prefWidth="55.0" text="Message" />
-      <Label layoutX="35.0" layoutY="214.0" prefHeight="18.0" prefWidth="49.0" text="Nom" />
-      <Label layoutX="35.0" layoutY="275.0" prefHeight="18.0" prefWidth="55.0" text="Prenom" />
-      <TextField layoutX="108.0" layoutY="146.0" style="-fx-background-color: #f9fbe7;" />
-      <TextField layoutX="108.0" layoutY="210.0" style="-fx-background-color: #f9fbe7;" />
-      <TextField layoutX="108.0" layoutY="271.0" style="-fx-background-color: #f9fbe7;" />
+      <Button layoutX="129.0" layoutY="326.0" mnemonicParsing="false" onAction="#supprimer" style="-fx-background-color: #d50000;" text="SUPPRIMER" textFill="WHITE" />
+      <Button layoutX="31.0" layoutY="326.0" mnemonicParsing="false" onAction="#modifier" style="-fx-background-color: #00c853;" text="MODIFIER" />
+      <Label layoutX="14.0" layoutY="150.0" prefHeight="18.0" prefWidth="55.0" text="Message" />
+      <Label layoutX="17.0" layoutY="214.0" prefHeight="18.0" prefWidth="49.0" text="Nom" />
+      <Label layoutX="14.0" layoutY="272.0" prefHeight="18.0" prefWidth="55.0" text="Prenom" />
+      <TextField fx:id="txtmessage" layoutX="72.0" layoutY="147.0" style="-fx-background-color: #f9fbe7;" />
+      <TextField fx:id="txtnom" layoutX="72.0" layoutY="211.0" style="-fx-background-color: #f9fbe7;" />
+      <TextField fx:id="txtprenom" layoutX="72.0" layoutY="269.0" style="-fx-background-color: #f9fbe7;" />
+      <TextField fx:id="txtsearch" layoutX="234.0" layoutY="90.0" onKeyPressed="#filter" onKeyReleased="#filter" onKeyTyped="#filter" prefHeight="25.0" prefWidth="401.0" />
+      <Label layoutX="101.0" layoutY="89.0" prefHeight="17.0" prefWidth="107.0" text="Search Box">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Button fx:id="repondre" layoutX="674.0" layoutY="326.0" mnemonicParsing="false" onAction="#ajouterRep" style="-fx-background-color: #2196f3;" text="REPONDRE" />
+      <TextField fx:id="txtreponse" layoutX="638.0" layoutY="191.0" prefHeight="97.0" prefWidth="149.0" style="-fx-background-color: #f9fbe7;" />
+      <Label layoutX="666.0" layoutY="146.0" prefHeight="27.0" prefWidth="92.0" text="Reponse">
+         <font>
+            <Font size="18.0" />
+         </font></Label>
+      <Button fx:id="reponses" layoutX="77.0" layoutY="367.0" mnemonicParsing="false" style="-fx-background-color: #2196f3;" text="REPONSES" />
+      <Button layoutX="369.0" layoutY="418.0" mnemonicParsing="false" onAction="#filechosserpdf" style="-fx-background-color: #00c853;" text="TELECHARGER PDF" />
    </children>
 </AnchorPane>

@@ -18,7 +18,7 @@ public class ServiceReclamation implements IService<Reclamation>{
     @Override
     public void add(Reclamation t) {
          try {
-        String qry ="INSERT INTO `reclamation`( `message`, `type`,`nom`,`prenom`) VALUES ('"+t.getMessage()+"','"+t.getType()+"','"+t.getNom()+"','"+t.getPrenom()+"')";
+        String qry ="INSERT INTO `reclamation`( `message`, `type`,`nom`,`prenom`,`categorie`) VALUES ('"+t.getMessage()+"','"+t.getType()+"','"+t.getNom()+"','"+t.getPrenom()+"','"+t.getCategorie()+"')";
       cnx = MyDB.getInstance().getCnx();
       
             Statement stm =cnx.createStatement();
@@ -44,6 +44,9 @@ public class ServiceReclamation implements IService<Reclamation>{
                 p.setId_rec(rs.getInt(1));
                 p.setMessage(rs.getString("message"));
                 p.setType(rs.getString(3));
+                p.setNom(rs.getString(4));
+                p.setPrenom(rs.getString(5));
+                p.setCategorie(rs.getString(6));
                 Reclamation.add(p);
             }
             return Reclamation;
@@ -59,7 +62,7 @@ public class ServiceReclamation implements IService<Reclamation>{
    @Override
     public void modifier(Reclamation t) {
         try {
-        String qry ="UPDATE `reclamation` SET `message`= '"+ t.getMessage()+ "' ,`type`='  "+ t.getType() +"' ,`nom`='  "+ t.getNom() +"' ,`prenom`='  "+ t.getPrenom() + "' WHERE `Id_rec`='"+t.getId_rec()+"'";
+        String qry ="UPDATE `reclamation` SET `message`= '"+ t.getMessage()+ "' ,`type`='  "+ t.getType() +"' ,`nom`='  "+ t.getNom() +"' ,`prenom`='  "+ t.getPrenom() +"' ,`categorie`='  "+ t.getCategorie() + "' WHERE `Id_rec`='"+t.getId_rec()+"'";
         cnx = MyDB.getInstance().getCnx();
       
             Statement stm =cnx.createStatement();
@@ -76,6 +79,19 @@ public class ServiceReclamation implements IService<Reclamation>{
        public void supprimer(Reclamation t) {
                try {
         String qry ="DELETE FROM `reclamation` WHERE `id_rec`='" + t.getId_rec()+ "'";
+        cnx = MyDB.getInstance().getCnx();
+      
+            Statement stm =cnx.createStatement();
+            
+            stm.executeUpdate(qry);
+            
+        } catch (SQLException ex) {
+             System.out.println(ex.getMessage());
+        } 
+         }
+        public void supprimerByid(int tl) {
+        try {
+        String qry ="DELETE FROM `reclamation` WHERE id_rec='" + tl+ "'";
         cnx = MyDB.getInstance().getCnx();
       
             Statement stm =cnx.createStatement();
