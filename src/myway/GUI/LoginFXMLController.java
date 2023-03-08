@@ -1,125 +1,75 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package myway.GUI;
 
+import java.awt.Button;
+import java.awt.HeadlessException;
+import java.awt.Image;
+import java.awt.Label;
+import java.awt.TextField;
+import java.awt.event.ActionEvent;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
-import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javax.swing.JOptionPane;
-import myway.Entities.Utilisateur;
-import myway.Services.ServiceUtilisateur;
+import myway.Utils.MyDB;
+
 
 /**
  * FXML Controller class
  *
- * @author baghd
+ * @author FIRAS
  */
 public class LoginFXMLController implements Initializable {
-    
-    private TextField tfnom;
-    private TextField tfprenom;
-    private PasswordField tfmotdepasse;
-    private Label lresultat;
     @FXML
-    private Button Login;
+    private AnchorPane labelG;
     @FXML
-    private Button Sign;
+    private ImageView img;
     @FXML
-    private Button profil;
-     @FXML
-    private Hyperlink mo;
-     
-    /* private Connection connect;
-     private PreparedStatement statement;
-     private ResultSet result;*/
-   Connection con;
-    PreparedStatement pst;
-    ResultSet rs;
+    private javafx.scene.control.Label label;
 
-    /**
-     * Initializes the controller class.
-     * 
-     */
+    @FXML
+    private javafx.scene.control.TextField textfield;
+
+    @FXML
+    private PasswordField passwordfield;
+
+    @FXML
+    private javafx.scene.control.Button btnlogin;
+     @FXML
+    private javafx.scene.control.Button Sign;
     
-     
-   public void login (ActionEvent event){
-        String nom= tfnom.getText();
-        String prenom= tfprenom.getText();
-        String motdepasse= tfmotdepasse.getText();
-        
-        if(nom.equals("")&& prenom.equals("")&& motdepasse.equals(""))
-        {
-            JOptionPane.showMessageDialog(null, "nom ou prenom ou mot de passe introuvable");
-        }
-        else {
-            try {
-                Class.forName("com.mysql.jdbc.Driver");
-                con= DriverManager.getConnection("jdbc:mysql://localhost/myway", "root","");
-                pst= con.prepareStatement("select * from `utilisateur` where nom=? And prenom=? and motdepasse=?");
-                pst.setString(1, nom);
-                pst.setString(2, prenom);
-                pst.setString(7, motdepasse);
-                
-                rs= pst.executeQuery();
-                
-                if(rs.next()){
-                    
-                    JOptionPane.showMessageDialog(null, "connexion réussie", "fatma", JOptionPane.INFORMATION_MESSAGE);
-                }
-                else{
-                    
-                    JOptionPane.showMessageDialog(null, "echec d'authentification", "bgh", JOptionPane.ERROR_MESSAGE);
-                    tfnom.setText("");
-                    tfprenom.setText("");
-                    tfmotdepasse.setText("");
-                    tfnom.requestFocus();
-                }
-                        } catch (ClassNotFoundException ex) {
-                Logger.getLogger(LoginFXMLController.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (SQLException ex) {
-                Logger.getLogger(LoginFXMLController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-    }
+     @FXML
+    private Hyperlink hyperlink2;
+    
+       @FXML
+    private Hyperlink hyperlink;
+    
+    Connection cnx = null;
+    ResultSet rs = null;
+    PreparedStatement pst = null ;
+    
+   
+    
     
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        Login.setOnAction((event)->{
-        
-        try{
-            FXMLLoader loader = new FXMLLoader (getClass().getResource("Home.fxml"));
-            Parent root = loader.load();
-            Login.getScene().setRoot(root);
-        }
-        catch (IOException ex){
-            System.out.print(ex.getMessage());
-            System.out.println("erreur");
-        }
-        
-    });
-         Sign.setOnAction((event)->{
+       public void initialize(URL url, ResourceBundle rb) {
+           Sign.setOnAction((event)->{
         
         try{
             FXMLLoader loader = new FXMLLoader (getClass().getResource("Signin.fxml"));
@@ -130,18 +80,125 @@ public class LoginFXMLController implements Initializable {
             System.out.print(ex.getMessage());
             System.out.println("erreur");
         }// TODO
-    } );  
+    } ); 
+           
+            hyperlink.setOnAction((event)->{
         
-    }
-  private void ajouter(ActionEvent event) {
- ServiceUtilisateur su = new ServiceUtilisateur();
- Utilisateur p = new Utilisateur( tfnom.getText(), tfprenom.getText(), tfmotdepasse.getText());
-        su.add(p);
-    }
-    private void afficher(ActionEvent event) {
+        try{
+            FXMLLoader loader = new FXMLLoader (getClass().getResource("resetpassword.fxml"));
+            Parent root = loader.load();
+            hyperlink.getScene().setRoot(root);
+        }
+        catch (IOException ex){
+            System.out.print(ex.getMessage());
+            System.out.println("erreur");
+        }// TODO
+    } ); 
+     
+       }
+
+      /* @FXML
+private void login(MouseEvent event) throws IOException {
+    cnx = (Connection) MyDB.getInstance().getCnx();
+    String qry = "SELECT * FROM Utilisateur WHERE motdepasse = ? AND e_mail = ? AND isActive = ?";
+
         
-        ServiceUtilisateur su= new ServiceUtilisateur();
-        lresultat.setText(su.afficher().toString());
+    try{
+         
+
+        if (textfield.getText().isEmpty()  || passwordfield.getText().isEmpty()||!textfield.getText().contains("@")||!textfield.getText().contains(".")) {
+        JOptionPane.showMessageDialog(null, "Veuillez verfier vos donnees");
+        return;
+        }
+        //String userType = rs.getString("Type");
+       pst = cnx.prepareStatement(qry);
+       pst.setString(1, passwordfield.getText());
+       pst.setString(2, textfield.getText());
+       pst.setInt(3, 1);
+
+        rs = pst.executeQuery();
+        if(rs.next()) {
+         String role = rs.getString("role");
+        int isActive = rs.getInt("isActive");
+        if(role.equals("user")) {
+               btnlogin.getScene().getWindow().hide();
+               Parent root = FXMLLoader.load(getClass().getResource("ProfilUser.fxml"));
+               Stage mainStage = new Stage();
+               Scene scene = new Scene(root);
+               mainStage.setScene(scene);
+               mainStage.show();
+            }else if(role.equals("admin")){
+                btnlogin.getScene().getWindow().hide();
+                Parent root = FXMLLoader.load(getClass().getResource("interfaceAdmin.fxml"));
+                Stage mainStage = new Stage();
+                Scene scene = new Scene(root);
+                mainStage.setScene(scene);
+                mainStage.show();
+            }else{
+                JOptionPane.showMessageDialog(null, "user inconnu");
+            }
+            
+        }else
+            JOptionPane.showMessageDialog(null, "login failed");
+                    
        
+    }catch(HeadlessException | SQLException e){
+        JOptionPane.showMessageDialog(null, e);
+    }
+}
+*/
+
+    @FXML
+    private void login(MouseEvent event) throws IOException {
+        cnx = (Connection) MyDB.getInstance().getCnx();
+        String qry = "SELECT * FROM Utilisateur WHERE motdepasse = ? AND e_mail = ? AND isActive = ?";
+
+            
+        try{
+             
+
+            if (textfield.getText().isEmpty()  || passwordfield.getText().isEmpty()||!textfield.getText().contains("@")||!textfield.getText().contains(".")) {
+            JOptionPane.showMessageDialog(null, "Veuillez verfier vos donnees");
+            return;
+            }
+            //String userType = rs.getString("Type");
+           pst = cnx.prepareStatement(qry);
+           pst.setString(1, passwordfield.getText());
+           pst.setString(2, textfield.getText());
+        
+
+            pst.setInt(3, 1);
+            rs = pst.executeQuery();
+            if(rs.next()) {
+             String role = rs.getString("role");
+            int isActive = rs.getInt("isActive");
+            if(role.equals("user")) {
+                   btnlogin.getScene().getWindow().hide();
+                   Parent root = FXMLLoader.load(getClass().getResource("Home.fxml"));
+                   Stage mainStage = new Stage();
+                   Scene scene = new Scene(root);
+                   mainStage.setScene(scene);
+                   mainStage.show();
+                }else if(role.equals("admin")){
+                    btnlogin.getScene().getWindow().hide();
+                    Parent root = FXMLLoader.load(getClass().getResource("interfaceAdmin.fxml"));
+                    Stage mainStage = new Stage();
+                    Scene scene = new Scene(root);
+                    mainStage.setScene(scene);
+                    mainStage.show();
+                    
+                }else{
+                    JOptionPane.showMessageDialog(null, "user inconnu");
+                }
+                
+            }else
+                JOptionPane.showMessageDialog(null, "login failed");
+                        
+           
+        }catch(HeadlessException | SQLException e){
+            JOptionPane.showMessageDialog(null, e);
+        }
+        
+    
     }
 }

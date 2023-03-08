@@ -10,15 +10,14 @@ package myway.Entities;
  
  */
 public class Utilisateur {
-    private int id, num_tel;
-    private String nom,prenom,role, motdepasse;
-    private Boolean isActive;
+    private int id, num_tel, isActive;
+    private String nom,prenom,role, motdepasse, e_mail;
 
     public Utilisateur() {
     }
 
     
-    public Utilisateur(int id, String nom, String prenom,int num_tel, String role,Boolean isActive, String motdepasse) {
+    public Utilisateur(int id, String nom, String prenom,String e_mail,int num_tel, String role,int isActive, String motdepasse) {
         this.id = id;
         this.nom = nom;
         this.prenom = prenom;
@@ -26,15 +25,18 @@ public class Utilisateur {
         this.role=role;
         this.isActive=isActive;
         this.motdepasse= motdepasse;
+        this.e_mail= e_mail;
     }
 
-    public Utilisateur( String nom, String prenom,int num_tel, String role,Boolean isActive, String motdepasse) {
+    public Utilisateur( String nom, String prenom,String e_mail,int num_tel, String role,int isActive, String motdepasse) {
         this.nom = nom;
         this.prenom = prenom;
         this.num_tel= num_tel;
         this.role=role;
         this.isActive=isActive;
         this.motdepasse= motdepasse;
+        this.e_mail= e_mail;
+
     }
 
     public Utilisateur(String text, String text0, String text1, String text2) {
@@ -43,6 +45,34 @@ public class Utilisateur {
 
     public Utilisateur(String text, String text0, String text1) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public Utilisateur(String nom, String prenom) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public Utilisateur(int id, int num_tel, String motdepasse, String e_mail) {
+        this.id= id;
+        this.num_tel= num_tel;
+        this.motdepasse= motdepasse;
+        this.e_mail= e_mail;
+
+    }
+
+    public Utilisateur(int id, String text, String text0, String utilisateur) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public Utilisateur(int id, String ma, String md, int te) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public String getE_mail() {
+        return e_mail;
+    }
+
+    public void setE_mail(String e_mail) {
+        this.e_mail = e_mail;
     }
 
     
@@ -97,14 +127,15 @@ public class Utilisateur {
         this.role = role;
     }
 
-    public Boolean getIsActive() {
+    public int getIsActive() {
         return isActive;
     }
 
-    public void setIsActive(Boolean isActive) {
+    public void setIsActive(int isActive) {
         this.isActive = isActive;
     }
-    
+
+  
 
  
     
@@ -114,9 +145,11 @@ public class Utilisateur {
   
     @Override
     public String toString() {
-        return "Utilisateur{" + "id=" + id + ", nom=" + nom + ", prenom=" + prenom +",num_tel=" + num_tel +
+        return "Utilisateur{" + "id=" + id + ", nom=" + nom + ", prenom=" + prenom +",e_mail="+e_mail+",num_tel=" + num_tel +
                 ",role=" +role +",isActive=" +isActive +",motdepasse="+motdepasse+'}';
     }
+
+   
     
     
 }

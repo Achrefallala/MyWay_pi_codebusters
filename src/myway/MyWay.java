@@ -28,10 +28,10 @@ public class MyWay {
 //        System.out.println(a.hashCode());
 //        System.out.println(a1.hashCode());
 
-        Utilisateur p = new Utilisateur( 1,"abomaher+1", "Mohamed",3258475,"user",true,"jjfjfj");
+        Utilisateur p = new Utilisateur( 16,"abomaher+1", "Mohamed","user@user",3258475,"user",1,"jjfjfj");
         ServiceUtilisateur su = new ServiceUtilisateur();
         //su.add(p);
-        //su.modifier(p);
+        su.modifier2(p);
         //ssu.supprimer(p);
         
         //System.out.println( su.afficher());
