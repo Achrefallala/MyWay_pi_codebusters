@@ -49,7 +49,5 @@ public class LigneTransport {
     public String toString() {
         return "LigneTransport{" + "id=" + id + ", moyenTransport=" + moyenTransport + ", trajet=" + trajet + '}';
     }
-    
-    
-    
+      
 }

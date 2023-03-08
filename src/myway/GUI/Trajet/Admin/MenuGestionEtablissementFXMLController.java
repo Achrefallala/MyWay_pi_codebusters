@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -21,11 +22,12 @@ import javafx.scene.control.Dialog;
 import javafx.scene.control.DialogPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyEvent;
 import myway.Entities.Etablissement;
 import myway.Entities.Trajet;
 import myway.Services.ServiceEtablissement;
-import myway.Services.ServiceTrajet;
 
 /**
  * FXML Controller class
@@ -34,8 +36,6 @@ import myway.Services.ServiceTrajet;
  */
 public class MenuGestionEtablissementFXMLController implements Initializable {
 
-    @FXML
-    private TableColumn<Etablissement, Integer> columnId;
     @FXML
     private TableColumn<Etablissement, String> columnNom;
     @FXML
@@ -50,6 +50,8 @@ public class MenuGestionEtablissementFXMLController implements Initializable {
     private TableColumn<Etablissement, String> columnDestination;
     @FXML
     private TableView<Etablissement> tableListeEtablissement;
+    @FXML
+    private TextField search;
 
     /**
      * Initializes the controller class.
@@ -59,7 +61,6 @@ public class MenuGestionEtablissementFXMLController implements Initializable {
         ServiceEtablissement se = new ServiceEtablissement();
         ObservableList<Etablissement> listeEtablissement = FXCollections.observableArrayList(se.display());
 
-        columnId.setCellValueFactory(new PropertyValueFactory<>("id"));
         columnNom.setCellValueFactory(new PropertyValueFactory<>("nom"));
         columnType.setCellValueFactory(new PropertyValueFactory<>("type"));
         columnDescription.setCellValueFactory(new PropertyValueFactory<>("description"));
@@ -120,7 +121,7 @@ public class MenuGestionEtablissementFXMLController implements Initializable {
             se.add(etablissement);
 
             ObservableList<Etablissement> listeEtablissement = FXCollections.observableArrayList(se.display());
-            columnId.setCellValueFactory(new PropertyValueFactory<>("id"));
+
             columnNom.setCellValueFactory(new PropertyValueFactory<>("nom"));
             columnType.setCellValueFactory(new PropertyValueFactory<>("type"));
             columnDescription.setCellValueFactory(new PropertyValueFactory<>("description"));
@@ -168,32 +169,32 @@ public class MenuGestionEtablissementFXMLController implements Initializable {
                 } else {
                     etat = 2;
                     ObservableList<Etablissement> listeEtablissement = FXCollections.observableArrayList(se.display());
-            columnId.setCellValueFactory(new PropertyValueFactory<>("id"));
-            columnNom.setCellValueFactory(new PropertyValueFactory<>("nom"));
-            columnType.setCellValueFactory(new PropertyValueFactory<>("type"));
-            columnDescription.setCellValueFactory(new PropertyValueFactory<>("description"));
-            columnDepart.setCellValueFactory(param -> new SimpleObjectProperty<>(param.getValue().getTrajet().getDepart()));
-            columnDestination.setCellValueFactory(param -> new SimpleObjectProperty<>(param.getValue().getTrajet().getDestination()));
-            tableListeEtablissement.setItems(listeEtablissement);
+
+                    columnNom.setCellValueFactory(new PropertyValueFactory<>("nom"));
+                    columnType.setCellValueFactory(new PropertyValueFactory<>("type"));
+                    columnDescription.setCellValueFactory(new PropertyValueFactory<>("description"));
+                    columnDepart.setCellValueFactory(param -> new SimpleObjectProperty<>(param.getValue().getTrajet().getDepart()));
+                    columnDestination.setCellValueFactory(param -> new SimpleObjectProperty<>(param.getValue().getTrajet().getDestination()));
+                    tableListeEtablissement.setItems(listeEtablissement);
                 }
             }
             if (etat == 1) {
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                 alert.setTitle("CONFIRMATION");
-                alert.setHeaderText("Voulez-vous vraiment modifier l'etablissement n° " + etablissement.getId() + " ?");
+                alert.setHeaderText("Voulez-vous vraiment modifier cet etablissement ?");
                 Optional<ButtonType> clickedButtonConfirmation = alert.showAndWait();
 
                 if (clickedButtonConfirmation.get() == ButtonType.OK) {
 
                     se.update(etablissement);
                     ObservableList<Etablissement> listeEtablissement = FXCollections.observableArrayList(se.display());
-            columnId.setCellValueFactory(new PropertyValueFactory<>("id"));
-            columnNom.setCellValueFactory(new PropertyValueFactory<>("nom"));
-            columnType.setCellValueFactory(new PropertyValueFactory<>("type"));
-            columnDescription.setCellValueFactory(new PropertyValueFactory<>("description"));
-            columnDepart.setCellValueFactory(param -> new SimpleObjectProperty<>(param.getValue().getTrajet().getDepart()));
-            columnDestination.setCellValueFactory(param -> new SimpleObjectProperty<>(param.getValue().getTrajet().getDestination()));
-            tableListeEtablissement.setItems(listeEtablissement);
+
+                    columnNom.setCellValueFactory(new PropertyValueFactory<>("nom"));
+                    columnType.setCellValueFactory(new PropertyValueFactory<>("type"));
+                    columnDescription.setCellValueFactory(new PropertyValueFactory<>("description"));
+                    columnDepart.setCellValueFactory(param -> new SimpleObjectProperty<>(param.getValue().getTrajet().getDepart()));
+                    columnDestination.setCellValueFactory(param -> new SimpleObjectProperty<>(param.getValue().getTrajet().getDestination()));
+                    tableListeEtablissement.setItems(listeEtablissement);
 
                 }
 
@@ -216,15 +217,15 @@ public class MenuGestionEtablissementFXMLController implements Initializable {
 
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("CONFIRMATION");
-            alert.setHeaderText("Voulez-vous vraiment supprimer l'etablissement n° " + etablissement.getId() + " ?");
+            alert.setHeaderText("Voulez-vous vraiment supprimer cet etablissement ?");
             //alert.setContentText("Vous devez selectionner un trajet");
             Optional<ButtonType> clickedButton = alert.showAndWait();
 
             if (clickedButton.get() == ButtonType.OK) {
                 se.delete(etablissement);
-                
+
                 ObservableList<Etablissement> listeEtablissement = FXCollections.observableArrayList(se.display());
-                columnId.setCellValueFactory(new PropertyValueFactory<>("id"));
+
                 columnNom.setCellValueFactory(new PropertyValueFactory<>("nom"));
                 columnType.setCellValueFactory(new PropertyValueFactory<>("type"));
                 columnDescription.setCellValueFactory(new PropertyValueFactory<>("description"));
@@ -238,9 +239,23 @@ public class MenuGestionEtablissementFXMLController implements Initializable {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("ERROR");
             alert.setHeaderText("Vous devez selectionner un etablissement");
-            //alert.setContentText("Vous devez selectionner un trajet");
+
             alert.showAndWait();
         }
+    }
+
+    @FXML
+    private void filter(KeyEvent event) {
+        ServiceEtablissement se = new ServiceEtablissement();
+        ObservableList<Etablissement> listeEtablissement = FXCollections.observableArrayList(se.display());
+        ObservableList<Etablissement> newdata = listeEtablissement.stream().filter(n
+                -> n.getNom().toLowerCase().contains(search.getText())
+                || n.getType().toLowerCase().contains(search.getText().toLowerCase())
+                || n.getDescription().toLowerCase().equals(search.getText())
+                || n.getTrajet().getDepart().toLowerCase().contains(search.getText().toLowerCase())
+                || n.getTrajet().getDestination().toLowerCase().contains(search.getText().toLowerCase())).collect(Collectors.toCollection(FXCollections::observableArrayList));
+
+        tableListeEtablissement.setItems(newdata);
     }
 
 }

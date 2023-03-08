@@ -10,23 +10,24 @@ package myway.Entities;
  */
 public class MoyenTransport {
     private int id;
-    private String matricule, organisation, type, icon, horaires;
+    private String matricule, organisation, nom, type, icon, horaires;
     private int nbr_places;
     private double prix;
 
     public MoyenTransport() {
     }
 
-    public MoyenTransport(String matricule, String organisation, String type, String icone, String horaires, int nbr_places, double prix) {
+    public MoyenTransport(String matricule, String organisation, String nom, String type, String icon, String horaires, int nbr_places, double prix) {
         this.matricule = matricule;
         this.organisation = organisation;
+        this.nom = nom;
         this.type = type;
-        this.icon = icone;
+        this.icon = icon;
         this.horaires = horaires;
         this.nbr_places = nbr_places;
         this.prix = prix;
     }
-    
+
     public int getId() {
         return id;
     }
@@ -37,6 +38,10 @@ public class MoyenTransport {
 
     public String getOrganisation() {
         return organisation;
+    }
+
+    public String getNom() {
+        return nom;
     }
 
     public String getType() {
@@ -55,10 +60,11 @@ public class MoyenTransport {
         return nbr_places;
     }
 
-    public double getPrix() {
-        return prix;
+    @Override
+    public String toString() {
+        return "MoyenTransport{" + "id=" + id + ", matricule=" + matricule + ", organisation=" + organisation + ", nom=" + nom + ", type=" + type + ", icon=" + icon + ", horaires=" + horaires + ", nbr_places=" + nbr_places + ", prix=" + prix + '}';
     }
-    
+
     public void setId(int id) {
         this.id = id;
     }
@@ -69,6 +75,10 @@ public class MoyenTransport {
 
     public void setOrganisation(String organisation) {
         this.organisation = organisation;
+    }
+
+    public void setNom(String nom) {
+        this.nom = nom;
     }
 
     public void setType(String type) {
@@ -87,14 +97,15 @@ public class MoyenTransport {
         this.nbr_places = nbr_places;
     }
 
-    public void setPrix (double prix) {
+    public void setPrix(double prix) {
         this.prix = prix;
     }
 
-    @Override
-    public String toString() {
-        return "MoyenTransport{" + "id=" + id + ", matricule=" + matricule + ", organisation=" + organisation + ", type=" + type + ", icon=" + icon + ", horaires=" + horaires + ", nbr_places=" + nbr_places + ", prix=" + prix + '}';
+    public double getPrix() {
+        return prix;
     }
+
+    
 
     
     

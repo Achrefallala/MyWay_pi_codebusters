@@ -21,8 +21,9 @@ public class MyWay {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        ServiceTrajet st = new ServiceTrajet();
+        //ServiceTrajet st = new ServiceTrajet();
         ServiceMoyenTransport se = new ServiceMoyenTransport();
+        se.display();
         //Trajet t = st.findById(11);
         //Etablissement e = new Etablissement("test", "test", t );
         //Etablissement e1 = se.findById(45);

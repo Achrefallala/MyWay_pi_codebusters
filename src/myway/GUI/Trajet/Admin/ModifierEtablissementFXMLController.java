@@ -4,13 +4,21 @@
  */
 package myway.GUI.Trajet.Admin;
 
+import java.io.IOException;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Dialog;
+import javafx.scene.control.DialogPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import myway.Entities.Etablissement;
@@ -23,7 +31,7 @@ import myway.Services.ServiceTrajet;
  * @author 9naydel
  */
 public class ModifierEtablissementFXMLController implements Initializable {
-    
+    Trajet trajet = new Trajet();
     Etablissement etablissement;
 
     @FXML
@@ -32,17 +40,18 @@ public class ModifierEtablissementFXMLController implements Initializable {
     private TextField tfNom;
     @FXML
     private TextArea tfDescription;
+    
     @FXML
-    private ChoiceBox<Trajet> cbSelectTrajet;
+    private Button btnSelectionner;
+    @FXML
+    private TextField tfTrajet;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        ServiceTrajet st = new ServiceTrajet();
-        ObservableList<Trajet> listeTrajet = FXCollections.observableArrayList(st.display());
-        cbSelectTrajet.setItems(listeTrajet);
+ 
     }  
     
     
@@ -51,15 +60,34 @@ public class ModifierEtablissementFXMLController implements Initializable {
         tfNom.setText(e.getNom());
         tfType.setText(e.getType());
         tfDescription.setText(e.getDescription());
-        cbSelectTrajet.setValue((e.getTrajet()));
-  
+        trajet = etablissement.getTrajet();
+        tfTrajet.setText(etablissement.getTrajet().getDepart() + "-->" + etablissement.getTrajet().getDestination());
+
     }
     
     public Etablissement getEtablissement(){
         etablissement.setNom(tfNom.getText());
         etablissement.setType(tfType.getText());
         etablissement.setDescription(tfDescription.getText());
-        etablissement.setTrajet(cbSelectTrajet.getValue());
+        etablissement.setTrajet(trajet);
        return etablissement;
+    }
+
+    @FXML
+    private void dialogSelectionnerTrajet(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("SelectionnerTrajetFXML.fxml"));
+        DialogPane paneModifierTrajet = loader.load();
+        SelectionnerTrajetFXMLController selectionnerTrajetFXMLController = loader.getController();
+
+        Dialog<ButtonType> dialog = new Dialog<>();
+        dialog.setDialogPane(paneModifierTrajet);
+        dialog.setTitle("Selectionner un trajet");
+        Optional<ButtonType> clickedButton = dialog.showAndWait();
+        
+        if (clickedButton.get() == ButtonType.OK) {
+            trajet = selectionnerTrajetFXMLController.getTrajet();
+            tfTrajet.setText(trajet.getDepart() + "-->" + trajet.getDestination());
+
+        }
     }
 }

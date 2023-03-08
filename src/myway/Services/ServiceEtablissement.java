@@ -69,7 +69,7 @@ public class ServiceEtablissement implements IServices<Etablissement> {
     public void update(Etablissement e) {
         try {
             String qry = "UPDATE etablissement SET " + "`nom` = '" + e.getNom() + "'" + ", `type` = '" + e.getType() + "'" + ", `description` = '" + e.getDescription() + "'" + ", `id_trajet` = '" + e.getTrajet().getId() + "'" + " WHERE id = " + e.getId();
-            System.out.println(qry);
+            
             cnx = MyDB.getInstance().getCnx();
             Statement stm = cnx.createStatement();
             stm.executeUpdate(qry);

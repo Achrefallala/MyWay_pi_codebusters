@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -21,7 +22,10 @@ import javafx.scene.control.Dialog;
 import javafx.scene.control.DialogPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.InputMethodEvent;
+import javafx.scene.input.KeyEvent;
 import myway.Entities.Trajet;
 import myway.Services.ServiceTrajet;
 
@@ -35,8 +39,6 @@ public class MenuGestionTrajetFXMLController implements Initializable {
     @FXML
     private TableView<Trajet> tableListeTrajet;
     @FXML
-    private TableColumn<Trajet, Integer> columnId;
-    @FXML
     private TableColumn<Trajet, String> columnDepart;
     @FXML
     private TableColumn<Trajet, String> columnDestination;
@@ -46,6 +48,8 @@ public class MenuGestionTrajetFXMLController implements Initializable {
     private TableColumn<Trajet, String> columnDirections;
     @FXML
     private TableColumn<Trajet, String> columnImage;
+    @FXML
+    private TextField search;
 
     /**
      * Initializes the controller class.
@@ -54,7 +58,6 @@ public class MenuGestionTrajetFXMLController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         ServiceTrajet st = new ServiceTrajet();
         ObservableList<Trajet> listeTrajet = FXCollections.observableArrayList(st.display());
-        columnId.setCellValueFactory(new PropertyValueFactory<>("id"));
         columnDepart.setCellValueFactory(new PropertyValueFactory<>("depart"));
         columnDestination.setCellValueFactory(new PropertyValueFactory<>("destination"));
         columnEtat.setCellValueFactory(new PropertyValueFactory<>("etat"));
@@ -116,7 +119,7 @@ public class MenuGestionTrajetFXMLController implements Initializable {
             st.add(t);
 
             ObservableList<Trajet> listeTrajet = FXCollections.observableArrayList(st.display());
-            columnId.setCellValueFactory(new PropertyValueFactory<>("id"));
+            
             columnDepart.setCellValueFactory(new PropertyValueFactory<>("depart"));
             columnDestination.setCellValueFactory(new PropertyValueFactory<>("destination"));
             columnEtat.setCellValueFactory(new PropertyValueFactory<>("etat"));
@@ -166,7 +169,7 @@ public class MenuGestionTrajetFXMLController implements Initializable {
                 } else {
                     etat = 2;
                     ObservableList<Trajet> listeTrajet = FXCollections.observableArrayList(st.display());
-                    columnId.setCellValueFactory(new PropertyValueFactory<>("id"));
+                    
                     columnDepart.setCellValueFactory(new PropertyValueFactory<>("depart"));
                     columnDestination.setCellValueFactory(new PropertyValueFactory<>("destination"));
                     columnEtat.setCellValueFactory(new PropertyValueFactory<>("etat"));
@@ -178,14 +181,14 @@ public class MenuGestionTrajetFXMLController implements Initializable {
             if (etat == 1) {
                 Alert alert = new Alert(AlertType.CONFIRMATION);
                 alert.setTitle("CONFIRMATION");
-                alert.setHeaderText("Voulez-vous vraiment modifier le trajet n° " + t.getId() + " ?");
+                alert.setHeaderText("Voulez-vous vraiment modifier le trajet n° ?");
                 Optional<ButtonType> clickedButtonConfirmation = alert.showAndWait();
 
                 if (clickedButtonConfirmation.get() == ButtonType.OK) {
 
                     st.update(t);
                     ObservableList<Trajet> listeTrajet = FXCollections.observableArrayList(st.display());
-                    columnId.setCellValueFactory(new PropertyValueFactory<>("id"));
+                    
                     columnDepart.setCellValueFactory(new PropertyValueFactory<>("depart"));
                     columnDestination.setCellValueFactory(new PropertyValueFactory<>("destination"));
                     columnEtat.setCellValueFactory(new PropertyValueFactory<>("etat"));
@@ -217,7 +220,7 @@ public class MenuGestionTrajetFXMLController implements Initializable {
 
             Alert alert = new Alert(AlertType.CONFIRMATION);
             alert.setTitle("CONFIRMATION");
-            alert.setHeaderText("Voulez-vous vraiment supprimer le trajet n° " + t.getId() + " ?");
+            alert.setHeaderText("Voulez-vous vraiment supprimer ce trajet ?");
             //alert.setContentText("Vous devez selectionner un trajet");
             Optional<ButtonType> clickedButton = alert.showAndWait();
 
@@ -226,7 +229,7 @@ public class MenuGestionTrajetFXMLController implements Initializable {
                 st.delete(t);
 
                 ObservableList<Trajet> listeTrajet = FXCollections.observableArrayList(st.display());
-                columnId.setCellValueFactory(new PropertyValueFactory<>("id"));
+                
                 columnDepart.setCellValueFactory(new PropertyValueFactory<>("depart"));
                 columnDestination.setCellValueFactory(new PropertyValueFactory<>("destination"));
                 columnEtat.setCellValueFactory(new PropertyValueFactory<>("etat"));
@@ -240,9 +243,24 @@ public class MenuGestionTrajetFXMLController implements Initializable {
             Alert alert = new Alert(AlertType.ERROR);
             alert.setTitle("ERROR");
             alert.setHeaderText("Vous devez selectionner un trajet");
-            //alert.setContentText("Vous devez selectionner un trajet");
+
             alert.showAndWait();
         }
     }
+
+    @FXML
+    private void filter(KeyEvent event) {
+        ServiceTrajet st = new ServiceTrajet();
+        ObservableList<Trajet> listeTrajet = FXCollections.observableArrayList(st.display());
+        ObservableList<Trajet> newdata = listeTrajet.stream().filter(n
+                -> n.getDepart().toLowerCase().contains(search.getText())
+                || n.getDestination().toLowerCase().contains(search.getText().toLowerCase())
+                || n.getDirections().toLowerCase().equals(search.getText())
+                || n.getEtat().toLowerCase().contains(search.getText().toLowerCase())).collect(Collectors.toCollection(FXCollections::observableArrayList));
+
+        tableListeTrajet.setItems(newdata);
+    }
+
+    
 
 }

@@ -4,15 +4,23 @@
  */
 package myway.GUI.Trajet.User;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
@@ -21,6 +29,11 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.StackPane;
+
+import javafx.scene.web.WebEngine;
+import javafx.scene.web.WebView;
+import javafx.stage.Stage;
 import myway.Entities.Etablissement;
 import myway.Entities.LigneTransport;
 import myway.Entities.MoyenTransport;
@@ -48,8 +61,7 @@ public class DetailsTrajetFXMLController implements Initializable {
     private TableView<MoyenTransport> tableMoyenTransport;
     @FXML
     private TableColumn<MoyenTransport, String> columnMoyenOrganisation;
-    @FXML
-    private TableColumn<MoyenTransport, String> columnMoyenType;
+    
     @FXML
     private TableColumn<MoyenTransport, String> columnMoyenIcon;
     @FXML
@@ -58,8 +70,6 @@ public class DetailsTrajetFXMLController implements Initializable {
     private TableColumn<MoyenTransport, Double> columnMoyenPrix;
     @FXML
     private TableColumn<MoyenTransport, String> columnMoyenHoraires;
-    @FXML
-    private ImageView ImageMap;
     @FXML
     private TextArea tfDirections;
     @FXML
@@ -72,16 +82,28 @@ public class DetailsTrajetFXMLController implements Initializable {
     private TableColumn<Etablissement, String> columnEtabType;
     @FXML
     private TableColumn<Etablissement, String> columnEtabDescription;
+    
+    @FXML
+    private WebView webView;
+    @FXML
+    private TableColumn<MoyenTransport, String> columnMoyenNom;
+    @FXML
+    private Button btnRetourner;
 
     /**
      * Initializes the controller class.
+     * @param url
+     * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+    
+        
+        
     }
 
     public void setTrajet(Trajet t){
+        
         
         this.t = t;
         tfDepart.setText(t.getDepart());
@@ -92,12 +114,18 @@ public class DetailsTrajetFXMLController implements Initializable {
         ObservableList<MoyenTransport> listMoyenTransport = FXCollections.observableArrayList(seMoyen.findByIdTrajet(t.getId()));
         
         columnMoyenOrganisation.setCellValueFactory(new PropertyValueFactory<>("organisation"));
-        columnMoyenType.setCellValueFactory(new PropertyValueFactory<>("type"));
+        columnMoyenNom.setCellValueFactory(new PropertyValueFactory<>("nom"));
+        ImageColumn imageColumn = new ImageColumn("", "icon");
+        tableMoyenTransport.getColumns().add(3, imageColumn);
         columnMoyenIcon.setCellValueFactory(new PropertyValueFactory<>("icon"));
         columnMoyenNbrPlaces.setCellValueFactory(new PropertyValueFactory<>("nbr_places"));
         columnMoyenPrix.setCellValueFactory(new PropertyValueFactory<>("prix"));
         columnMoyenHoraires.setCellValueFactory(new PropertyValueFactory<>("horaires"));
+        
         tableMoyenTransport.setItems(listMoyenTransport);
+        
+        WebEngine engine = webView.getEngine();
+        engine.load(t.getImage());
         
         tfDirections.setText(t.getDirections());
         tfEtat.setText(t.getEtat());
@@ -134,6 +162,49 @@ public class DetailsTrajetFXMLController implements Initializable {
                
         }
         return null;
+    }
+
+    @FXML
+    private void retourner(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("ChercherTrajetFXML.fxml"));
+            Parent chercherTrajet = loader.load();
+            
+
+            Stage chercherTrajetStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Scene chercherTrajetScene = new Scene(chercherTrajet);
+
+            chercherTrajetStage.setTitle("chercher Trajet: ");
+            chercherTrajetStage.setScene(chercherTrajetScene);
+            chercherTrajetStage.show();
+    }
+    
+    public class ImageColumn extends TableColumn<MoyenTransport, String> {
+
+        public ImageColumn(String title, String imageUrlProperty) {
+            super(title);
+            setCellValueFactory(new PropertyValueFactory<>("icon"));
+            setCellFactory(column -> new ImageCell());
+        }
+
+        private class ImageCell extends TableCell<MoyenTransport, String> {
+
+            private ImageView imageView = new ImageView();
+
+            @Override
+            protected void updateItem(String imageUrl, boolean empty) {
+                super.updateItem(imageUrl, empty);
+
+                if (empty || imageUrl == null) {
+                    setGraphic(null);
+                } else {
+                    Image image = new Image("C:\\Users\\kandi\\OneDrive\\Documents\\NetBeansProjects\\myWay\\src\\myway\\Assets/" + imageUrl );
+                    imageView.setImage(image);
+                    imageView.setFitWidth(30);
+                    imageView.setFitHeight(35);
+                    setGraphic(imageView);
+                }
+            }
+        }
     }
     
 }

@@ -42,9 +42,10 @@ public class ChercherTrajetFXMLController implements Initializable {
 
     @FXML
     private void chercher(ActionEvent event) throws IOException {
-
         ServiceTrajet st = new ServiceTrajet();
-        Trajet t = st.findByDepartAndDestination(tfDepart.getText(), tfDestination.getText());
+        //Trajet t = st.findByDepartAndDestination(tfDepart.getText(), tfDestination.getText());
+        Trajet t = st.findByDepartAndDestination("Bardo","Ariana");
+        
 
         if ("".equals(tfDepart.getText()) || "".equals(tfDestination.getText())) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -70,6 +71,7 @@ public class ChercherTrajetFXMLController implements Initializable {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("DetailsTrajetFXML.fxml"));
             Parent detailsTrajet = loader.load();
             DetailsTrajetFXMLController detailsTrajetFXMLController = loader.getController();
+            
             detailsTrajetFXMLController.setTrajet(t);
 
             Stage detailsTrajetStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
