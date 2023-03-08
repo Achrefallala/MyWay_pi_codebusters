@@ -29,11 +29,11 @@ public class LingeService implements InterfaceService<Linge>{
     public void ajouter(Linge t) {
         try {
             String sql;
-            sql = "insert into linge (id,moyentpid,trajetid) values (?,?,?)";
+            sql = "insert into ligne (id,id_moyentp,id_trajet) values (?,?,?)";
             PreparedStatement ste = cnx.prepareStatement(sql);
             ste.setInt(1, t.getId());
-            ste.setString(2, t.getMoyentpid());
-            ste.setInt(3, t.getTrajetid());
+            ste.setString(2, t.getId_moyentp());
+            ste.setInt(3, t.getId_trajet());
            
       
             ste.executeUpdate();
@@ -53,12 +53,12 @@ public class LingeService implements InterfaceService<Linge>{
         m = new ArrayList<>();
         try {
             String sql;
-            sql="select * from linge";
+            sql="select * from ligne";
             Statement ste = cnx.prepareStatement(sql);
             
             ResultSet rs= ste.executeQuery(sql);
             while(rs.next()){
-                Linge l =new Linge(rs.getInt("id"),rs.getString("moyentpid"),rs.getInt("trajetid"));
+                Linge l =new Linge(rs.getInt("id"),rs.getString("id_moyentp"),rs.getInt("id_trajet"));
                 m.add(l);
             }
         } catch (SQLException ex) {
@@ -76,7 +76,7 @@ public class LingeService implements InterfaceService<Linge>{
     @Override
     public void supprimer(Linge t) {
         try {
-            String sql="delete from linge where id=?";
+            String sql="delete from ligne where id=?";
             PreparedStatement ste = cnx.prepareStatement(sql);
             ste.setInt(1, t.getId());
             ste.executeUpdate();
@@ -84,12 +84,12 @@ public class LingeService implements InterfaceService<Linge>{
            System.out.println(ex.getMessage());
         }
     }
-public void modifier(int trajetid,Linge l) {
-        String sql = "update linge set trajetid=? where id=?";
+public void modifier(int id_trajet,Linge l) {
+        String sql = "update ligne set id_trajet=? where id=?";
         try {
             PreparedStatement ste = cnx.prepareStatement(sql);
             
-            ste.setInt(1,trajetid);
+            ste.setInt(1,id_trajet);
             ste.setInt(2,l.getId());
             ste.executeUpdate();
         } catch (SQLException ex) {

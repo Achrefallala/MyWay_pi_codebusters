@@ -37,7 +37,7 @@ public class MoyentpService implements InterfaceService<Moyentp>{
             ste.setString(1, t.getMatricule());
             ste.setString(2, t.getType());
             ste.setInt(3, t.getNbreplace());
-            ste.setInt(4, t.getPrix_ticket());
+            ste.setFloat(4, t.getPrix_ticket());
             ste.setString(5, t.getHoraire());
             ste.setString(6, t.getNom());
       
@@ -59,7 +59,7 @@ public class MoyentpService implements InterfaceService<Moyentp>{
             
             ResultSet rs= ste.executeQuery(sql);
             while(rs.next()){
-                Moyentp p =new Moyentp(rs.getString("matricule"),rs.getString("type"),rs.getInt("nbreplace"),rs.getInt("prix_ticket"),rs.getString("horaire"),rs.getString("nom"));
+                Moyentp p =new Moyentp(rs.getString("matricule"),rs.getString("type"),rs.getInt("nbreplace"),rs.getFloat("prix_ticket"),rs.getString("horaire"),rs.getString("nom"));
                 m.add(p);
             }
         } catch (SQLException ex) {
@@ -86,14 +86,14 @@ public class MoyentpService implements InterfaceService<Moyentp>{
         }
     }
 
-    public void modifier(String type ,int nbreplace,int prix_ticket,String horaire,String nom,Moyentp p) {
+    public void modifier(Moyentp p) {
         String sql = "update moyentp set type=?, nbreplace=?, prix_ticket=?, horaire=?, nom=?  where matricule=?";
         try {
             PreparedStatement ste = cnx.prepareStatement(sql);
-            ste.setString(1,type);
-            ste.setInt(2,nbreplace);
-            ste.setInt(3,prix_ticket);
-            ste.setString(4,horaire);
+            ste.setString(1,p.getType());
+            ste.setInt(2,p.getNbreplace());
+            ste.setFloat(3,p.getPrix_ticket());
+            ste.setString(4,p.getHoraire());
             ste.setString(5,p.getNom());
             ste.setString(6,p.getMatricule());
             

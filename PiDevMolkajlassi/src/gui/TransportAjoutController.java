@@ -5,24 +5,36 @@
  */
 package gui;
 
+import static java.awt.SystemColor.control;
+import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
+import tests.NewFXMain;
 import tn.esprit.entity.Moyentp;
 import tn.esprit.services.MoyentpService;
 
@@ -35,7 +47,6 @@ public class TransportAjoutController implements Initializable {
 
     @FXML
     private TextField TextMatricule;
-    @FXML
     private TextField TextType;
     @FXML
     private TextField TextNombre;
@@ -56,7 +67,7 @@ public class TransportAjoutController implements Initializable {
     @FXML
     private TableColumn<Moyentp,Integer> nombreCol;
     @FXML
-    private TableColumn<Moyentp,Integer> prixCol;
+    private TableColumn<Moyentp,Float> prixCol;
     @FXML
     private TableColumn<Moyentp,String> horaireCol;
      MoyentpService ss = new MoyentpService();
@@ -69,7 +80,12 @@ public class TransportAjoutController implements Initializable {
     private TableColumn<Moyentp, String> nomCol;
     @FXML
     private TextField TextNom;
-    
+   
+    @FXML
+    private ChoiceBox<String> ChoiceBox;
+    private String[] type={"bus","metro","train"};
+    @FXML
+    private Button LigneID;
 
     /**
      * Initializes the controller class.
@@ -79,6 +95,7 @@ public class TransportAjoutController implements Initializable {
         // TODO
         // List<Moyentp> stat;
         //stat = ss.getAll();
+        ChoiceBox.getItems().addAll(type);
         ObservableList<Moyentp> listStat = FXCollections.observableArrayList(stat);
         matriculeCol.setCellValueFactory(new PropertyValueFactory<>("matricule"));
         typeCol.setCellValueFactory(new PropertyValueFactory<>("type"));
@@ -96,11 +113,12 @@ public class TransportAjoutController implements Initializable {
         Moyentp s= new Moyentp();
        
         s.setMatricule(TextMatricule.getText());
-        s.setType(TextType.getText());
+       s.setType(ChoiceBox.getValue());
          int x=Integer.parseInt(TextNombre.getText());
         s.setNbreplace(x);
-         int y=Integer.parseInt(TextPrix.getText());
+        float y = Float.parseFloat(TextPrix.getText());
         s.setPrix_ticket(y);
+
         
           s.setHoraire(TextHoraire.getText());
           s.setNom(TextNom.getText());
@@ -117,11 +135,12 @@ public class TransportAjoutController implements Initializable {
      private void reset() {
       
       TextMatricule.setText("");
-      TextType.setText("");
+     
       TextNombre.setText("");
       TextPrix.setText("");
       TextHoraire.setText("");
       TextNom.setText("");
+      
       
     }
 
@@ -130,21 +149,22 @@ public class TransportAjoutController implements Initializable {
         List<Moyentp> List;
         
         if(isInputValid()){
+            
               Moyentp s = new Moyentp();
              s.setMatricule(TextMatricule.getText());
              String matricule=s.getMatricule();
              
              
-              s.setType(TextType.getText());
-             String type=s.getType();
+              
+            s.setType(ChoiceBox.getValue());
               
               int x=Integer.parseInt(TextNombre.getText());
               s.setNbreplace(x);
               
               
-              int y=Integer.parseInt(TextPrix.getText());
-              s.setPrix_ticket(y);
-              
+              float y = Float.parseFloat(TextPrix.getText());
+       s.setPrix_ticket(y);
+
               
              
              s.setHoraire(TextHoraire.getText());
@@ -155,7 +175,7 @@ public class TransportAjoutController implements Initializable {
              String nom=s.getNom();
              
             
-             ss.modifier(type,x,y,horaire,nom,s);
+             ss.modifier(s);
              
              
          reset();
@@ -165,6 +185,17 @@ public class TransportAjoutController implements Initializable {
              
          }
     }
+  public void switchToScene1(ActionEvent event) throws IOException {
+    try {
+        Parent root = FXMLLoader.load(getClass().getResource("../gui/ligneAjout.fxml"));
+        Scene scene = new Scene(root, 700, 400);
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(scene);
+        stage.show();
+    } catch (IOException ex) {
+        Logger.getLogger(NewFXMain.class.getName()).log(Level.SEVERE, null, ex);
+    }
+}
 
     @FXML
     private void SupprimerAction(ActionEvent event) {
@@ -204,6 +235,7 @@ public class TransportAjoutController implements Initializable {
     }
     table.setItems(filteredAbonnements);
     }
+    
      @FXML
     public void getSelected(MouseEvent event){
         int index = -1;
@@ -211,14 +243,16 @@ public class TransportAjoutController implements Initializable {
         if (index <= -1){
             return;
         }
-        TextMatricule.setText(matriculeCol.getCellData(index));
-        TextType.setText(typeCol.getCellData(index));
-        TextNombre.setText(nombreCol.getCellData(index).toString());
-        TextPrix.setText(prixCol.getCellData(index).toString());
-        TextHoraire.setText(horaireCol.getCellData(index));
-        TextNom.setText(horaireCol.getCellData(index));
+       Moyentp m = table.getItems().get(table.getSelectionModel().getSelectedIndex());
+    TextMatricule.setText(m.getMatricule());
+    ChoiceBox.setValue(m.getType());
+    TextNombre.setText(Integer.toString(m.getNbreplace()));
+    TextPrix.setText(Float.toString(m.getPrix_ticket()));
+    TextHoraire.setText(m.getHoraire());
+    TextNom.setText(m.getNom());
         
     }
+    
     
      private boolean isInputValid() {
         String errorMessage = "";
@@ -226,17 +260,17 @@ public class TransportAjoutController implements Initializable {
         if (TextMatricule.getText() == null || TextMatricule.getText().length() == 0  || TextMatricule.getText().matches("[0-9]+") ) {
             errorMessage += "Invalide Matricule!\n"; 
         }
-       if (TextType.getText() == null || TextType.getText().isEmpty() || !TextType.getText().matches("metro|train|bus")) {
-    errorMessage += "Invalide type!\n"; 
-}
-
+     
+        
       if (TextNombre.getText() == null || TextNombre.getText().isEmpty() || !TextNombre.getText().matches("\\d+") || Integer.parseInt(TextNombre.getText()) <= 0) {
     errorMessage += "Invalide nombre de place!\n";
 }
-
-          if (TextPrix.getText() == null || TextPrix.getText().isEmpty() || !TextPrix.getText().matches("\\d+") || Integer.parseInt(TextPrix.getText()) <= 0) {
-    errorMessage += "Invalide prix!\n";
+if (TextPrix.getText() == null || TextPrix.getText().isEmpty() || !TextPrix.getText().matches("\\d+(\\.\\d+)?") || Float.parseFloat(TextPrix.getText()) <= 0) {
+    errorMessage += "Invalid prix!";
 }
+
+
+
         if (TextHoraire.getText() == null || TextHoraire.getText().length() == 0 || TextHoraire.getText().matches("[0-9]+")) {
             errorMessage += "Invalide horaire!\n"; 
         }
@@ -259,5 +293,7 @@ public class TransportAjoutController implements Initializable {
             return false;
         }
     }
+
+    
     
 }

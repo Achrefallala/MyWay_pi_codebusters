@@ -10,14 +10,15 @@ package tn.esprit.entity;
  * @author Molka
  */
 public class Moyentp {
-    private int nbreplace,prix_ticket;
+    private int nbreplace;
     private String matricule,horaire,type,nom;
+    private float prix_ticket;
 
     public Moyentp() {
     }
 
     
-    public Moyentp(String matricule,String type,int nbreplace,int prix_ticket, String horaire,String nom) {
+    public Moyentp(String matricule,String type,int nbreplace,float prix_ticket, String horaire,String nom) {
         this.matricule= matricule;
         this.type= type;
         this.nbreplace = nbreplace;
@@ -26,6 +27,10 @@ public class Moyentp {
          this.nom = nom;
         
        
+    }
+
+    public Moyentp(int aInt, String string) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     
@@ -50,9 +55,15 @@ public class Moyentp {
         return nbreplace;
     }
 
-    public int getPrix_ticket() {
+    public void setPrix_ticket(float prix_ticket) {
+        this.prix_ticket = prix_ticket;
+    }
+
+    public float getPrix_ticket() {
         return prix_ticket;
     }
+
+    
 
     public void setType(String type) {
         this.type = type;
@@ -71,9 +82,7 @@ public class Moyentp {
         this.nbreplace = nbreplace;
     }
 
-    public void setPrix_ticket(int prix_ticket) {
-        this.prix_ticket = prix_ticket;
-    }
+  
 
     public String getNom() {
         return nom;

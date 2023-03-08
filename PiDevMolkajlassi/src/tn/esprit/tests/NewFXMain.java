@@ -29,8 +29,8 @@ public class NewFXMain extends Application{
             
          
              try {
-              //Parent root = FXMLLoader.load(getClass().getResource("../gui/TransportAjout.fxml"));
-              Parent root = FXMLLoader.load(getClass().getResource("../gui/ligneAjout.fxml"));
+              Parent root = FXMLLoader.load(getClass().getResource("../gui/TransportAjout.fxml"));
+              //Parent root = FXMLLoader.load(getClass().getResource("../gui/ligneAjout.fxml"));
               Scene scene = new Scene(root, 700, 400);   
               primaryStage.setTitle("Transport");
               primaryStage.setScene(scene);

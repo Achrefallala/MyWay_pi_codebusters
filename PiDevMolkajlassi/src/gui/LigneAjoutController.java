@@ -5,14 +5,22 @@
  */
 package gui;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
@@ -21,10 +29,15 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 import org.controlsfx.control.Notifications;
+import tests.NewFXMain;
 import tn.esprit.entity.Linge;
 import tn.esprit.entity.Moyentp;
+import tn.esprit.entity.Trajet;
 import tn.esprit.services.LingeService;
+import tn.esprit.services.MoyentpService;
+import tn.esprit.services.TrajetService;
 
 /**
  * FXML Controller class
@@ -54,10 +67,14 @@ public class LigneAjoutController implements Initializable {
     @FXML
     private TableColumn<Linge,Integer> trajetCol;
     LingeService ss = new LingeService();
+     MoyentpService cc = new MoyentpService();
+     TrajetService dd = new TrajetService();
     @FXML
     private TextField recherche;
     
      List<Linge> lig = ss.getAll();
+     List<Moyentp>mp=cc.getAll();
+       List<Trajet> taj= dd.getAll();
 
     /**
      * Initializes the controller class.
@@ -68,12 +85,57 @@ public class LigneAjoutController implements Initializable {
         //lig = ss.getAll();
         ObservableList<Linge> listLig = FXCollections.observableArrayList(lig);
         idCol.setCellValueFactory(new PropertyValueFactory<>("id"));
-        moyenCol.setCellValueFactory(new PropertyValueFactory<>("moyentpid"));
-        trajetCol.setCellValueFactory(new PropertyValueFactory<>("trajetid"));
-       
+        moyenCol.setCellValueFactory(new PropertyValueFactory<>("id_moyentp"));
+
+        trajetCol.setCellValueFactory(new PropertyValueFactory<>("id_trajet"));
+        
+       TableColumn<Linge, String> dureeColumn = new TableColumn<>("nom");
+    dureeColumn.setCellValueFactory(cellData -> {
+        Linge l = cellData.getValue();
+        Moyentp moy = getMoyenBYId(l.getId_moyentp());
+        if (moy != null) {
+            return new SimpleStringProperty(moy.getNom());
+        } else {
+            return new SimpleStringProperty("");
+        }
+    });
+    table.getColumns().add(dureeColumn);
+
+    
+    
+     TableColumn<Linge, String> trajetColumn = new TableColumn<>("destination");
+    trajetColumn.setCellValueFactory(cellData -> {
+        Linge d = cellData.getValue();
+        Trajet taj = getTrajetBYId(d.getId_trajet());
+        if (taj != null) {
+            return new SimpleStringProperty(taj.getDestination());
+        } else {
+            return new SimpleStringProperty("");
+        }
+    });
+    table.getColumns().add(trajetColumn);
+   
+
         table.setItems(listLig);
     }    
+private Moyentp getMoyenBYId(String id){
+    for (Moyentp m :mp ){
+        if(m.getMatricule().equals(id)){
+            return m;
+        }
+                }
+    return null;
+}
+ 
 
+private Trajet getTrajetBYId(int id){
+for (Trajet t:taj ){
+    if(t.getId()==id){
+        return t;
+}
+}
+return null;
+}
     @FXML
     private void AjouterAction(ActionEvent event) {
         
@@ -84,11 +146,10 @@ public class LigneAjoutController implements Initializable {
        
        
        
-         int x=Integer.parseInt(TextId.getText());
-        s.setId(x);
-          s.setMoyentpid(TextMoyen.getText());
+        
+          s.setId_moyentp(TextMoyen.getText());
          int y=Integer.parseInt(TextTrajet.getText());
-        s.setTrajetid(y);
+        s.setId_trajet(y);
         
           
           
@@ -97,8 +158,8 @@ public class LigneAjoutController implements Initializable {
          List = FXCollections.observableList(ss.getAll());
                 table.setItems((ObservableList<Linge>) List);
                  Notifications.create()
-            .title("New Linge Added")
-            .text("A new Linge has been added successfully!")
+            .title("New Ligne Added")
+            .text("A new Ligne has been added successfully!")
             .showInformation();
         
     }
@@ -124,16 +185,20 @@ public class LigneAjoutController implements Initializable {
           int x=Integer.parseInt(TextId.getText());
          s.setId(x);
          
-            s.setMoyentpid(TextMoyen.getText());
-             String moyentpid=s.getMoyentpid();
+            s.setId_moyentp(TextMoyen.getText());
+             String moyentpid=s.getId_moyentp();
          
          
           int y=Integer.parseInt(TextTrajet.getText());
-         s.setTrajetid(x);
+         s.setId_trajet(x);
          
          
          
           ss.modifier(y,s);
+           Notifications.create()
+            .title("New Ligne Updated")
+            .text("A new Ligne has been updated successfully!")
+            .showInformation();
          reset();
           List = FXCollections.observableList(ss.getAll());
                 table.setItems((ObservableList<Linge>) List);
@@ -166,6 +231,10 @@ public class LigneAjoutController implements Initializable {
        
         //System.out.println(clicked);
      ss.supprimer(clicked);
+      Notifications.create()
+            .title("New Linge deleted")
+            .text("A new Linge has been deleted successfully!")
+            .showInformation();
                 //updating user data after closing popup
                 List = FXCollections.observableList(ss.getAll());
                 table.setItems((ObservableList<Linge>) List);

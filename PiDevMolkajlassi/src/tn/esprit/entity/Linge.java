@@ -10,21 +10,31 @@ package tn.esprit.entity;
  * @author Admin
  */
 public class Linge {
-     private int id,trajetid;
-     private String moyentpid ;
-
+     private int id,id_trajet;
+     private String id_moyentp ;
+     private Trajet trajet;
     public Linge() {
     }
 
     
-    public Linge(int id,String moyentpid,int trajetid) {
+    public Linge(int id,String id_moyentp,int id_trajet) {
         this.id= id;
-        this.moyentpid= moyentpid;
-        this.trajetid = trajetid;
+        this.id_moyentp= id_moyentp;
+        this.id_trajet = id_trajet;
          
         
        
     }
+
+    public Trajet getTrajet() {
+        return trajet;
+    }
+
+    public void setTrajet(Trajet trajet) {
+        this.trajet = trajet;
+    }
+
+   
 
     public int getId() {
         return id;
@@ -34,21 +44,24 @@ public class Linge {
         this.id = id;
     }
 
-    public String getMoyentpid() {
-        return moyentpid;
+    public String getId_moyentp() {
+        return id_moyentp;
     }
 
-    public void setMoyentpid(String moyentpid) {
-        this.moyentpid = moyentpid;
+    public int getId_trajet() {
+        return id_trajet;
     }
 
-    public int getTrajetid() {
-        return trajetid;
+    public void setId_moyentp(String id_moyentp) {
+        this.id_moyentp = id_moyentp;
     }
 
-    public void setTrajetid(int trajetid) {
-        this.trajetid = trajetid;
+    public void setId_trajet(int id_trajet) {
+        this.id_trajet = id_trajet;
     }
+
+    
+   
 
    
 
@@ -57,7 +70,7 @@ public class Linge {
     
     @Override
     public String toString() {
-        return "Linge{" + "id=" + id + ", moyentpid=" + moyentpid + ", trajetid=" + trajetid  +'}';
+        return "Linge{" + "id=" + id + ", id_moyentp=" + id_moyentp + ", id_trajet=" + id_trajet  +'}';
     }
     
     
