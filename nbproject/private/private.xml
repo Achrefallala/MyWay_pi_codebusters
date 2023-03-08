@@ -6,6 +6,7 @@
             <file>file:/C:/Users/DELL/Desktop/Workshop3A24/src/workshop3a24/GUI/HomeLocationFxmlController.java</file>
             <file>file:/C:/Users/DELL/Desktop/Workshop3A24/src/workshop3a24/GUI/InterfaceLocationController.java</file>
             <file>file:/C:/Users/DELL/Desktop/Workshop3A24/src/workshop3a24/GUI/NewFXMain.java</file>
+            <file>file:/C:/Users/DELL/Desktop/Workshop3A24/src/workshop3a24/Services/IService.java</file>
             <file>file:/C:/Users/DELL/Desktop/Workshop3A24/src/workshop3a24/Entities/contrat_location.java</file>
             <file>file:/C:/Users/DELL/Desktop/Workshop3A24/src/workshop3a24/Entities/Location.java</file>
             <file>file:/C:/Users/DELL/Desktop/Workshop3A24/src/workshop3a24/Services/ServiceContratLocation.java</file>
@@ -13,8 +14,7 @@
             <file>file:/C:/Users/DELL/Desktop/Workshop3A24/src/workshop3a24/GUI/ContratLocationController.java</file>
             <file>file:/C:/Users/DELL/Desktop/Workshop3A24/src/workshop3a24/GUI/MycardnewController.java</file>
             <file>file:/C:/Users/DELL/Desktop/Workshop3A24/src/workshop3a24/Services/ServiceLocation.java</file>
-            <file>file:/C:/Users/DELL/Desktop/Workshop3A24/src/workshop3a24/GUI/interfaceLocation.fxml</file>
-            <file>file:/C:/Users/DELL/Desktop/Workshop3A24/src/workshop3a24/GUI/Mycardnew.fxml</file>
+            <file>file:/C:/Users/DELL/Desktop/Workshop3A24/src/workshop3a24/A.java</file>
             <file>file:/C:/Users/DELL/Desktop/Workshop3A24/src/workshop3a24/NewFXMain1.java</file>
         </group>
     </open-files>

@@ -26,55 +26,42 @@ import workshop3a24.Services.ServiceLocation;
  *
  * @author DELL
  */
+
 public class InterfaceLocationController implements Initializable {
 
+
+    /**
+     * Initializes the controller class.
+     */
+   // public class InterfacelocationController implements Initializable {
+
     @FXML
-    private ScrollPane scrollpane;
+    private ScrollPane scrollPane;
     @FXML
-    private FlowPane Flow;
-    @FXML
-    private TextField txtN;
-    @FXML
-    private TextField txtD;
-    @FXML
-    private TextField txtT;
-    @FXML
-    private TextField txtDesc;
-    @FXML
-    private TextField txtP;
+    private FlowPane flowPane;
+    ServiceLocation sl=new ServiceLocation(); 
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        ServiceLocation sl =new ServiceLocation();
-       
+        
+        List<Location> l = sl.afficher(); 
+        
+        setLocations(l);
+        // TODO
+    }
 
-         List <Location> l= sl.afficher();
-      //  ObservableList<Node> children = Flow.getChildren()
-                
-                for (Location m :l ){
+    public void setLocations(List<Location> locations) {
+        flowPane.getChildren().clear();
+        for (Location location : locations
              
-       
-            BorderPane borderpane = new BorderPane();
-            
+                ) {
+            MycardnewController mycardnewController = new MycardnewController(location);
+            flowPane.getChildren().add(mycardnewController);
 
-            borderpane.setPadding(new javafx.geometry.Insets(10, 10, 0, 10));
-            Label labelN = new Label(m.getNom());
-             Label labelDIS = new Label(m.getDisponibilite());
-              Label labelT = new Label(m.getType());
-            borderpane.setTop(labelN);
-            borderpane.setCenter(labelDIS);
-            borderpane.setBottom(labelT);
-            Flow.getChildren().addAll(borderpane);
-            
-            
-            
-                }
-                // TODO
-;
-    }  
-    
-    
-}
+        }
+    }
+
+    } 

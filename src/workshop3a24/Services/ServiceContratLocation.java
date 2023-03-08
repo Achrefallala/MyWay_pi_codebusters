@@ -17,6 +17,7 @@ import workshop3a24.Utils.MyDB;
  * @author Mohamed
  */
 public class ServiceContratLocation implements IService<contrat_location>{
+    
     Connection cnx;
     @Override
     public void add(contrat_location cl) {
@@ -62,7 +63,33 @@ public class ServiceContratLocation implements IService<contrat_location>{
     }
     
     
-
+  public List<contrat_location> afficherBYIDLocation(int i) {
+        List<contrat_location> ContratLocations = new ArrayList<>();
+        try {
+            String qry ="SELECT * FROM `Contrat_Location` WHERE `id_location`="+i+" ";
+            cnx = MyDB.getInstance().getCnx();
+            Statement stm = cnx.createStatement();
+            ResultSet rs = stm.executeQuery(qry);
+            while(rs.next()){
+                contrat_location cl =new contrat_location();
+                cl.setId_location(rs.getInt(1));
+                cl.setPrix(rs.getFloat("prix"));
+                cl.setDebut(rs.getDate(3));
+                cl.setFin(rs.getDate("date_fin"));
+                
+               ContratLocations.add(cl);
+            }
+            return ContratLocations;
+            
+            
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return ContratLocations;
+        
+    }
+    
+    
     @Override
     public void modifier(contrat_location cl) {
         

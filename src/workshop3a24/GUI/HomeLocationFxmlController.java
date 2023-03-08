@@ -16,8 +16,11 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
 import java.net.URL;
 import java.text.SimpleDateFormat;
+import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
@@ -36,6 +39,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
+import org.controlsfx.control.Notifications;
 import workshop3a24.Entities.Location;
 import workshop3a24.Services.ServiceLocation;
 
@@ -76,6 +80,8 @@ public class HomeLocationFxmlController implements Initializable {
     private TextField search;
     @FXML
     private Button btnGenPDF;
+    @FXML
+    private Button handleExport;
 
     /**
      * Initializes the controller class.
@@ -165,6 +171,11 @@ public class HomeLocationFxmlController implements Initializable {
             txtDispo.setText("");
             txtType.setText("");
             txtDescription.setText("");
+            
+            Notifications.create()
+            .title("New Location Added")
+            .text("A new Location has been added successfully!")
+            .showInformation();
         }
         
         
@@ -192,6 +203,11 @@ public class HomeLocationFxmlController implements Initializable {
                 alert.setContentText("Updateddd!");
 
                 alert.showAndWait();
+                
+                Notifications.create()
+            .title("New Location Modified")
+            .text("A new Location has been modifiedsuccessfully!")
+            .showInformation();
                                 table();
         }
     }
@@ -279,6 +295,34 @@ public class HomeLocationFxmlController implements Initializable {
             desktop.open(file); //opens the specified file   
         }
     }
+    
+    
+    
+    
+    @FXML
+    public void handleExport() throws Exception {
+    
+    PrintWriter writer = new PrintWriter( new OutputStreamWriter(new FileOutputStream("C:\\Users\\Dell\\Desktop\\Workshop3A24\\location.csv"), "UTF-8"));
+
+ServiceLocation sl = new ServiceLocation();
+        
+        List<Location> annonce = sl.afficher();
+       writer.write("Nom,Disponibilite,Type,Description\n");
+               for (Location obj : annonce) {
+                   
+            writer.write(obj.getNom().toString());
+            writer.write(",");
+            writer.write(obj.getDisponibilite().toString());
+            writer.write(",");
+            writer.write(obj.getType().toString());
+            writer.write("\n");
+             writer.write(obj.getDescription().toString());
+            writer.write("\n");
+
+               }
+               writer.flush();
+               writer.close();
+}
     
     
     

@@ -5,10 +5,11 @@
  */
 package workshop3a24.GUI;
 
-import static com.oracle.webservices.internal.api.databinding.DatabindingModeFeature.ID;
+
 import java.net.URL;
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -24,8 +25,10 @@ import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import org.controlsfx.control.Notifications;
 import workshop3a24.Entities.contrat_location;
 import workshop3a24.Services.ServiceContratLocation;
+import workshop3a24.Services.ServiceLocation;
 
 /**
  * FXML Controller class
@@ -115,6 +118,11 @@ public class ContratLocationController implements Initializable {
 
         alert.setHeaderText("location Registation");
         alert.setContentText("Deleted!");
+        
+           Notifications.create()
+            .title("New contratLocation deleted ")
+            .text("A new contratLocation has been deleted successfully!")
+            .showInformation();
 
         alert.showAndWait();
     }
@@ -144,6 +152,11 @@ public class ContratLocationController implements Initializable {
             txtPrix.setText("");
             txtDebut.setValue(null);
             txtFin.setValue(null);
+            
+               Notifications.create()
+            .title("New contratLocation added")
+            .text("A new contratLocation has been added successfully!")
+            .showInformation();
            
             
         }
@@ -183,9 +196,18 @@ public class ContratLocationController implements Initializable {
             alert.setContentText("Updateddd!");
 
             alert.showAndWait();
+            
+               Notifications.create()
+            .title("New contratLocation Modified")
+            .text("A new contratLocation has been modified successfully!")
+            .showInformation();
             table();}
         }
     }
+    
+    
+    
+    
 
     private boolean isInputValid() {
         String errorMessage = "";

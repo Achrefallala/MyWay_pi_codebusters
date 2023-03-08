@@ -12,7 +12,7 @@ package workshop3a24.Entities;
 public class Location {
     private int id_location  ;
     private String nom,disponibilite,type,description;
-   
+  // private contrat_location contrat_location;
 
     public Location() {
     }
