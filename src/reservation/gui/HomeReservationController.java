@@ -94,7 +94,7 @@ public class HomeReservationController implements Initializable {
 
             for (Reservation res : listRes) {
                 r = new ResultReservation();
-
+                r.setId_reservation(res.getId_reservation());
                 r.setDepart(res.getLigne().getTrajet().getDepart());
                 r.setDestination(res.getLigne().getTrajet().getDestination());
                 r.setNom(res.getUtilisateur().getNom());

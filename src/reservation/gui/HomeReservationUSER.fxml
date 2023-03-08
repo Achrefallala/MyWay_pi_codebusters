@@ -13,7 +13,7 @@
   <children>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="308.0" prefWidth="543.0" VBox.vgrow="ALWAYS">
       <children>
-            <Text fill="#73c1ab" layoutX="244.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Reservations" textAlignment="RIGHT" wrappingWidth="183.6708984375">
+            <Text fill="#73c1ab" layoutX="225.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Reservation" textAlignment="RIGHT" wrappingWidth="183.6708984375">
                <font>
                   <Font size="32.0" />
                </font>
@@ -23,7 +23,7 @@
                   <Font size="22.0" />
                </font>
             </Label>
-            <Label fx:id="tfmoyen" layoutX="409.0" layoutY="317.0" prefHeight="32.0" prefWidth="38.0" text="fixe">
+            <Label fx:id="tfmoyen" layoutX="409.0" layoutY="317.0" prefHeight="32.0" prefWidth="135.0" text="fixe">
                <font>
                   <Font size="22.0" />
                </font>
@@ -43,23 +43,23 @@
                   <Font size="22.0" />
                </font>
             </Label>
-            <Label fx:id="tfdestination" layoutX="411.0" layoutY="190.0" prefHeight="32.0" prefWidth="52.0" text="fixe">
+            <Label fx:id="tfdestination" layoutX="411.0" layoutY="190.0" prefHeight="32.0" prefWidth="215.0" text="fixe">
                <font>
                   <Font size="22.0" />
                </font>
             </Label>
-            <Button fx:id="addreservation" layoutX="102.0" layoutY="508.0" mnemonicParsing="false" prefHeight="81.0" prefWidth="468.0" text="Confirmer les donnees et imprimer votre ticket" />
+            <Button fx:id="btnGenPDF" layoutX="102.0" layoutY="508.0" mnemonicParsing="false" onAction="#btnGenPDF" prefHeight="81.0" prefWidth="468.0" text="Confirmer et imprimer votre ticket" />
             <Label layoutX="80.0" layoutY="254.0" prefHeight="32.0" prefWidth="206.0" text="Prix">
                <font>
                   <Font size="22.0" />
                </font>
             </Label>
-            <Label fx:id="tfprix" layoutX="411.0" layoutY="238.0" prefHeight="32.0" prefWidth="52.0" text="fixe">
+            <Label fx:id="tfprix" layoutX="411.0" layoutY="238.0" prefHeight="32.0" prefWidth="80.0" text="fixe">
                <font>
                   <Font size="22.0" />
                </font>
             </Label>
-            <Label fx:id="tfprix1" layoutX="463.0" layoutY="238.0" prefHeight="32.0" prefWidth="52.0" text="DT">
+            <Label fx:id="tfprix1" layoutX="503.0" layoutY="238.0" prefHeight="32.0" prefWidth="52.0" text="DT">
                <font>
                   <Font size="22.0" />
                </font>

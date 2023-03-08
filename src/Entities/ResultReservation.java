@@ -10,11 +10,13 @@ package Entities;
  * @author Slim
  */
 public class ResultReservation {
+
     private int id_reservation;
     private String nom;
     private String type;
     private String depart;
     private String destination;
+    private Double prix;
 
     public ResultReservation() {
     }
@@ -24,6 +26,22 @@ public class ResultReservation {
         this.type = type;
         this.depart = depart;
         this.destination = destination;
+    }
+
+    public ResultReservation(String nom, String type, String depart, String destination, Double prix) {
+        this.nom = nom;
+        this.type = type;
+        this.depart = depart;
+        this.destination = destination;
+        this.prix = prix;
+    }
+
+    public Double getPrix() {
+        return prix;
+    }
+
+    public void setPrix(Double prix) {
+        this.prix = prix;
     }
 
     public int getId_reservation() {
@@ -68,10 +86,7 @@ public class ResultReservation {
 
     @Override
     public String toString() {
-        return "ResultReservation{" + "id_reservation=" + id_reservation + ", nom=" + nom + ", type=" + type + ", depart=" + depart + ", destination=" + destination + '}';
+        return "ResultReservation{" + "id_reservation=" + id_reservation + ", nom=" + nom + ", type=" + type + ", depart=" + depart + ", destination=" + destination + ", prix=" + prix + '}';
     }
-    
-   
-    
-    
+
 }

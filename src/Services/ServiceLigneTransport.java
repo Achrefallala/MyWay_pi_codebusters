@@ -42,10 +42,10 @@ public class ServiceLigneTransport implements IServices<LigneTransport> {
     public void modifier(LigneTransport l) {
     }
 
-    public LigneTransport findByIdTrajetAndMatriculeMoyenTp(int idTrajet, String matriculeMoyenTp) {
+    public LigneTransport findByIdTrajetAndId_MoyenTp(int id_trajet, int id_moyentp) {
         LigneTransport l = new LigneTransport();
         try {
-            String qry = "SELECT l.id_ligne, t.id_trajet, t.depart, t.destination, t.etat, t.directions, t.image,  m.matricule, m.organisation, m.type, m.icon, m.nbr_places, m.prix, m.horaires FROM moyen_transport m JOIN ligne_transport l ON m.matricule = l.matricule JOIN trajet t ON l.id_trajet = t.id_trajet WHERE t.id_trajet = " + idTrajet + " AND m.matricule = '" + matriculeMoyenTp +"'";
+            String qry = "SELECT ligne_transport.id_ligne, trajet.id_trajet, trajet.depart, trajet.destination, trajet.etat, trajet.directions, trajet.image,  moyen_transport.id_moyentp, moyen_transport.organisation, moyen_transport.type, moyen_transport.icon, moyen_transport.nbr_places, moyen_transport.prix, moyen_transport.horaires FROM moyen_transport JOIN ligne_transport  ON moyen_transport.id_moyentp = ligne_transport.id_moyentp JOIN trajet  ON ligne_transport.id_trajet = trajet.id_trajet WHERE trajet.id_trajet = " + id_trajet + " AND moyen_transport.id_moyentp = '" + id_moyentp +"'";
             System.out.println(qry);
 
             cnx = MyDB.getInstance().getCnx();
@@ -54,7 +54,7 @@ public class ServiceLigneTransport implements IServices<LigneTransport> {
             while (rs.next()) {
 
                 MoyenTransport e = new MoyenTransport();
-                e.setMatricule(rs.getString("matricule"));
+                e.setId_moyentp(rs.getInt("id_moyentp"));
                 e.setOrganisation(rs.getString("organisation"));
                 e.setType(rs.getString("type"));
                 e.setIcon(rs.getString("icon"));

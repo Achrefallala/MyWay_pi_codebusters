@@ -101,7 +101,8 @@ Ticket t = new Ticket();
 
             for (Ticket tic : listTic) {
                 r = new ResultTicket();
-
+                
+                r.setId_ticket(tic.getId_ticket());
                 r.setNom(tic.getUtilisateur().getNom());
                 r.setPrix(tic.getLigne().getMoyentransport().getPrix());
                 r.setDepart(tic.getLigne().getTrajet().getDepart());
@@ -113,6 +114,8 @@ Ticket t = new Ticket();
 
             }
 
+            System.out.println("*****************listtic*********************"+ listTic);
+            
             tableTic.setItems(FXCollections.observableArrayList(listResTic));
             nomutilisateurCol.setCellValueFactory(new PropertyValueFactory<>("nom"));
             prixticketCol.setCellValueFactory(new PropertyValueFactory<>("prix"));
@@ -153,6 +156,8 @@ Ticket t = new Ticket();
         try {
             cnx = MyDB.getInstance().getCnx();
             PreparedStatement pst = cnx.prepareStatement("DELETE FROM ticket WHERE id_ticket = ?");
+            
+            System.out.println("r.getId_ticket()"+ r.getId_ticket());
             pst.setInt(1, r.getId_ticket());
             pst.executeUpdate();
 
