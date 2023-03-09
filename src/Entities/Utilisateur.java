@@ -10,7 +10,7 @@ package Entities;
  * @author Slim
  */
 public class Utilisateur {
-    private int id_utilisateur;
+    private int id;
     private String nom;
     private String prenom;
     private int num_tel;
@@ -18,20 +18,28 @@ public class Utilisateur {
     public Utilisateur() {
     }
 
-    public Utilisateur(int id_utilisateur, String nom, String prenom, int num_tel) {
-        this.id_utilisateur = id_utilisateur;
+    public Utilisateur(int id, String nom, String prenom, int num_tel) {
+        this.id = id;
         this.nom = nom;
         this.prenom = prenom;
         this.num_tel = num_tel;
     }
 
-    public int getId_utilisateur() {
-        return id_utilisateur;
+    public Utilisateur(String nom, String prenom, int num_tel) {
+        this.nom = nom;
+        this.prenom = prenom;
+        this.num_tel = num_tel;
     }
 
-    public void setId_utilisateur(int id_utilisateur) {
-        this.id_utilisateur = id_utilisateur;
+    public int getId() {
+        return id;
     }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+ 
 
     public String getNom() {
         return nom;
@@ -59,8 +67,10 @@ public class Utilisateur {
 
     @Override
     public String toString() {
-        return "Utilisateur{" + "id_utilisateur=" + id_utilisateur + ", nom=" + nom + ", prenom=" + prenom + ", num_tel=" + num_tel + '}';
+        return "Utilisateur{" + "id=" + id + ", nom=" + nom + ", prenom=" + prenom + ", num_tel=" + num_tel + '}';
     }
+
+    
 
     
 }

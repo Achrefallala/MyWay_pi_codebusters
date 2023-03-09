@@ -10,9 +10,10 @@ package Entities;
  * @author Slim
  */
 public class LigneTransport {
-    private int id_ligne;
+    private int id;
 private Trajet trajet;
 private MoyenTransport moyentransport;
+
 
     public LigneTransport() {
     }
@@ -24,12 +25,12 @@ private MoyenTransport moyentransport;
 
   
 
-    public int getId_ligne() {
-        return id_ligne;
+    public int getId() {
+        return id;
     }
 
-    public void setId_ligne(int id_ligne) {
-        this.id_ligne = id_ligne;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public Trajet getTrajet() {
@@ -50,9 +51,10 @@ private MoyenTransport moyentransport;
 
     @Override
     public String toString() {
-        return "LigneTransport{" + "id_ligne=" + id_ligne + ", trajet=" + trajet + ", moyentransport=" + moyentransport + '}';
+        return "LigneTransport{" + "id=" + id + ", trajet=" + trajet + ", moyentransport=" + moyentransport + '}';
     }
 
+   
    
 
    

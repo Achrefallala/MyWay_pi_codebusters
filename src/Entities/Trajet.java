@@ -11,7 +11,7 @@ package Entities;
  */
 public class Trajet {
 
-    private int id_trajet;
+    private int id;
     private String depart, destination, etat, directions, image;
 
     public Trajet() {
@@ -26,8 +26,14 @@ public class Trajet {
     }
 
     public int getId() {
-        return id_trajet;
+        return id;
     }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    
 
     public String getDepart() {
         return depart;
@@ -49,9 +55,7 @@ public class Trajet {
         return image;
     }
 
-    public void setId(int id) {
-        this.id_trajet = id_trajet;
-    }
+    
 
     public void setDepart(String depart) {
         this.depart = depart;
@@ -75,7 +79,9 @@ public class Trajet {
 
     @Override
     public String toString() {
-        return "Trajet{" + "id_trajet=" + id_trajet + ", depart=" + depart + ", destination=" + destination + ", etat=" + etat + ", directions=" + directions + ", image=" + image + '}';
+        return "Trajet{" + "id=" + id + ", depart=" + depart + ", destination=" + destination + ", etat=" + etat + ", directions=" + directions + ", image=" + image + '}';
     }
+
+  
 
 }

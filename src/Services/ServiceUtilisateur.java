@@ -44,7 +44,7 @@ public class ServiceUtilisateur implements IServices<Utilisateur>{
             ResultSet rs = stm.executeQuery(qry);
             while(rs.next()){
                 Utilisateur p =new Utilisateur();
-                p.setId_utilisateur(rs.getInt(1));
+                p.setId(rs.getInt(1));
                 p.setNom(rs.getString("nom"));
                 p.setPrenom(rs.getString(3));
                 p.setNum_tel(rs.getInt("num_tel"));
@@ -63,7 +63,7 @@ public class ServiceUtilisateur implements IServices<Utilisateur>{
     public int searchUserbyNom(String n) {
             int idUser = 0;
         try {  
-            String qry = "SELECT `id_utilisateur` FROM `utilisateur`" + "WHERE nom='"+n+"'";
+            String qry = "SELECT `id` FROM `utilisateur`" + "WHERE nom='"+n+"'";
             cnx = MyDB.getInstance().getCnx();
             Statement stm = cnx.createStatement();
             ResultSet rs = stm.executeQuery(qry);
@@ -84,7 +84,7 @@ public class ServiceUtilisateur implements IServices<Utilisateur>{
         public String searchUserbyId(int id) {
             String nom = "";
         try {  
-            String qry = "SELECT `nom` FROM `utilisateur`" + "WHERE id_utilisateur='"+id+"'";
+            String qry = "SELECT `nom` FROM `utilisateur`" + "WHERE id='"+id+"'";
             cnx = MyDB.getInstance().getCnx();
             Statement stm = cnx.createStatement();
             ResultSet rs = stm.executeQuery(qry);
@@ -104,7 +104,7 @@ public class ServiceUtilisateur implements IServices<Utilisateur>{
   @Override
     public void modifier(Utilisateur t) {
          try {
-        String qry ="UPDATE `utilisateur` SET `nom`='"+t.getNom()+"',`prenom`='"+t.getPrenom()+"',`num_tel`='"+t.getNum_tel()+"' WHERE `id`='"+t.getId_utilisateur()+"'";
+        String qry ="UPDATE `utilisateur` SET `nom`='"+t.getNom()+"',`prenom`='"+t.getPrenom()+"',`num_tel`='"+t.getNum_tel()+"' WHERE `id`='"+t.getId()+"'";
       cnx = MyDB.getInstance().getCnx();
       
             Statement stm =cnx.createStatement();
@@ -120,7 +120,7 @@ public class ServiceUtilisateur implements IServices<Utilisateur>{
 
       @Override
     public void supprimer(Utilisateur t) {
-       String qry = "DELETE FROM `utilisateur` WHERE `id`='"+t.getId_utilisateur()+"'";
+       String qry = "DELETE FROM `utilisateur` WHERE `id`='"+t.getId()+"'";
         try {
             cnx = MyDB.getInstance().getCnx();
       

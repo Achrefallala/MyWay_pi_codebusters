@@ -30,7 +30,7 @@ public class ServiceReservation implements IServices<Reservation> {
         ServiceUtilisateur uService = new ServiceUtilisateur();
         System.out.println("begin Try");
 
-        String qry = "SELECT reservation.id_reservation, utilisateur.nom as nom, moyen_transport.type as type, trajet.depart as depart, trajet.destination as destination FROM reservation INNER JOIN utilisateur ON reservation.id_utilisateur = utilisateur.id_utilisateur INNER JOIN ligne_transport ON reservation.id_ligne = ligne_transport.id_ligne INNER JOIN moyen_transport ON ligne_transport.id_moyentp = moyen_transport.id_moyentp INNER JOIN trajet ON ligne_transport.id_trajet = trajet.id_trajet;";
+        String qry = "SELECT reservation.id, utilisateur.nom as nom, moyen_transport.type as type, trajet.depart as depart, trajet.destination as destination FROM reservation INNER JOIN utilisateur ON reservation.id_utilisateur = utilisateur.id INNER JOIN ligne_transport ON reservation.id_ligne = ligne_transport.id INNER JOIN moyen_transport ON ligne_transport.id_moyentp = moyen_transport.id INNER JOIN trajet ON ligne_transport.id_trajet = trajet.id;";
 
         try {
             cnx = MyDB.getInstance().getCnx();
@@ -42,7 +42,7 @@ public class ServiceReservation implements IServices<Reservation> {
                 Trajet t = new Trajet();
                 LigneTransport lt = new LigneTransport();
                 MoyenTransport mt = new MoyenTransport();
-                r.setId_reservation(rs.getInt("id_reservation"));
+                r.setId(rs.getInt("id"));
                 u.setNom(rs.getString("nom"));
                 mt.setType(rs.getString("type"));
                 t.setDepart(rs.getString("depart"));
@@ -69,15 +69,14 @@ public class ServiceReservation implements IServices<Reservation> {
         return listRes;
     }
 
-    public List<Reservation> afficherConnectedUser() {
+    public List<Reservation> afficherByID(int id_user) {
         System.out.println("begin Afficher");
-        
         List<Reservation> listRes = new ArrayList<>();
         ServiceUtilisateur uService = new ServiceUtilisateur();
         System.out.println("begin Try");
 
-        String qry = "SELECT reservation.id_reservation, utilisateur.nom, moyen_transport.prix, trajet.depart, trajet.destination, ticket.id_ticket, ticket.dateticket, moyen_transport.type FROM ticket INNER JOIN utilisateur ON ticket.id_utilisateur = utilisateur.id_utilisateur INNER JOIN ligne_transport ON ticket.id_ligne = ligne_transport.id_ligne INNER JOIN trajet ON ligne_transport.id_trajet = trajet.id_trajet INNER JOIN moyen_transport ON ligne_transport.id_moyentp = moyen_transport.id_moyentp where utilisateur.id_utilisateur=4;";
-
+        String qry = "SELECT  utilisateur.nom, moyen_transport.prix, trajet.depart, trajet.destination, ticket.id, ticket.dateticket, moyen_transport.type FROM ticket INNER JOIN utilisateur ON ticket.id_utilisateur = utilisateur.id INNER JOIN ligne_transport ON ticket.id_ligne = ligne_transport.id INNER JOIN trajet ON ligne_transport.id_trajet = trajet.id INNER JOIN moyen_transport ON ligne_transport.id_moyentp = moyen_transport.id where utilisateur.id=" + id_user;
+        System.out.println("c bon taadet");
         try {
             cnx = MyDB.getInstance().getCnx();
             Statement stm = cnx.createStatement();
@@ -88,7 +87,7 @@ public class ServiceReservation implements IServices<Reservation> {
                 Trajet t = new Trajet();
                 LigneTransport lt = new LigneTransport();
                 MoyenTransport mt = new MoyenTransport();
-                r.setId_reservation(rs.getInt("id_reservation"));
+                r.setId(rs.getInt("id"));
                 u.setNom(rs.getString("nom"));
                 mt.setType(rs.getString("type"));
                 t.setDepart(rs.getString("depart"));
@@ -201,6 +200,10 @@ public class ServiceReservation implements IServices<Reservation> {
 
     @Override
     public void modifier(Reservation r) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public Object getUtilisateur() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

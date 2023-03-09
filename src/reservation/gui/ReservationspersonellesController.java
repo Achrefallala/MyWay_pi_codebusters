@@ -34,7 +34,7 @@ public class ReservationspersonellesController implements Initializable {
     ServiceReservation res = new ServiceReservation();
 
     Connection cnx;
-      @FXML
+    @FXML
     private TableView<ResultReservation> tableRes;
     @FXML
     private TableColumn<ResultReservation, String> departCol;
@@ -48,7 +48,6 @@ public class ReservationspersonellesController implements Initializable {
     private Button DeleteBtn;
     @FXML
     private Button AddNewRes;
-  
 
     /**
      * Initializes the controller class.
@@ -62,13 +61,13 @@ public class ReservationspersonellesController implements Initializable {
         List<Reservation> listRes = new ArrayList<>();
         try {
 
-            listRes = res.afficherConnectedUser();
+            listRes = res.afficherByID(4);
             ResultReservation r;
             List<ResultReservation> listResReservation = new ArrayList<>();
 
             for (Reservation res : listRes) {
                 r = new ResultReservation();
-                r.setId_reservation(res.getId_reservation());
+                r.setId(res.getId());
                 r.setDepart(res.getLigne().getTrajet().getDepart());
                 r.setDestination(res.getLigne().getTrajet().getDestination());
                 r.setNom(res.getUtilisateur().getNom());
@@ -79,11 +78,11 @@ public class ReservationspersonellesController implements Initializable {
             }
 
             tableRes.setItems(FXCollections.observableArrayList(listResReservation));
-            
+
             departCol.setCellValueFactory(new PropertyValueFactory<>("depart"));
             destinationCol.setCellValueFactory(new PropertyValueFactory<>("destination"));
             prixCol.setCellValueFactory(new PropertyValueFactory<>("prix"));
-           typeCol.setCellValueFactory(new PropertyValueFactory<>("type"));
+            typeCol.setCellValueFactory(new PropertyValueFactory<>("type"));
 
             tableRes.setRowFactory(tv -> {
                 TableRow<ResultReservation> myRow = new TableRow<>();

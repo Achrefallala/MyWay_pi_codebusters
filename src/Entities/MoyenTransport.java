@@ -11,14 +11,14 @@ package Entities;
  */
 public class MoyenTransport {
 
-    private int id_moyentp, nbr_places;
+    private int id, nbr_places;
     private String matricule, organisation, type, icon, horaires;
     private double prix;
-
+private String nom;
     public MoyenTransport() {
     }
 
-    public MoyenTransport(int nbr_places, String matricule, String organisation, String type, String icon, String horaires, double prix) {
+    public MoyenTransport(int nbr_places, String matricule, String organisation, String type, String icon, String horaires, double prix, String nom) {
         this.nbr_places = nbr_places;
         this.matricule = matricule;
         this.organisation = organisation;
@@ -26,15 +26,32 @@ public class MoyenTransport {
         this.icon = icon;
         this.horaires = horaires;
         this.prix = prix;
+        this.nom = nom;
     }
 
-    public int getId_moyentp() {
-        return id_moyentp;
+    
+
+    public String getNom() {
+        return nom;
     }
 
-    public void setId_moyentp(int id_moyentp) {
-        this.id_moyentp = id_moyentp;
+    public void setNom(String nom) {
+        this.nom = nom;
     }
+
+    
+    
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+    
+
+  
+    
 
     public int getNbr_places() {
         return nbr_places;
@@ -94,8 +111,8 @@ public class MoyenTransport {
 
     @Override
     public String toString() {
-        return "MoyenTransport{" + "id_moyentp=" + id_moyentp + ", nbr_places=" + nbr_places + ", matricule=" + matricule + ", organisation=" + organisation + ", type=" + type + ", icon=" + icon + ", horaires=" + horaires + ", prix=" + prix + '}';
+        return "MoyenTransport{" + "id=" + id + ", nbr_places=" + nbr_places + ", matricule=" + matricule + ", organisation=" + organisation + ", type=" + type + ", icon=" + icon + ", horaires=" + horaires + ", prix=" + prix + ", nom=" + nom + '}';
     }
-    
+
 
 }

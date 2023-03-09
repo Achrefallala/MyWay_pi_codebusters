@@ -14,7 +14,7 @@ import java.util.Date;
  */
 public class Reservation {
 
-    private int id_reservation;
+    private int id;
     private LigneTransport ligne; // ligne.id_ligne; moyentp.type
     private Utilisateur utilisateur;
     private String disponibilite_r;
@@ -28,16 +28,17 @@ public class Reservation {
         this.disponibilite_r = disponibilite_r;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     
 
-    public int getId_reservation() {
-        return id_reservation;
-    }
-
-    public void setId_reservation(int id_reservation) {
-        this.id_reservation = id_reservation;
-    }
-
+   
     public LigneTransport getLigne() {
         return ligne;
     }
@@ -64,8 +65,10 @@ public class Reservation {
 
     @Override
     public String toString() {
-        return "Reservation{" + "id_reservation=" + id_reservation + ", ligne=" + ligne + ", utilisateur=" + utilisateur + ", disponibilite_r=" + disponibilite_r + '}';
+        return "Reservation{" + "id=" + id + ", ligne=" + ligne + ", utilisateur=" + utilisateur + ", disponibilite_r=" + disponibilite_r + '}';
     }
+
+    
 
     
 }

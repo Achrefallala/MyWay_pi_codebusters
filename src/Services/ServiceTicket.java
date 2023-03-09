@@ -35,7 +35,7 @@ public class ServiceTicket implements IServicesT<Ticket> {
         ServiceUtilisateur uService = new ServiceUtilisateur();
         System.out.println("begin Try");
 
-        String qry = "SELECT ticket.id_ticket, utilisateur.nom, moyen_transport.prix, trajet.depart, trajet.destination, ticket.dateticket, moyen_transport.type FROM ticket INNER JOIN utilisateur ON ticket.id_utilisateur = utilisateur.id_utilisateur INNER JOIN ligne_transport ON ticket.id_ligne = ligne_transport.id_ligne INNER JOIN trajet ON ligne_transport.id_trajet = trajet.id_trajet INNER JOIN moyen_transport ON ligne_transport.id_moyentp = moyen_transport.id_moyentp;";
+        String qry = "SELECT ticket.id, utilisateur.nom, moyen_transport.prix, trajet.depart, trajet.destination, ticket.dateticket, moyen_transport.type FROM ticket INNER JOIN utilisateur ON ticket.id_utilisateur = utilisateur.id INNER JOIN ligne_transport ON ticket.id_ligne = ligne_transport.id INNER JOIN trajet ON ligne_transport.id_trajet = trajet.id INNER JOIN moyen_transport ON ligne_transport.id_moyentp = moyen_transport.id;";
 
         try {
             cnx = MyDB.getInstance().getCnx();
@@ -48,7 +48,7 @@ public class ServiceTicket implements IServicesT<Ticket> {
                 LigneTransport lt = new LigneTransport();
                 MoyenTransport mt = new MoyenTransport();
                 Ticket tic = new Ticket();
-                tic.setId_ticket(rs.getInt("id_ticket"));
+                tic.setId(rs.getInt("id"));
                 u.setNom(rs.getString("nom"));
                 mt.setPrix(rs.getDouble("prix"));
                 t.setDepart(rs.getString("depart"));
@@ -104,7 +104,7 @@ public class ServiceTicket implements IServicesT<Ticket> {
         }
     }
      */
-    public void supprimer(int id_ticket) {
+    public void supprimer(int id) {
 //        try {
 //            String qry = "DELETE from ticket where id_ticket = " + id_ticket + ";";
 //            cnx = MyDB.getInstance().getCnx();

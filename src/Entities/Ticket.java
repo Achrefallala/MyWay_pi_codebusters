@@ -13,7 +13,7 @@ import java.util.Date;
  */
 public class Ticket {
 
-    private int id_ticket;
+    private int id;
     private Reservation reservation; //id_reservation;
     private Utilisateur utilisateur; //id_utilisateur
     private LigneTransport ligne;
@@ -29,13 +29,15 @@ public class Ticket {
         this.dateticket = dateticket;
     }
 
-    public int getId_ticket() {
-        return id_ticket;
+    public int getId() {
+        return id;
     }
 
-    public void setId_ticket(int id_ticket) {
-        this.id_ticket = id_ticket;
+    public void setId(int id) {
+        this.id = id;
     }
+
+   
 
     public Reservation getReservation() {
         return reservation;
@@ -71,7 +73,8 @@ public class Ticket {
 
     @Override
     public String toString() {
-        return "Ticket{" + "id_ticket=" + id_ticket + ", reservation=" + reservation + ", utilisateur=" + utilisateur + ", ligne=" + ligne + ", dateticket=" + dateticket + '}';
+        return "Ticket{" + "id=" + id + ", reservation=" + reservation + ", utilisateur=" + utilisateur + ", ligne=" + ligne + ", dateticket=" + dateticket + '}';
     }
 
+    
 }

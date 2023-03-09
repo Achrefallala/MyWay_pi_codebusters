@@ -12,7 +12,7 @@ import java.sql.Date;
  * @author Slim
  */
 public class ResultTicket {
-    private int id_ticket;
+    private int id;
     private String nom;
     private double prix;
     private String depart;
@@ -32,17 +32,17 @@ public class ResultTicket {
         this.type = type;
     }
 
-    public ResultTicket(int id_ticket, java.util.Date dateticket, String nom, String depart, String destination) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public int getId() {
+        return id;
     }
 
-    public int getId_ticket() {
-        return id_ticket;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public void setId_ticket(int id_ticket) {
-        this.id_ticket = id_ticket;
-    }
+   
+
+   
 
     public String getNom() {
         return nom;
@@ -94,8 +94,9 @@ public class ResultTicket {
 
     @Override
     public String toString() {
-        return "ResultTicket{" + "id_ticket=" + id_ticket + ", nom=" + nom + ", prix=" + prix + ", depart=" + depart + ", destination=" + destination + ", dateticket=" + dateticket + ", type=" + type + '}';
+        return "ResultTicket{" + "id=" + id + ", nom=" + nom + ", prix=" + prix + ", depart=" + depart + ", destination=" + destination + ", dateticket=" + dateticket + ", type=" + type + '}';
     }
+
     
     
 }

@@ -7,10 +7,14 @@ package reservation.gui;
 
 import Entities.LigneTransport;
 import Entities.Reservation;
+import Entities.ResultReservation;
+import Entities.ResultTicket;
 import Entities.Ticket;
 import Entities.Utilisateur;
 import Services.ServiceLigneTransport;
+import Services.ServiceReservation;
 import Services.ServiceTicket;
+import Services.ServiceUtilisateur;
 import com.itextpdf.text.Element;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfPCell;
@@ -74,16 +78,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class HomeReservationUSERController implements Initializable {
-
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         ServiceLigneTransport sl = new ServiceLigneTransport();
-        LigneTransport l = sl.findByIdTrajetAndId_MoyenTp(8, 4);
-        tfdepart.setText(l.getTrajet().getDepart());
+        ResultReservation rr = new ResultReservation();
+        LigneTransport l = sl.findByIdUser(4);
+        tfdepart.setText(l.getTrajet().getDepart().toString());
         tfdestination.setText(l.getTrajet().getDestination());
         tfprix.setText(Double.toString(l.getMoyentransport().getPrix()));
         tfmoyen.setText(l.getMoyentransport().getType());
-      /*  try {
+       
+
+        
+      /*  try {/
             generateQR("drira", 15);
 
         } catch (WriterException ex) {
@@ -168,12 +175,18 @@ public class HomeReservationUSERController implements Initializable {
             document.add(table);
 
             // Ajout du code QR en dessous du tableau
+                      
+    ServiceReservation res = new ServiceReservation();
+ServiceUtilisateur uService = new ServiceUtilisateur();
+ResultTicket rt = new ResultTicket();
+            ResultReservation rr=new ResultReservation();
+
             int id_ticket = 15; // id du ticket à utiliser
             String nom = "drira"; // nom du titulaire du ticket à utiliser
             generateQR(nom, id_ticket);
             Image img = Image.getInstance("codeqr.png");
             document.add(img);
-
+ 
             // Fermeture du document
             document.close();
 

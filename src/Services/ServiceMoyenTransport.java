@@ -19,10 +19,12 @@ import java.util.List;
  * @author Slim
  */
 public class ServiceMoyenTransport implements IServices<MoyenTransport> {
+
     Connection cnx;
 
     @Override
-    public void add(MoyenTransport e) {}
+    public void add(MoyenTransport e) {
+    }
 
     @Override
     public List<MoyenTransport> afficher() {
@@ -33,8 +35,10 @@ public class ServiceMoyenTransport implements IServices<MoyenTransport> {
             Statement stm = cnx.createStatement();
             ResultSet rs = stm.executeQuery(qry);
             while (rs.next()) {
-                
+
                 MoyenTransport e = new MoyenTransport();
+                e.setId(rs.getInt("id_moyentp"));
+
                 e.setMatricule(rs.getString("matricule"));
                 e.setOrganisation(rs.getString("organisation"));
                 e.setType(rs.getString("type"));
@@ -42,6 +46,7 @@ public class ServiceMoyenTransport implements IServices<MoyenTransport> {
                 e.setNbr_places(rs.getInt("nbr_places"));
                 e.setPrix(rs.getDouble("prix"));
                 e.setHoraires(rs.getString("horaires"));
+                e.setNom(rs.getString("nom"));
 
                 MoyenTransports.add(e);
             }
@@ -55,10 +60,12 @@ public class ServiceMoyenTransport implements IServices<MoyenTransport> {
     }
 
     @Override
-    public void supprimer(MoyenTransport m) {}
+    public void supprimer(MoyenTransport m) {
+    }
 
     @Override
-    public void modifier(MoyenTransport m) {}
+    public void modifier(MoyenTransport m) {
+    }
 
     public List<MoyenTransport> findByMatricule(String matricule) {
         List<MoyenTransport> MoyenTransports = new ArrayList<>();
@@ -68,7 +75,7 @@ public class ServiceMoyenTransport implements IServices<MoyenTransport> {
             Statement stm = cnx.createStatement();
             ResultSet rs = stm.executeQuery(qry);
             while (rs.next()) {
-                
+
                 MoyenTransport e = new MoyenTransport();
                 e.setMatricule(rs.getString("matricule"));
                 e.setOrganisation(rs.getString("organisation"));
@@ -77,6 +84,7 @@ public class ServiceMoyenTransport implements IServices<MoyenTransport> {
                 e.setNbr_places(rs.getInt("nbr_places"));
                 e.setPrix(rs.getDouble("prix"));
                 e.setHoraires(rs.getString("horaires"));
+                e.setNom(rs.getString("nom"));
 
                 MoyenTransports.add(e);
             }
@@ -88,18 +96,17 @@ public class ServiceMoyenTransport implements IServices<MoyenTransport> {
         return MoyenTransports;
 
     }
+/*
+    public List<MoyenTransport> findByIdTrajet(int id_trajet) {
 
-    public List<MoyenTransport> findByIdTrajet(int id_trajet){
-        
-        
         List<MoyenTransport> MoyenTransports = new ArrayList<>();
         try {
-            String qry = "SELECT m.matricule, m.organisation, m.type, m.icon, m.nbr_places, m.prix, m.horaires FROM moyen_transport m JOIN ligne_transport l ON m.matricule = l.matricule_moyentp JOIN trajet t ON l.id_trajet = t.id WHERE id_trajet = " + id_trajet ;
+            String qry = "SELECT m.nom m.matricule, m.organisation, m.type, m.icon, m.nbr_places, m.prix, m.horaires FROM moyen_transport m JOIN ligne_transport l ON m.matricule = l.matricule_moyentp JOIN trajet t ON l.id_trajet = t.id WHERE id = " + id_trajet;
             cnx = MyDB.getInstance().getCnx();
             Statement stm = cnx.createStatement();
             ResultSet rs = stm.executeQuery(qry);
             while (rs.next()) {
-                
+
                 MoyenTransport e = new MoyenTransport();
                 e.setMatricule(rs.getString("matricule"));
                 e.setOrganisation(rs.getString("organisation"));
@@ -108,6 +115,7 @@ public class ServiceMoyenTransport implements IServices<MoyenTransport> {
                 e.setNbr_places(rs.getInt("nbr_places"));
                 e.setPrix(rs.getDouble("prix"));
                 e.setHoraires(rs.getString("horaires"));
+                e.setNom(rs.getString("nom"));
 
                 MoyenTransports.add(e);
             }
@@ -117,6 +125,6 @@ public class ServiceMoyenTransport implements IServices<MoyenTransport> {
             System.out.println(ex.getMessage());
         }
         return MoyenTransports;
-        
-    }
+
+    }*/
 }

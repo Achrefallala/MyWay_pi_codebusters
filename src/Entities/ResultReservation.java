@@ -11,7 +11,7 @@ package Entities;
  */
 public class ResultReservation {
 
-    private int id_reservation;
+    private int id;
     private String nom;
     private String type;
     private String depart;
@@ -44,13 +44,15 @@ public class ResultReservation {
         this.prix = prix;
     }
 
-    public int getId_reservation() {
-        return id_reservation;
+    public int getId() {
+        return id;
     }
 
-    public void setId_reservation(int id_reservation) {
-        this.id_reservation = id_reservation;
+    public void setId(int id) {
+        this.id = id;
     }
+
+   
 
     public String getNom() {
         return nom;
@@ -86,7 +88,9 @@ public class ResultReservation {
 
     @Override
     public String toString() {
-        return "ResultReservation{" + "id_reservation=" + id_reservation + ", nom=" + nom + ", type=" + type + ", depart=" + depart + ", destination=" + destination + ", prix=" + prix + '}';
+        return "ResultReservation{" + "id=" + id + ", nom=" + nom + ", type=" + type + ", depart=" + depart + ", destination=" + destination + ", prix=" + prix + '}';
     }
+
+  
 
 }

@@ -50,6 +50,7 @@ import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyEvent;
 
 /**
  * FXML Controller class
@@ -62,9 +63,9 @@ public class HomeTicketController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         table();
     }
-Ticket t = new Ticket();
+    Ticket t = new Ticket();
     ServiceTicket tic = new ServiceTicket();
-        Connection cnx;
+    Connection cnx;
 
     @FXML
     private TableView<ResultTicket> tableTic;
@@ -101,8 +102,8 @@ Ticket t = new Ticket();
 
             for (Ticket tic : listTic) {
                 r = new ResultTicket();
-                
-                r.setId_ticket(tic.getId_ticket());
+
+                r.setId(tic.getId());
                 r.setNom(tic.getUtilisateur().getNom());
                 r.setPrix(tic.getLigne().getMoyentransport().getPrix());
                 r.setDepart(tic.getLigne().getTrajet().getDepart());
@@ -114,8 +115,8 @@ Ticket t = new Ticket();
 
             }
 
-            System.out.println("*****************listtic*********************"+ listTic);
-            
+            System.out.println("*****************listtic*********************" + listTic);
+
             tableTic.setItems(FXCollections.observableArrayList(listResTic));
             nomutilisateurCol.setCellValueFactory(new PropertyValueFactory<>("nom"));
             prixticketCol.setCellValueFactory(new PropertyValueFactory<>("prix"));
@@ -142,7 +143,7 @@ Ticket t = new Ticket();
 
     @FXML
     private void Delete(ActionEvent event) {
- ResultTicket r = tableTic.getSelectionModel().getSelectedItem();
+        ResultTicket r = tableTic.getSelectionModel().getSelectedItem();
         if (r == null) {
             // no row is selected, show an error message
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -155,10 +156,10 @@ Ticket t = new Ticket();
 
         try {
             cnx = MyDB.getInstance().getCnx();
-            PreparedStatement pst = cnx.prepareStatement("DELETE FROM ticket WHERE id_ticket = ?");
-            
-            System.out.println("r.getId_ticket()"+ r.getId_ticket());
-            pst.setInt(1, r.getId_ticket());
+            PreparedStatement pst = cnx.prepareStatement("DELETE FROM ticket WHERE id = ?");
+
+            System.out.println("r.getId()" + r.getId());
+            pst.setInt(1, r.getId());
             pst.executeUpdate();
 
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -244,20 +245,23 @@ Ticket t = new Ticket();
     }
 
     @FXML
-    private void searchBar() {
+    private void searchBar(KeyEvent event) {
         ServiceTicket sr = new ServiceTicket();
         List<Ticket> l = sr.afficher();
-        ObservableList<ResultTicket> newdata = FXCollections.observableArrayList();
-
-        for (Ticket ticket : l) {
-            if (ticket.getUtilisateur().getNom().toLowerCase().contains(txt_keyword.getText().toLowerCase())
-                    || ticket.getLigne().getTrajet().getDepart().toLowerCase().contains(txt_keyword.getText().toLowerCase())) {
-                // convert Ticket to ResultTicket
-                ResultTicket resultTicket = new ResultTicket(ticket.getId_ticket(), ticket.getDateticket(), ticket.getUtilisateur().getNom(), ticket.getLigne().getTrajet().getDepart(), ticket.getLigne().getTrajet().getDestination());
-                newdata.add(resultTicket);
-            }
-        }
-
+        ObservableList<ResultTicket> newdata = l.stream()
+                .filter(n -> n.getUtilisateur().getNom().toLowerCase().contains(txt_keyword.getText().toLowerCase())
+                || n.getLigne().getMoyentransport().getType().toLowerCase().contains(txt_keyword.getText().toLowerCase())
+                || n.getLigne().getTrajet().getDepart().toLowerCase().contains(txt_keyword.getText().toLowerCase())
+                || n.getLigne().getTrajet().getDestination().toLowerCase().contains(txt_keyword.getText().toLowerCase()))
+                .map(res -> {
+                    ResultTicket r = new ResultTicket();
+                    r.setDepart(res.getLigne().getTrajet().getDepart());
+                    r.setDestination(res.getLigne().getTrajet().getDestination());
+                    r.setNom(res.getUtilisateur().getNom());
+                    r.setType(res.getLigne().getMoyentransport().getType());
+                    return r;
+                })
+                .collect(Collectors.toCollection(FXCollections::observableArrayList));
         tableTic.setItems(newdata);
     }
 
