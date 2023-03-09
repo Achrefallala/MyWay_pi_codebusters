@@ -5,8 +5,10 @@
  */
 package reservation.gui;
 
+import Entities.LigneTransport;
 import Entities.Reservation;
 import Entities.ResultReservation;
+import Services.ServiceLigneTransport;
 import Services.ServiceReservation;
 import java.net.URL;
 import java.sql.Connection;
@@ -32,6 +34,8 @@ public class ReservationspersonellesController implements Initializable {
 
     Reservation r = new Reservation();
     ServiceReservation res = new ServiceReservation();
+    ServiceLigneTransport sl = new ServiceLigneTransport();
+    ResultReservation rr = new ResultReservation();
 
     Connection cnx;
     @FXML
@@ -58,20 +62,20 @@ public class ReservationspersonellesController implements Initializable {
     }
 
     public void table() {
-        List<Reservation> listRes = new ArrayList<>();
+        List<LigneTransport> listRes = new ArrayList<>();
         try {
 
-            listRes = res.afficherByID(4);
+            listRes = sl.findByIdLigneList(4);
             ResultReservation r;
             List<ResultReservation> listResReservation = new ArrayList<>();
 
-            for (Reservation res : listRes) {
+            for (LigneTransport res : listRes) {
                 r = new ResultReservation();
                 r.setId(res.getId());
-                r.setDepart(res.getLigne().getTrajet().getDepart());
-                r.setDestination(res.getLigne().getTrajet().getDestination());
-                r.setNom(res.getUtilisateur().getNom());
-                r.setType(res.getLigne().getMoyentransport().getType());
+                r.setDepart(res.getTrajet().getDepart());
+                r.setDestination(res.getTrajet().getDestination());
+                r.setType(res.getMoyentransport().getType());
+                r.setPrix(res.getMoyentransport().getPrix());
 
                 listResReservation.add(r);
 

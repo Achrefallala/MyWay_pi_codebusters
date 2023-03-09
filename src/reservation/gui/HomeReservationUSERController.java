@@ -82,7 +82,7 @@ public class HomeReservationUSERController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         ServiceLigneTransport sl = new ServiceLigneTransport();
         ResultReservation rr = new ResultReservation();
-        LigneTransport l = sl.findByIdUser(4);
+        LigneTransport l = sl.findByIdLigne(4);
         tfdepart.setText(l.getTrajet().getDepart().toString());
         tfdestination.setText(l.getTrajet().getDestination());
         tfprix.setText(Double.toString(l.getMoyentransport().getPrix()));

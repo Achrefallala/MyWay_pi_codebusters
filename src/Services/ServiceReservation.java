@@ -69,13 +69,13 @@ public class ServiceReservation implements IServices<Reservation> {
         return listRes;
     }
 
-    public List<Reservation> afficherByID(int id_user) {
+    public List<Reservation> afficherByID(int id_ligne) {
         System.out.println("begin Afficher");
         List<Reservation> listRes = new ArrayList<>();
         ServiceUtilisateur uService = new ServiceUtilisateur();
         System.out.println("begin Try");
 
-        String qry = "SELECT  utilisateur.nom, moyen_transport.prix, trajet.depart, trajet.destination, ticket.id, ticket.dateticket, moyen_transport.type FROM ticket INNER JOIN utilisateur ON ticket.id_utilisateur = utilisateur.id INNER JOIN ligne_transport ON ticket.id_ligne = ligne_transport.id INNER JOIN trajet ON ligne_transport.id_trajet = trajet.id INNER JOIN moyen_transport ON ligne_transport.id_moyentp = moyen_transport.id where utilisateur.id=" + id_user;
+        String qry = "SELECT  utilisateur.nom, moyen_transport.prix, trajet.depart, trajet.destination, ticket.id, ticket.dateticket, moyen_transport.type FROM ticket INNER JOIN utilisateur ON ticket.id_utilisateur = utilisateur.id INNER JOIN ligne_transport ON ticket.id_ligne = ligne_transport.id INNER JOIN trajet ON ligne_transport.id_trajet = trajet.id INNER JOIN moyen_transport ON ligne_transport.id_moyentp = moyen_transport.id where ligne_transport.id=" + id_ligne;
         System.out.println("c bon taadet");
         try {
             cnx = MyDB.getInstance().getCnx();
