@@ -7,21 +7,22 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="myway.GUI.Trajet.Admin.MenuGestionTrajetFXMLController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="760.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="myway.GUI.Trajet.Admin.MenuGestionTrajetFXMLController">
    <children>
-      <Button layoutX="31.0" layoutY="25.0" mnemonicParsing="false" onAction="#dialogAjouterTrajet" prefHeight="26.0" prefWidth="73.0" text="Ajouter" />
-      <Button layoutX="117.0" layoutY="25.0" mnemonicParsing="false" onAction="#dialogModifierTrajet" prefHeight="26.0" prefWidth="83.0" text="Modifier" />
-      <Button layoutX="212.0" layoutY="25.0" mnemonicParsing="false" onAction="#dialogSupprimerTrajet" prefHeight="26.0" prefWidth="83.0" text="Supprimer" />
-      <TableView fx:id="tableListeTrajet" layoutX="31.0" layoutY="66.0" prefHeight="310.0" prefWidth="538.0">
+       <fx:include source="../../Sidebar/Admin/sidebarAdmin.fxml" />
+      <Button layoutX="207.0" layoutY="136.0" mnemonicParsing="false" onAction="#dialogAjouterTrajet" prefHeight="26.0" prefWidth="73.0" text="Ajouter" />
+      <Button layoutX="293.0" layoutY="136.0" mnemonicParsing="false" onAction="#dialogModifierTrajet" prefHeight="26.0" prefWidth="83.0" text="Modifier" />
+      <Button layoutX="388.0" layoutY="136.0" mnemonicParsing="false" onAction="#dialogSupprimerTrajet" prefHeight="26.0" prefWidth="83.0" text="Supprimer" />
+      <TableView fx:id="tableListeTrajet" layoutX="207.0" layoutY="177.0" prefHeight="310.0" prefWidth="538.0">
          <columns>
             <TableColumn fx:id="columnDepart" prefWidth="75.20001220703125" text="Depart" />
             <TableColumn fx:id="columnDestination" prefWidth="79.20001220703125" text="Destination" />
             <TableColumn fx:id="columnEtat" prefWidth="121.5999755859375" text="Etat" />
             <TableColumn fx:id="columnDirections" prefWidth="170.39996337890625" text="Directions" />
-            <TableColumn fx:id="columnImage" prefWidth="75.199951171875" text="Image" />
+            <TableColumn fx:id="columnImage" prefWidth="75.199951171875" text="Map" />
          </columns>
       </TableView>
-      <TextField fx:id="search" layoutX="419.0" layoutY="25.0" onKeyTyped="#filter" />
-      <Text layoutX="358.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Chercher :" />
+      <TextField fx:id="search" layoutX="595.0" layoutY="136.0" onKeyTyped="#filter" />
+      <Text layoutX="534.0" layoutY="153.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Chercher :" />
    </children>
 </AnchorPane>

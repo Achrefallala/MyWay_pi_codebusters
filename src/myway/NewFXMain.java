@@ -22,7 +22,7 @@ public class NewFXMain extends Application {
     @Override
     public void start(Stage primaryStage) {
         try {
-            Parent root=FXMLLoader.load(getClass().getResource("../myWay/GUI/Reclamation/User/AjouterReclamation.fxml"));
+            Parent root=FXMLLoader.load(getClass().getResource("../myWay/GUI/Utilisateur/User/LoginFXML.fxml"));
             Scene scene = new Scene(root);
             primaryStage.setTitle("MyWay");
             primaryStage.setScene(scene);

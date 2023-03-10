@@ -8,6 +8,7 @@ import myway.Entities.Etablissement;
 import myway.Entities.MoyenTransport;
 import myway.Entities.Trajet;
 import myway.Services.ServiceEtablissement;
+import myway.Services.ServiceLigneTransport;
 import myway.Services.ServiceMoyenTransport;
 import myway.Services.ServiceTrajet;
 
@@ -45,6 +46,8 @@ public class MyWay {
         //for(MoyenTransport e : se.findByIdTrajet(11)){System.out.println(e);}
         //se.modifier(e0, "nom", "roots");
         //System.out.println(e0.toString());
+        ServiceLigneTransport s = new ServiceLigneTransport();
+        System.out.println(s.findByIdLigne(74).getTrajet().getDepart());
     }
     
 }

@@ -20,35 +20,39 @@ import myway.Utils.MyDB;
  * @author 9naydel
  */
 public class ServiceLigneTransport implements IServices<LigneTransport> {
+
     Connection cnx;
 
     @Override
-    public void add(LigneTransport l) {}
+    public void add(LigneTransport l) {
+    }
 
     @Override
     public List<LigneTransport> display() {
         List<LigneTransport> ligneTransports = new ArrayList<>();
-        
+
         return ligneTransports;
 
     }
 
     @Override
-    public void delete(LigneTransport l) {}
+    public void delete(LigneTransport l) {
+    }
 
     @Override
-    public void update(LigneTransport l) {}
+    public void update(LigneTransport l) {
+    }
 
     public LigneTransport findByIdTrajetAndMatriculeMoyenTp(int idTrajet, int idMoyenTp) {
         LigneTransport ligneTransport = new LigneTransport();
         try {
-            String qry = "SELECT l.id, t.id, t.depart, t.destination, t.etat, t.directions, t.image, m.id, m.matricule, m.organisation, m.type, m.icon, m.nbr_places, m.prix, m.horaires FROM `moyen_transport` m JOIN `ligne_transport` l ON m.id = l.id_moyentp JOIN `trajet` t ON l.id_trajet = t.id WHERE id_trajet = " + idTrajet + " AND id_moyentp = " + idMoyenTp  ;
-            
+            String qry = "SELECT l.id, t.id, t.depart, t.destination, t.etat, t.directions, t.image, m.id, m.matricule, m.organisation, m.type, m.icon, m.nbr_places, m.prix, m.horaires FROM `moyen_transport` m JOIN `ligne_transport` l ON m.id = l.id_moyentp JOIN `trajet` t ON l.id_trajet = t.id WHERE id_trajet = " + idTrajet + " AND id_moyentp = " + idMoyenTp;
+
             cnx = MyDB.getInstance().getCnx();
             Statement stm = cnx.createStatement();
             ResultSet rs = stm.executeQuery(qry);
             while (rs.next()) {
-                
+
                 MoyenTransport e = new MoyenTransport();
                 e.setId(rs.getInt("id"));
                 e.setMatricule(rs.getString("matricule"));
@@ -58,7 +62,7 @@ public class ServiceLigneTransport implements IServices<LigneTransport> {
                 e.setNbr_places(rs.getInt("nbr_places"));
                 e.setPrix(rs.getDouble("prix"));
                 e.setHoraires(rs.getString("horaires"));
-                
+
                 Trajet t = new Trajet();
                 t.setId(rs.getInt("id"));
                 t.setDepart(rs.getString("depart"));
@@ -80,5 +84,89 @@ public class ServiceLigneTransport implements IServices<LigneTransport> {
 
     }
 
-    
+    public LigneTransport findByIdLigne(int id_ligne) {
+        LigneTransport l = new LigneTransport();
+        try {
+            String qry = "SELECT ligne_transport.id, trajet.id, trajet.depart, trajet.destination, trajet.etat, trajet.directions, trajet.image,  moyen_transport.id, moyen_transport.organisation, moyen_transport.type, moyen_transport.icon, moyen_transport.nbr_places, moyen_transport.prix, moyen_transport.horaires FROM moyen_transport JOIN ligne_transport  ON moyen_transport.id = ligne_transport.id_moyentp JOIN trajet  ON ligne_transport.id_trajet = trajet.id WHERE ligne_transport.id	 = " + id_ligne ;
+            System.out.println(qry);
+
+            cnx = MyDB.getInstance().getCnx();
+            Statement stm = cnx.createStatement();
+            ResultSet rs = stm.executeQuery(qry);
+            while (rs.next()) {
+
+                MoyenTransport e = new MoyenTransport();
+                e.setId(rs.getInt("id"));
+                e.setOrganisation(rs.getString("organisation"));
+                e.setType(rs.getString("type"));
+                e.setIcon(rs.getString("icon"));
+                e.setNbr_places(rs.getInt("nbr_places"));
+                e.setPrix(rs.getDouble("prix"));
+                e.setHoraires(rs.getString("horaires"));
+
+                Trajet t = new Trajet();
+                t.setId(rs.getInt("id"));
+                t.setDepart(rs.getString("depart"));
+                t.setDestination(rs.getString("destination"));
+                t.setEtat(rs.getString("etat"));
+                t.setDirections(rs.getString("directions"));
+                t.setImage(rs.getString("image"));
+
+                l.setId(rs.getInt("id"));
+                l.setMoyenTransport(e);
+                l.setTrajet(t);
+
+            }
+            return l;
+
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return l;
+
+    }
+
+   public List <LigneTransport> findByIdLigneList(int id_ligne) {
+    List<LigneTransport> l = new ArrayList<>();
+
+        try {
+            String qry = "SELECT ligne_transport.id, trajet.id, trajet.depart, trajet.destination, trajet.etat, trajet.directions, trajet.image,  moyen_transport.id, moyen_transport.organisation, moyen_transport.type, moyen_transport.icon, moyen_transport.nbr_places, moyen_transport.prix, moyen_transport.horaires FROM moyen_transport JOIN ligne_transport  ON moyen_transport.id = ligne_transport.id_moyentp JOIN trajet  ON ligne_transport.id_trajet = trajet.id WHERE ligne_transport.id	 = " + id_ligne ;
+            System.out.println(qry);
+
+            cnx = MyDB.getInstance().getCnx();
+            Statement stm = cnx.createStatement();
+            ResultSet rs = stm.executeQuery(qry);
+            while (rs.next()) {
+               LigneTransport m=new LigneTransport();
+                MoyenTransport e = new MoyenTransport();
+                e.setId(rs.getInt("id"));
+                e.setOrganisation(rs.getString("organisation"));
+                e.setType(rs.getString("type"));
+                e.setIcon(rs.getString("icon"));
+                e.setNbr_places(rs.getInt("nbr_places"));
+                e.setPrix(rs.getDouble("prix"));
+                e.setHoraires(rs.getString("horaires"));
+
+                Trajet t = new Trajet();
+                t.setId(rs.getInt("id"));
+                t.setDepart(rs.getString("depart"));
+                t.setDestination(rs.getString("destination"));
+                t.setEtat(rs.getString("etat"));
+                t.setDirections(rs.getString("directions"));
+                t.setImage(rs.getString("image"));
+                m.setId(id_ligne);
+                m.setMoyenTransport(e);
+                m.setTrajet(t);
+                l.add(m);
+
+            }
+            return l;
+
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return l;
+
+    }
+
 }

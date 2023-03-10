@@ -7,12 +7,13 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="myway.GUI.Trajet.Admin.MenuGestionEtablissementFXMLController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="770.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="myway.GUI.Trajet.Admin.MenuGestionEtablissementFXMLController">
    <children>
-      <Button layoutX="31.0" layoutY="28.0" mnemonicParsing="false" onAction="#dialogAjouterEtablissement" prefHeight="26.0" prefWidth="73.0" text="Ajouter" />
-      <Button layoutX="117.0" layoutY="28.0" mnemonicParsing="false" onAction="#dialogModifierEtablissement" prefHeight="26.0" prefWidth="83.0" text="Modifier" />
-      <Button layoutX="212.0" layoutY="28.0" mnemonicParsing="false" onAction="#dialogSupprimerEtablissement" prefHeight="26.0" prefWidth="83.0" text="Supprimer" />
-      <TableView fx:id="tableListeEtablissement" layoutX="31.0" layoutY="65.0" prefHeight="310.0" prefWidth="538.0">
+       <fx:include source="../../Sidebar/Admin/sidebarAdmin.fxml" />
+      <Button layoutX="211.0" layoutY="130.0" mnemonicParsing="false" onAction="#dialogAjouterEtablissement" prefHeight="26.0" prefWidth="73.0" text="Ajouter" />
+      <Button layoutX="297.0" layoutY="130.0" mnemonicParsing="false" onAction="#dialogModifierEtablissement" prefHeight="26.0" prefWidth="83.0" text="Modifier" />
+      <Button layoutX="392.0" layoutY="130.0" mnemonicParsing="false" onAction="#dialogSupprimerEtablissement" prefHeight="26.0" prefWidth="83.0" text="Supprimer" />
+      <TableView fx:id="tableListeEtablissement" layoutX="211.0" layoutY="167.0" prefHeight="310.0" prefWidth="538.0">
          <columns>
             <TableColumn fx:id="columnNom" prefWidth="75.20001220703125" text="Nom" />
             <TableColumn fx:id="columnType" prefWidth="92.0" text="Type" />
@@ -25,7 +26,7 @@
             </TableColumn>
          </columns>
       </TableView>
-      <TextField fx:id="search" layoutX="420.0" layoutY="29.0" onKeyTyped="#filter" />
-      <Text layoutX="359.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Chercher :" />
+      <TextField fx:id="search" layoutX="600.0" layoutY="131.0" onKeyTyped="#filter" />
+      <Text layoutX="539.0" layoutY="148.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Chercher :" />
    </children>
 </AnchorPane>

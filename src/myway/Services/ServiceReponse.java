@@ -24,7 +24,9 @@ public class ServiceReponse implements IServices<Reponse> {
     @Override
     public void add(Reponse t) {
         try {
-            String qry = "INSERT INTO reponse`( Id_rec`, reponse) VALUES ('" + t.getId_rec() + "','" + t.getReponse() + "')";
+            String qry = "INSERT INTO reponse( Id_rec, reponse) VALUES ('" + t.getId_rec() + "','" + t.getReponse() + "')";
+            System.out.println(qry);
+
             cnx = MyDB.getInstance().getCnx();
 
             Statement stm = cnx.createStatement();

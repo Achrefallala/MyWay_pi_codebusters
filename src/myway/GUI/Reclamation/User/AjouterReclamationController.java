@@ -4,6 +4,8 @@
  */
 package myway.GUI.Reclamation.User;
 
+
+
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -17,6 +19,7 @@ import javafx.scene.control.TextField;
 import javafx.util.Duration;
 import myway.Entities.Reclamation;
 import myway.Services.ServiceReclamation;
+import org.controlsfx.control.Notifications;
 
 /**
  * FXML Controller class
@@ -50,37 +53,6 @@ public class AjouterReclamationController implements Initializable {
     
 }
      
-   /* @FXML
-    private void ajouterr(ActionEvent event) {
-    
-        
-        String message = tfmessage.getText();
-        
-        String nom = NomTXFLD.getText();
-        String prenom = PrenomTXFLD.getText();
-        String categorie = categorieTXFLD.getText();
-
-        if (message.isEmpty() || nom.isEmpty() || prenom.isEmpty()|| categorie.isEmpty()) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setHeaderText(null);
-            alert.setContentText("Please Fill All DATA");
-            alert.showAndWait();
-
-        } else {
-        ServiceReclamation sp= new ServiceReclamation();
-        Reclamation r = new Reclamation(message, nom, prenom,categorie);
-           sp.add(r);
-           
-          tfmessage.setText("");
-          NomTXFLD.setText("");
-          PrenomTXFLD.setText("");
-          categorieTXFLD.setText ("");
-          
-         
-          
-            
-
-        }}*/
   
     @FXML
     private void ajouterReclamation(ActionEvent event) {
@@ -94,7 +66,7 @@ public class AjouterReclamationController implements Initializable {
         String prenom = PrenomTXFLD.getText();
         String categorie = categorieTXFLD.getText();
 
-            //User u =new User(User.currenUserId, "sou");
+           
            ServiceReclamation sp= new ServiceReclamation();
            Reclamation r = new Reclamation(message, nom, prenom,categorie);
            sp.add(r);
@@ -109,12 +81,7 @@ public class AjouterReclamationController implements Initializable {
           PrenomTXFLD.setText("");
           categorieTXFLD.setText ("");
           
-           Notifications.create()
-          .title("Notification")
-          .text("Your complaint will soon be treated")
-          .position(Pos.BOTTOM_RIGHT)
-          .hideAfter(Duration.seconds(5))
-          .showInformation();
+           //Notifications.create().title("Notification").text("Your complaint will soon be treated").position(Pos.BOTTOM_RIGHT).hideAfter(Duration.seconds(5)).showInformation();
            
             
         }

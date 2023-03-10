@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+
+<AnchorPane prefHeight="715.0" prefWidth="730.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="myway.GUI.Reservation.User.ReservationspersonellesController">
+   <children>
+       <fx:include source="../../Sidebar/User/sidebarUser.fxml" />
+      <Text fill="#80cbc4" layoutX="384.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mes Reservations">
+         <font>
+            <Font size="29.0" />
+         </font>
+      </Text>
+      <TableView fx:id="tableRes" layoutX="227.0" layoutY="147.0" prefHeight="331.0" prefWidth="614.0">
+         <columns>
+            <TableColumn fx:id="departCol" prefWidth="126.0" text="DEPART" />
+            <TableColumn fx:id="destinationCol" minWidth="4.0" prefWidth="131.0" text="DESTINATION" />
+            <TableColumn fx:id="prixCol" minWidth="4.0" prefWidth="141.0" text="PRIX" />
+            <TableColumn fx:id="typeCol" minWidth="4.0" prefWidth="214.0" text="MOYEN DE TRANSPORT" />
+         </columns>
+      </TableView>
+      <Button fx:id="DeleteBtn" layoutX="320.0" layoutY="503.0" mnemonicParsing="false" onAction="#Delete" prefHeight="65.0" prefWidth="249.0" text="Supprimer" />
+      <Button fx:id="AddNewRes" layoutX="578.0" layoutY="503.0" mnemonicParsing="false" prefHeight="65.0" prefWidth="249.0" text="Ajouter une nouvelle reservation?" />
+   </children>
+</AnchorPane>

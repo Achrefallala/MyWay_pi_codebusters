@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -13,27 +14,28 @@
 
 <ScrollPane hbarPolicy="ALWAYS" prefHeight="460.0" prefWidth="732.0" vbarPolicy="ALWAYS" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="myway.GUI.Trajet.User.DetailsTrajetFXMLController">
    <content>
-      <AnchorPane prefHeight="1676.0" prefWidth="583.0">
+      <AnchorPane prefHeight="1676.0" prefWidth="730.0">
          <children>
+             <fx:include source="../../Sidebar/User/sidebarUser.fxml" />
             <WebView fx:id="webView" layoutX="195.0" layoutY="480.0" prefHeight="386.0" prefWidth="502.0" />
-            <Text layoutX="195.0" layoutY="90.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Trajet : ">
+            <Text layoutX="407.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Trajet : ">
                <font>
                   <Font size="24.0" />
                </font>
             </Text>
-            <Text layoutX="196.0" layoutY="129.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Départ:">
+            <Text layoutX="201.0" layoutY="87.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Départ :">
                <font>
                   <Font size="18.0" />
                </font>
             </Text>
-            <Text layoutX="458.0" layoutY="129.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Destination:">
+            <Text layoutX="457.0" layoutY="87.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Destination :">
                <font>
                   <Font size="18.0" />
                </font>
             </Text>
-            <TextField fx:id="tfDepart" editable="false" layoutX="261.0" layoutY="110.0" prefHeight="25.0" prefWidth="141.0" />
-            <TextField fx:id="tfDest" editable="false" layoutX="560.0" layoutY="110.0" prefHeight="25.0" prefWidth="141.0" />
-            <Text layoutX="195.0" layoutY="183.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Moyens de tranport :">
+            <TextField fx:id="tfDepart" editable="false" layoutX="271.0" layoutY="68.0" prefHeight="25.0" prefWidth="141.0" />
+            <TextField fx:id="tfDest" editable="false" layoutX="559.0" layoutY="68.0" prefHeight="25.0" prefWidth="141.0" />
+            <Text layoutX="197.0" layoutY="183.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Moyens de tranport :">
                <font>
                   <Font size="24.0" />
                </font>
@@ -70,14 +72,19 @@
                   <Font size="24.0" />
                </font>
             </Text>
-            <TableView fx:id="tableEtablissement" fixedCellSize="50.0" layoutX="192.0" layoutY="1476.0" prefHeight="200.0" prefWidth="516.0">
+            <TableView fx:id="tableEtablissement" fixedCellSize="50.0" layoutX="192.0" layoutY="1476.0" prefHeight="200.0" prefWidth="516.0" stylesheets="@../../../Assets/design.css">
                <columns>
-                  <TableColumn fx:id="columnEtabNom" prefWidth="132.0" text="Nom" />
-                  <TableColumn fx:id="columnEtabType" prefWidth="126.0" text="Type" />
-                  <TableColumn fx:id="columnEtabDescription" prefWidth="257.0" text="Description" />
+                  <TableColumn fx:id="columnEtabNom" prefWidth="132.0" />
+                  <TableColumn fx:id="columnEtabType" prefWidth="126.0" />
+                  <TableColumn fx:id="columnEtabDescription" prefWidth="257.0" />
                </columns>
             </TableView>
-            <Button fx:id="btnRetourner" layoutX="195.0" layoutY="34.0" mnemonicParsing="false" onAction="#retourner" text="Retour" />
+            <Button fx:id="btnRetourner" layoutX="200.0" layoutY="12.0" mnemonicParsing="false" onAction="#retourner" text="Retour" />
+            <Label layoutX="195.0" layoutY="117.0" text="Meteo :">
+               <font>
+                  <Font size="18.0" />
+               </font></Label>
+            <TextField fx:id="weatherText" layoutX="271.0" layoutY="117.0" prefHeight="26.0" prefWidth="35.0" />
          </children>
       </AnchorPane>
    </content>

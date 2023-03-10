@@ -6,39 +6,37 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/19" fx:controller="myway.GUI.Reclamation.User.AjouterReclamationController">
+<AnchorPane id="AnchorPane" prefHeight="715.0" prefWidth="730.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="myway.GUI.Reclamation.User.AjouterReclamationController">
    <children>
-      <TextField fx:id="NomTXFLD" layoutX="119.0" layoutY="57.0" promptText="***" />
-      <TextField fx:id="PrenomTXFLD" layoutX="383.0" layoutY="57.0" promptText="***" />
-      <ImageView fitHeight="48.0" fitWidth="52.0" layoutX="26.0" layoutY="46.0" pickOnBounds="true" preserveRatio="true">
+       <fx:include source="../../Sidebar/User/sidebarUser.fxml" />
+      <TextField fx:id="NomTXFLD" layoutX="302.0" layoutY="89.0" promptText="***" />
+      <TextField fx:id="PrenomTXFLD" layoutX="566.0" layoutY="89.0" promptText="***" />
+      <ImageView fitHeight="48.0" fitWidth="52.0" layoutX="209.0" layoutY="78.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../Assets/nom.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="48.0" fitWidth="52.0" layoutX="98.0" layoutY="186.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="48.0" fitWidth="52.0" layoutX="281.0" layoutY="218.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../Assets/sujet.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="48.0" fitWidth="52.0" layoutX="274.0" layoutY="46.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="48.0" fitWidth="52.0" layoutX="457.0" layoutY="78.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../Assets/prenom.png" />
          </image>
       </ImageView>
-      <TextField fx:id="tfmessage" layoutX="162.0" layoutY="191.0" prefHeight="38.0" prefWidth="270.0" promptText="write here">
+      <TextField fx:id="tfmessage" layoutX="345.0" layoutY="223.0" prefHeight="38.0" prefWidth="270.0" promptText="write here">
          <font>
             <Font size="17.0" />
          </font>
       </TextField>
-      <Label layoutX="85.0" layoutY="61.0" text="Nom" />
-      <Label layoutX="333.0" layoutY="61.0" text="Prenom" />
-      <Line endX="190.0" layoutX="292.0" layoutY="277.0" startX="-180.0" />
-      <Label layoutX="149.0" layoutY="150.0" text="Catégorie" />
-      <TextField fx:id="categorieTXFLD" layoutX="223.0" layoutY="146.0" promptText="***" />
-      <Button layoutX="380.0" layoutY="301.0" mnemonicParsing="false" onAction="#ajouterReclamation" prefHeight="38.0" prefWidth="105.0" style="-fx-background-color: #80cbc4;" text="AJOUTER" />
+      <Label layoutX="268.0" layoutY="93.0" text="Nom" />
+      <Label layoutX="516.0" layoutY="93.0" text="Prenom" />
+      <Label layoutX="332.0" layoutY="182.0" text="Catégorie" />
+      <TextField fx:id="categorieTXFLD" layoutX="406.0" layoutY="178.0" promptText="***" />
+      <Button layoutX="427.0" layoutY="292.0" mnemonicParsing="false" onAction="#ajouterReclamation" prefHeight="38.0" prefWidth="105.0" style="-fx-background-color: #80cbc4;" text="AJOUTER" />
    </children>
 </AnchorPane>

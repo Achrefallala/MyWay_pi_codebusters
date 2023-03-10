@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="715.0" prefWidth="730.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="myway.GUI.Location.Admin.HomeLocationFxmlController">
+   <children>
+              <fx:include source="../../Sidebar/Admin/sidebarAdmin.fxml" />
+
+      <Label layoutX="350.0" layoutY="16.0" prefHeight="59.0" prefWidth="178.0" text="Location" textFill="#2f84c9">
+         <font>
+            <Font name="System Bold Italic" size="41.0" />
+         </font>
+      </Label>
+      <Pane layoutX="798.0" layoutY="14.0" prefHeight="245.0" prefWidth="340.0" style="-fx-background-color: turquoise;">
+         <children>
+            <Label layoutX="15.0" layoutY="25.0" text="nom" textFill="#fcf9f9" />
+            <Label layoutX="15.0" layoutY="74.0" text="disponibilite" textFill="#fcf8f8" />
+            <Label layoutX="15.0" layoutY="126.0" text="type" textFill="#eeeaea" />
+            <Label layoutX="19.0" layoutY="184.0" text="description" textFill="#f2eded" />
+            <TextField fx:id="txtNom" layoutX="100.0" layoutY="20.0" />
+            <TextField fx:id="txtDispo" layoutX="100.0" layoutY="69.0" />
+            <TextField fx:id="txtDescription" layoutX="100.0" layoutY="173.0" prefHeight="59.0" prefWidth="206.0" />
+            <TextField fx:id="txtType" layoutX="100.0" layoutY="121.0" />
+         </children>
+      </Pane>
+      <TableView fx:id="tableLocation" layoutX="338.0" layoutY="280.0" prefHeight="421.0" prefWidth="806.0">
+         <columns>
+            <TableColumn fx:id="ID" minWidth="0.0" prefWidth="0.0" text="Id_location" />
+            <TableColumn fx:id="nomColmn" prefWidth="227.0" text="nom" />
+            <TableColumn fx:id="dispoColmn" prefWidth="90.0" text="dispo" />
+            <TableColumn fx:id="typeColmn" prefWidth="110.0" text="type" />
+            <TableColumn fx:id="DescriptionColmn" prefWidth="387.0" text="description" />
+         </columns>
+      </TableView>
+      <Button fx:id="btnDelete" layoutX="673.0" layoutY="197.0" mnemonicParsing="false" onAction="#supprimer" style="-fx-background-color: turquoise;" text="supprimer" textFill="#fffafa" />
+      <Button fx:id="btnAdd" layoutX="673.0" layoutY="30.0" mnemonicParsing="false" onAction="#ajouter" prefHeight="31.0" prefWidth="88.0" style="-fx-background-color: turquoise;" text="ajouter" textFill="#f8fbfc" />
+      <Button fx:id="btnUpdate" layoutX="673.0" layoutY="106.0" mnemonicParsing="false" onAction="#modifier" prefHeight="31.0" prefWidth="88.0" style="-fx-background-color: turquoise;" text="modifier" textFill="#eceeee" />
+      <TextField fx:id="search" layoutX="338.0" layoutY="228.0" onKeyPressed="#filter" onKeyReleased="#filter" onKeyTyped="#filter" />
+      <Button fx:id="btnGenPDF" layoutX="439.0" layoutY="166.0" mnemonicParsing="false" onAction="#btnGenPDF" prefHeight="31.0" prefWidth="133.0" style="-fx-background-color: turquoise;" text="generer pdf" textFill="#f8fbfc" />
+      <Button fx:id="handleExport" layoutX="439.0" layoutY="106.0" mnemonicParsing="false" onAction="#handleExport" prefHeight="31.0" prefWidth="133.0" style="-fx-background-color: turquoise;" text="generer EXCEL" textFill="#f8fbfc" />
+      <Label layoutX="541.0" layoutY="228.0" prefHeight="31.0" prefWidth="81.0" style="-fx-background-color: turquoise;" text="recherche" />
+   </children>
+</AnchorPane>

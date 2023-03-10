@@ -4,10 +4,17 @@
  */
 package myway.GUI.Trajet.User;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URI;
 import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -29,7 +36,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.StackPane;
 
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
@@ -41,6 +47,9 @@ import myway.Entities.Trajet;
 import myway.Services.ServiceEtablissement;
 import myway.Services.ServiceLigneTransport;
 import myway.Services.ServiceMoyenTransport;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
 
 /**
  * FXML Controller class
@@ -48,8 +57,8 @@ import myway.Services.ServiceMoyenTransport;
  * @author 9naydel
  */
 public class DetailsTrajetFXMLController implements Initializable {
-    
-    ServiceMoyenTransport  seMoyen = new ServiceMoyenTransport();
+
+    ServiceMoyenTransport seMoyen = new ServiceMoyenTransport();
     ServiceEtablissement seEtab = new ServiceEtablissement();
     private Trajet t;
 
@@ -61,7 +70,7 @@ public class DetailsTrajetFXMLController implements Initializable {
     private TableView<MoyenTransport> tableMoyenTransport;
     @FXML
     private TableColumn<MoyenTransport, String> columnMoyenOrganisation;
-    
+
     @FXML
     private TableColumn<MoyenTransport, String> columnMoyenIcon;
     @FXML
@@ -82,7 +91,7 @@ public class DetailsTrajetFXMLController implements Initializable {
     private TableColumn<Etablissement, String> columnEtabType;
     @FXML
     private TableColumn<Etablissement, String> columnEtabDescription;
-    
+
     @FXML
     private WebView webView;
     @FXML
@@ -90,29 +99,29 @@ public class DetailsTrajetFXMLController implements Initializable {
     @FXML
     private Button btnRetourner;
 
+    @FXML
+    private TextField weatherText;
+
     /**
      * Initializes the controller class.
+     *
      * @param url
      * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-    
-        
-        
+
     }
 
-    public void setTrajet(Trajet t){
-        
-        
+    public void setTrajet(Trajet t) {
+
         this.t = t;
         tfDepart.setText(t.getDepart());
         tfDest.setText(t.getDestination());
-        
+
         //ImageMap.setImage(new Image("Assets/ariana.png"));
-        
         ObservableList<MoyenTransport> listMoyenTransport = FXCollections.observableArrayList(seMoyen.findByIdTrajet(t.getId()));
-        
+
         columnMoyenOrganisation.setCellValueFactory(new PropertyValueFactory<>("organisation"));
         columnMoyenNom.setCellValueFactory(new PropertyValueFactory<>("nom"));
         ImageColumn imageColumn = new ImageColumn("", "icon");
@@ -121,45 +130,72 @@ public class DetailsTrajetFXMLController implements Initializable {
         columnMoyenNbrPlaces.setCellValueFactory(new PropertyValueFactory<>("nbr_places"));
         columnMoyenPrix.setCellValueFactory(new PropertyValueFactory<>("prix"));
         columnMoyenHoraires.setCellValueFactory(new PropertyValueFactory<>("horaires"));
-        
+
         tableMoyenTransport.setItems(listMoyenTransport);
-        
+
         WebEngine engine = webView.getEngine();
         engine.load(t.getImage());
-        
+
         tfDirections.setText(t.getDirections());
         tfEtat.setText(t.getEtat());
-        
-        ObservableList<Etablissement> listEtablissement = FXCollections.observableArrayList(seEtab.findByTrajet(t));   
+
+        ObservableList<Etablissement> listEtablissement = FXCollections.observableArrayList(seEtab.findByTrajet(t));
         columnEtabNom.setCellValueFactory(new PropertyValueFactory<>("nom"));
         columnEtabType.setCellValueFactory(new PropertyValueFactory<>("type"));
         columnEtabDescription.setCellValueFactory(new PropertyValueFactory<>("description"));
         tableEtablissement.setItems(listEtablissement);
-    }    
+        
 
-    
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create("https://weather1395.p.rapidapi.com/temperature?url="+ t.getDepart()))
+                .header("X-RapidAPI-Key", "ab1eae2ac1msh139cbfaa7fa3fbdp1688ecjsne35b49dc8a1d")
+                .header("X-RapidAPI-Host", "weather1395.p.rapidapi.com")
+                .method("GET", HttpRequest.BodyPublishers.noBody())
+                .build();
+        
+        try {
+            HttpResponse<String> response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
+            System.out.println(response.body());
+            //weatherText.setText(response.body());
+            weatherText.setText("32°");
+            
+        } catch (IOException ex) {
+            Logger.getLogger(DetailsTrajetFXMLController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(DetailsTrajetFXMLController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
     @FXML
-    private LigneTransport reserver(MouseEvent event) {
+    private LigneTransport reserver(MouseEvent event) throws IOException {
         if (tableMoyenTransport.getSelectionModel().getSelectedItem() != null) {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-                alert.setTitle("CONFIRMATION");
-                alert.setHeaderText("Voulez-vous vraiment réserver ce " + tableMoyenTransport.getSelectionModel().getSelectedItem().getType() + " ?");
-                Optional<ButtonType> clickedButtonConfirmation = alert.showAndWait();
+            alert.setTitle("CONFIRMATION");
+            alert.setHeaderText("Voulez-vous vraiment réserver ce " + tableMoyenTransport.getSelectionModel().getSelectedItem().getType() + " ?");
+            Optional<ButtonType> clickedButtonConfirmation = alert.showAndWait();
 
-                if (clickedButtonConfirmation.get() == ButtonType.OK) {
-                    LigneTransport lt;
-    
-                    ServiceLigneTransport slt = new ServiceLigneTransport();
-                    lt = slt.findByIdTrajetAndMatriculeMoyenTp(t.getId(), tableMoyenTransport.getSelectionModel().getSelectedItem().getId());
-                    tableMoyenTransport.getSelectionModel().clearSelection();
-                    System.out.println("vous avez reservez ce " + lt);
-                    return lt;
+            if (clickedButtonConfirmation.get() == ButtonType.OK) {
+                LigneTransport lt;
+                ServiceLigneTransport slt = new ServiceLigneTransport();
+                lt = slt.findByIdTrajetAndMatriculeMoyenTp(t.getId(), tableMoyenTransport.getSelectionModel().getSelectedItem().getId());
+                tableMoyenTransport.getSelectionModel().clearSelection();
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("../../Reservation/User/HomeReservationUSER.fxml"));
+                System.out.println("vous avez reservez ce " + lt);
+                Parent parent = loader.load();
+                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                Scene scene = new Scene(parent);
+                stage.setTitle("Mes Reservations ");
+                stage.setScene(scene);
+                stage.show();
+                
+                System.out.println("vous avez reservez ce " + lt);
+                 CurrentLigneTransportId.id=lt.getId();
 
-                }else{
-                    tableMoyenTransport.getSelectionModel().clearSelection();
-                }
-               
+                return lt;
+            } else {
+                tableMoyenTransport.getSelectionModel().clearSelection();
+            }
+
         }
         return null;
     }
@@ -167,17 +203,16 @@ public class DetailsTrajetFXMLController implements Initializable {
     @FXML
     private void retourner(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("ChercherTrajetFXML.fxml"));
-            Parent chercherTrajet = loader.load();
-            
+        Parent chercherTrajet = loader.load();
 
-            Stage chercherTrajetStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            Scene chercherTrajetScene = new Scene(chercherTrajet);
+        Stage chercherTrajetStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene chercherTrajetScene = new Scene(chercherTrajet);
 
-            chercherTrajetStage.setTitle("chercher Trajet: ");
-            chercherTrajetStage.setScene(chercherTrajetScene);
-            chercherTrajetStage.show();
+        chercherTrajetStage.setTitle("chercher Trajet: ");
+        chercherTrajetStage.setScene(chercherTrajetScene);
+        chercherTrajetStage.show();
     }
-    
+
     public class ImageColumn extends TableColumn<MoyenTransport, String> {
 
         public ImageColumn(String title, String imageUrlProperty) {
@@ -197,7 +232,7 @@ public class DetailsTrajetFXMLController implements Initializable {
                 if (empty || imageUrl == null) {
                     setGraphic(null);
                 } else {
-                    Image image = new Image("C:\\Users\\kandi\\OneDrive\\Documents\\NetBeansProjects\\myWay\\src\\myway\\Assets/" + imageUrl );
+                    Image image = new Image("C:\\Users\\kandi\\OneDrive\\Documents\\NetBeansProjects\\myWay\\src\\myway\\Assets/" + imageUrl);
                     imageView.setImage(image);
                     imageView.setFitWidth(30);
                     imageView.setFitHeight(35);
@@ -206,5 +241,10 @@ public class DetailsTrajetFXMLController implements Initializable {
             }
         }
     }
-    
+
+    //zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz
+    void getWeatherData(ActionEvent event) throws MalformedURLException {
+
+    }
+
 }

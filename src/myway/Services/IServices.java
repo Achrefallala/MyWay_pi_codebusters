@@ -16,6 +16,5 @@ public interface IServices<T> {
     public List<T> display();
     public void update(T t);
     public void delete(T t);
-    
-    
+   
 }

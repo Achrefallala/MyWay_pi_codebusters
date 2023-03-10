@@ -6,29 +6,27 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/19" fx:controller="myway.GUI.Reclamation.Admin.RepondreReclamationController">
+<AnchorPane id="AnchorPane" prefHeight="715.0" prefWidth="730.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="myway.GUI.Reclamation.Admin.RepondreReclamationController">
    <children>
-      <Pane layoutX="10.0" layoutY="66.0" prefHeight="6.0" prefWidth="578.0" style="-fx-background-color: black;" />
-      <Text layoutX="234.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="REPONSES" wrappingWidth="174.13671875">
+       <fx:include source="../../Sidebar/Admin/sidebarAdmin.fxml" />
+      <Text layoutX="331.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" text="REPONSES" wrappingWidth="174.13671875">
          <font>
             <Font name="Bauhaus 93" size="32.0" />
          </font>
       </Text>
-      <TextField fx:id="txtreponse" layoutX="60.0" layoutY="218.0" prefHeight="65.0" prefWidth="155.0" />
-      <Label layoutX="100.0" layoutY="177.0" prefHeight="17.0" prefWidth="95.0" text="Reponse">
+      <TextField fx:id="txtreponse" layoutX="344.0" layoutY="484.0" prefHeight="65.0" prefWidth="155.0" />
+      <Label layoutX="378.0" layoutY="443.0" prefHeight="17.0" prefWidth="95.0" text="Reponse">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Button layoutX="155.0" layoutY="316.0" mnemonicParsing="false" onAction="#supprimer" style="-fx-background-color: #d50000;" text="SUPPRIMER" textFill="WHITE" />
-      <Button layoutX="50.0" layoutY="316.0" mnemonicParsing="false" onAction="#modifier" style="-fx-background-color: #00c853;" text="MODIFIER" />
-      <Button fx:id="back" layoutX="90.0" layoutY="107.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="95.0" style="-fx-background-color: #1de9b6;" text="BACK" />
-      <TableView fx:id="reponseTable" layoutX="265.0" layoutY="143.0" prefHeight="265.0" prefWidth="286.0" style="-fx-background-color: #e0f2f1;">
+      <Button layoutX="439.0" layoutY="582.0" mnemonicParsing="false" onAction="#supprimer" style="-fx-background-color: #d50000;" text="SUPPRIMER" textFill="WHITE" />
+      <Button layoutX="334.0" layoutY="582.0" mnemonicParsing="false" onAction="#modifier" style="-fx-background-color: #00c853;" text="MODIFIER" />
+      <Button fx:id="back" layoutX="235.0" layoutY="75.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="95.0" style="-fx-background-color: #1de9b6;" text="Retourner" />
+      <TableView fx:id="reponseTable" layoutX="283.0" layoutY="121.0" prefHeight="265.0" prefWidth="286.0" style="-fx-background-color: #e0f2f1;">
          <columns>
             <TableColumn fx:id="idRepCol" maxWidth="82.0" prefWidth="82.0" style="-fx-alignment: center;" text="ID REPONSE" />
             <TableColumn fx:id="idRecCol" maxWidth="100.0" prefWidth="88.0" style="-fx-alignment: center;" text="ID REC" />

@@ -12,10 +12,9 @@
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/kandi/OneDrive/Documents/NetBeansProjects/myWay/src/myway/GUI/Trajet/User/ChercherTrajetFXMLController.java</file>
-            <file>file:/C:/Users/kandi/OneDrive/Documents/NetBeansProjects/myWay/src/myway/GUI/Trajet/Admin/MenuGestionTrajetFXMLController.java</file>
-            <file>file:/C:/Users/kandi/OneDrive/Documents/NetBeansProjects/myWay/src/myway/Entities/MoyenTransport.java</file>
             <file>file:/C:/Users/kandi/OneDrive/Documents/NetBeansProjects/myWay/src/myway/NewFXMain.java</file>
+            <file>file:/C:/Users/kandi/OneDrive/Documents/NetBeansProjects/myWay/src/myway/GUI/Reservation/Admin/HomeReservation.fxml</file>
+            <file>file:/C:/Users/kandi/OneDrive/Documents/NetBeansProjects/myWay/src/myway/GUI/Reservation/Admin/HomeReservationController.java</file>
             <file>file:/C:/Users/kandi/OneDrive/Documents/NetBeansProjects/myWay/src/myway/GUI/Trajet/User/DetailsTrajetFXMLController.java</file>
         </group>
     </open-files>

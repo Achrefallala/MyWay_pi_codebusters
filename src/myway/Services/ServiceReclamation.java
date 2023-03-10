@@ -24,7 +24,7 @@ public class ServiceReclamation implements IServices<Reclamation> {
     @Override
     public void add(Reclamation t) {
         try {
-            String qry = "INSERT INTO reclamation`( message`, type,`nom`,`prenom`,`categorie`) VALUES ('" + t.getMessage() + "','" + t.getType() + "','" + t.getNom() + "','" + t.getPrenom() + "','" + t.getCategorie() + "')";
+            String qry = "INSERT INTO reclamation( message, type,nom,prenom,categorie) VALUES ('" + t.getMessage() + "','" + t.getType() + "','" + t.getNom() + "','" + t.getPrenom() + "','" + t.getCategorie() + "')";
             cnx = MyDB.getInstance().getCnx();
 
             Statement stm = cnx.createStatement();
@@ -67,7 +67,7 @@ public class ServiceReclamation implements IServices<Reclamation> {
     @Override
     public void update(Reclamation t) {
         try {
-            String qry = "UPDATE reclamation SET message`= '" + t.getMessage() + "' ,type`='  " + t.getType() + "' ,`nom`='  " + t.getNom() + "' ,`prenom`='  " + t.getPrenom() + "' ,`categorie`='  " + t.getCategorie() + "' WHERE `Id_rec`='" + t.getId_rec() + "'";
+            String qry = "UPDATE reclamation SET `message`= '" + t.getMessage() + "' ,`type`=' " + t.getType() + "' ,`nom`='  " + t.getNom() + "' ,`prenom`='  " + t.getPrenom() + "' ,`categorie`='  " + t.getCategorie() + "' WHERE `Id_rec`='" + t.getId_rec() + "'";
             cnx = MyDB.getInstance().getCnx();
 
             Statement stm = cnx.createStatement();

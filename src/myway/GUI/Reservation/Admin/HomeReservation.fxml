@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="AnchorPane" prefHeight="715.0" prefWidth="730.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="myway.GUI.Reservation.Admin.HomeReservationController">
+   <children>
+              <fx:include source="../../Sidebar/Admin/sidebarAdmin.fxml" />
+
+      <TableView fx:id="tableRes" layoutX="406.0" layoutY="202.0" prefHeight="505.0" prefWidth="642.0">
+         <columns>
+            <TableColumn fx:id="nomutilisateurCol" minWidth="0.0" prefWidth="148.0" text="NOM UTILISATEUR" />
+            <TableColumn fx:id="moyentransportCol" minWidth="0.0" prefWidth="173.0" text="MOYEN TRANSPORT" />
+            <TableColumn fx:id="departCol" minWidth="0.0" prefWidth="151.0" text="DEPART" />
+            <TableColumn fx:id="destinationCol" minWidth="0.0" prefWidth="187.0" text="DESTINATION" />
+         </columns>
+      </TableView>
+      <Text fill="#73c1ab" layoutX="472.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Reservations" textAlignment="RIGHT" wrappingWidth="183.6708984375">
+         <font>
+            <Font size="32.0" />
+         </font>
+      </Text>
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+      <Button fx:id="btnDelete" layoutX="707.0" layoutY="127.0" mnemonicParsing="false" onAction="#Delete" prefHeight="50.0" prefWidth="212.0" text="Supprimer cette reservation" />
+      <Button fx:id="btnGenPDF" layoutX="437.0" layoutY="127.0" mnemonicParsing="false" onAction="#btnGenPDF" prefHeight="50.0" prefWidth="225.0" text="Generer PDF" />
+      <TextField fx:id="txt_keyword" layoutX="508.0" layoutY="81.0" onKeyPressed="#searchBar" onKeyReleased="#searchBar" onKeyTyped="#searchBar" prefHeight="31.0" prefWidth="439.0" promptText="Rechercher une reservation?" />
+      <ImageView fitHeight="136.0" fitWidth="155.0" layoutX="58.0" layoutY="-6.0">
+         <image>
+            <Image url="@../../../../../../../../../../images/logomyway.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>
