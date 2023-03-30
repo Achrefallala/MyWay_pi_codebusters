@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="AnchorPane" fx:id="AnchorPane" prefHeight="796.0" prefWidth="1329.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="reservation.gui.Guide_controller">
+   <children>
+      <TableView fx:id="tableRes" layoutX="346.0" layoutY="232.0" prefHeight="531.0" prefWidth="983.0">
+        <columns>
+            <TableColumn fx:id="nomCol" minWidth="0.0" prefWidth="129.0" text="NOM" />
+            <TableColumn fx:id="prenomCol" minWidth="0.0" prefWidth="209.0" text="PRENOM" />
+            <TableColumn fx:id="ageCol" minWidth="0.0" prefWidth="171.0" text="AGE" />
+            <TableColumn fx:id="langueCol" minWidth="0.0" prefWidth="210.0" text="LANGUES" />
+            <TableColumn fx:id="experienceCol" minWidth="0.0" prefWidth="291.0" text="EXPERIENCES" />
+        </columns>
+      </TableView>
+      <Text fill="#73c1ab" layoutX="438.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Guide Touristique" wrappingWidth="342.6708984375">
+         <font>
+            <Font size="32.0" />
+         </font>
+      </Text>
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+      <Button fx:id="btnGenPDF" layoutX="346.0" layoutY="112.0" mnemonicParsing="false" onAction="#btnGenPDF" prefHeight="50.0" prefWidth="225.0" text="Generer PDF" />
+      <TextField fx:id="txt_keyword" layoutX="601.0" layoutY="121.0" onKeyPressed="#searchBar" onKeyReleased="#searchBar" onKeyTyped="#searchBar" prefHeight="31.0" prefWidth="714.0" promptText="Rechercher un guide en particulier?" />
+      <ImageView fitHeight="136.0" fitWidth="155.0" layoutX="58.0" layoutY="-6.0">
+         <image>
+            <Image url="@../../images/logomyway.png" />
+         </image>
+      </ImageView>
+      <Pane layoutX="1.0" layoutY="165.0" prefHeight="402.0" prefWidth="323.0" style="-fx-background-color: #80cbc4;">
+         <children>
+            <Label layoutX="14.0" layoutY="35.0" prefHeight="21.0" prefWidth="45.0" text="Nom" textFill="#fcf8f8" />
+            <TextField fx:id="txtnom" layoutX="100.0" layoutY="30.0" prefHeight="31.0" prefWidth="214.0" />
+            <Label layoutX="15.0" layoutY="82.0" prefHeight="21.0" prefWidth="59.0" text="Prenom" textFill="#fcf8f8" />
+            <TextField fx:id="txtprenom" layoutX="101.0" layoutY="77.0" prefHeight="31.0" prefWidth="214.0" />
+            <Label layoutX="14.0" layoutY="126.0" prefHeight="21.0" prefWidth="45.0" text="Age" textFill="#fcf8f8" />
+            <TextField fx:id="txtage" layoutX="100.0" layoutY="121.0" prefHeight="31.0" prefWidth="214.0" />
+            <Label layoutX="14.0" layoutY="169.0" prefHeight="21.0" prefWidth="67.0" text="Langues" textFill="#fcf8f8" />
+            <TextField fx:id="txtlangues" layoutX="101.0" layoutY="173.0" prefHeight="57.0" prefWidth="214.0" />
+            <Label layoutX="8.0" layoutY="262.0" prefHeight="21.0" prefWidth="80.0" text="Experiences" textFill="#fcf8f8" />
+            <TextField fx:id="txtexperiences" layoutX="101.0" layoutY="243.0" prefHeight="136.0" prefWidth="214.0" />
+         </children>
+      </Pane>
+      <Button fx:id="btnDelete" layoutX="85.0" layoutY="710.0" mnemonicParsing="false" onAction="#supprimer" prefHeight="50.0" prefWidth="155.0" style="-fx-background-color: #80cbc4;" text="Supprimer" textFill="WHITE" />
+      <Button fx:id="btnAdd" layoutX="85.0" layoutY="578.0" mnemonicParsing="false" onAction="#ajouter" prefHeight="50.0" prefWidth="155.0" style="-fx-background-color: #80cbc4;" text="Ajouter" textFill="WHITE" />
+      <Button fx:id="btnUpdate" layoutX="85.0" layoutY="641.0" mnemonicParsing="false" onAction="#modifier" prefHeight="50.0" prefWidth="155.0" style="-fx-background-color: #80cbc4;" text="Modifier" textFill="WHITE" />
+   </children>
+</AnchorPane>
